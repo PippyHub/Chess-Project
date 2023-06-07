@@ -3,7 +3,7 @@ import java.awt.*;
 public class Board extends JFrame{
     public Board() {
         JFrame frame = new JFrame();
-        this.setBounds(10, 10, 512, 512);
+        frame.setBounds(10, 10, 512, 512);
 
         JPanel panel = new JPanel();
         this.add(panel);
@@ -13,9 +13,16 @@ public class Board extends JFrame{
     }
     public void paint(Graphics g){
         boolean white = true;
-        for(int boardY = 0; boardY < 8; boardY++);{
+        for(int boardY = 0; boardY < 8; boardY++){
             for(int boardX = 0; boardX < 8; boardX++){
-                g.fillRect(boardX*64, boardY*64, 64, 64);
+                if(white){
+                    g.setColor(Color.white);
+                }
+                else {
+                    g.setColor(Color.black);
+                }
+                g.fillRect(boardX * 64, boardY * 64, 64, 64);
+                white=!white;
             }
             white=!white;
         }
