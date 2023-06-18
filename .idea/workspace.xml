@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="take piece image and store in array imgs">
-      <change afterPath="$PROJECT_DIR$/src/Pieces.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="finished piece array">
       <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -126,7 +124,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687084868756</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="finished piece array">
+      <created>1687085757381</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1687085757381</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -140,6 +145,7 @@
     <MESSAGE value="added kill and move" />
     <MESSAGE value="changed moved to use ps.stream" />
     <MESSAGE value="take piece image and store in array imgs" />
-    <option name="LAST_COMMIT_MESSAGE" value="take piece image and store in array imgs" />
+    <MESSAGE value="finished piece array" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished piece array" />
   </component>
 </project>

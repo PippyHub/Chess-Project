@@ -53,7 +53,7 @@ public class Board extends JFrame{
             white=!white;
 
             for(Piece p: ps) {
-                int index = 0;
+                int index;
                 if(p.name.equalsIgnoreCase("king")){
                     index = 0;
                 }
