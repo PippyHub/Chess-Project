@@ -5,8 +5,7 @@
  * @version (19/06/2023)
  */
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,19 +13,25 @@ import java.util.LinkedList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class Board extends JFrame {
-    LinkedList<Piece> ps = new LinkedList<>(); //linked list of pieces
+public class Board extends JFrame implements ActionListener, MouseListener{
+    public static LinkedList<Piece> ps = new LinkedList<>(); //linked list of pieces
     Image[] images = new Image[12];
     final int HEADER_OFFSET = 30;
-    public Board() throws IOException {
-        BufferedImage all = ImageIO.read(new File("src/ChessPiecesArray.png"));
-        int index = 0;
-        for(int y = 0; y < 120; y += 60) {
-            for(int x = 0; x < 360; x += 60) {
-                images[index] = all.getSubimage(x, y, 60, 60)
-                        .getScaledInstance(64, 64, BufferedImage.SCALE_SMOOTH);
-                index++;
+    public Board() {
+        System.out.println("test1");
+        try {
+            BufferedImage all = ImageIO.read(new File("src/ChessPiecesArray.png"));
+
+            int index = 0;
+            for (int y = 0; y < 120; y += 60) {
+                for (int x = 0; x < 360; x += 60) {
+                    images[index] = all.getSubimage(x, y, 60, 60)
+                            .getScaledInstance(64, 64, BufferedImage.SCALE_SMOOTH);
+                    index++;
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         Piece bKing = (new Piece(4, 0, true,"king", ps));
@@ -66,49 +71,34 @@ public class Board extends JFrame {
         JFrame frame = new JFrame();
         this.setBounds(10, 10, 512, 512 + HEADER_OFFSET);
 
+        addMouseListener(this);
+        //frame.addMouseMotionListener(this);
+
         JPanel panel = new JPanel();
         frame.add(panel);
-        frame.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible (true);
     }
-    public void paint(Graphics g){
+
+    public void actionPerformed(ActionEvent e){}
+    public void mouseExited(MouseEvent e){}
+    public void mouseEntered(MouseEvent e){}
+    public void mouseReleased(MouseEvent e){}
+    public void mousePressed(MouseEvent e){System.out.println(getPiece(e.getX(), e.getY()).name);}
+    public void mouseClicked(MouseEvent e){}
+
+    public void paint(Graphics g) {
         boolean white = true;
-        for(int boardY = 0; boardY < 8; boardY++){
-            for(int boardX = 0; boardX < 8; boardX++){
-                if(white){
+        for(int boardY = 0; boardY < 8; boardY++) {
+            for(int boardX = 0; boardX < 8; boardX++) {
+                if(white) {
                     g.setColor(Color.white);
                 }
                 else {
                     g.setColor(Color.decode("#769656"));
                 }
-                g.fillRect(boardX * 64, (boardY * 64) + HEADER_OFFSET, 64, 64);
+                g.fillRect(boardX * 64, boardY * 64 + HEADER_OFFSET, 64, 64);
                 white=!white;
             }
             white=!white;
@@ -118,28 +108,39 @@ public class Board extends JFrame {
 
         for(Piece p: ps) {
             int index = 0;
-            if(p.name.equalsIgnoreCase("queen")){
+            if(p.name.equalsIgnoreCase("queen")) {
                 index = 0;
             }
-            if(p.name.equalsIgnoreCase("king")){
+            if(p.name.equalsIgnoreCase("king")) {
                 index = 1;
             }
-            if(p.name.equalsIgnoreCase("rook")){
+            if(p.name.equalsIgnoreCase("rook")) {
                 index = 2;
             }
-            if(p.name.equalsIgnoreCase("knight")){
+            if(p.name.equalsIgnoreCase("knight")) {
                 index = 3;
             }
-            if(p.name.equalsIgnoreCase("bishop")){
+            if(p.name.equalsIgnoreCase("bishop")) {
                 index = 4;
             }
-            if(p.name.equalsIgnoreCase("pawn")){
+            if(p.name.equalsIgnoreCase("pawn")) {
                 index = 5;
             }
-            if(!p.isBlack){
+            if(!p.isBlack) {
                 index+=6;
             }
-            g.drawImage(images[index], p.pX * 64, p.pY * 64 + HEADER_OFFSET, this);
+            g.drawImage(images[index], p.x, p.y, this);
         }
+    }
+
+    public static Piece getPiece(int x, int y) {
+        int pX = x/64;
+        int pY = y/64 + 30;
+        for(Piece p: ps) {
+            if (p.pX == pX && p.pY == pY) {
+                return p;
+            }
+        }
+        return null;
     }
 }
