@@ -21,9 +21,19 @@ public class Board extends JFrame{
         int index = 0;
         for (int y = 0; y < 400; y += 200) {
             for (int x = 0; x < 1200; x += 200) {
-                // Check if the sub-image coordinates and dimensions are within the source image bounds
-                int subImageWidth = Math.min(200, all.getWidth() - x);
-                int subImageHeight = Math.min(200, all.getHeight() - y);
+                // Calculate the remaining width and height
+                int remainingWidth = all.getWidth() - x;
+                int remainingHeight = all.getHeight() - y;
+
+                // Calculate the actual width and height for the sub-image
+                int subImageWidth = Math.min(200, remainingWidth);
+                int subImageHeight = Math.min(200, remainingHeight);
+
+                // Check if the sub-image dimensions are valid
+                if (subImageWidth <= 0 || subImageHeight <= 0) {
+                    // Handle the case where the dimensions are zero or negative
+                    continue;
+                }
 
                 images[index] = all.getSubimage(x, y, subImageWidth, subImageHeight)
                         .getScaledInstance(64, 64, BufferedImage.SCALE_SMOOTH);
@@ -31,7 +41,7 @@ public class Board extends JFrame{
             }
         }
 
-        ps.add(new Piece(5, 2, true,"king", ps));
+        Piece wking = (new Piece(2, 2, true,"king", ps));
 
         JFrame frame = new JFrame();
         this.setBounds(10, 10, 512, 512 + HEADER_OFFSET);
