@@ -1,8 +1,8 @@
 /**
- * Write a description of class Piece here.
+ * Constructor for all chess pieces
  *
  * @author (Piper Inns Hall)
- * @version (18/06/2023)
+ * @version (19/06/2023)
  */
 import java.util.LinkedList;
 public class Piece {
