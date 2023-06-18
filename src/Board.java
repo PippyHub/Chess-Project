@@ -13,18 +13,20 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 public class Board extends JFrame{
+    LinkedList<Piece> ps = new LinkedList<>(); //linked list of pieces
+    Image[] images = new Image[12];
     final int HEADER_OFFSET = 30;
     public Board() throws IOException {
-        LinkedList<Piece> ps = new LinkedList<>(); //linked list of pieces
         BufferedImage all = ImageIO.read(new File("src/Pieces.png"));
-        Image[] imgs = new Image[12];
-        int ind = 0;
+        int index = 0;
         for(int y = 0; y < 400; y += 200) {
             for(int x = 0; x < 1200; x += 200) {
-                imgs[ind] = all.getSubimage(x, y, 200, 200).getScaledInstance(64, 64, BufferedImage.SCALE_SMOOTH);
-                ind++;
+                images[index] = all.getSubimage(x, y, 200, 200).getScaledInstance(64, 64, BufferedImage.SCALE_SMOOTH);
+                index++;
             }
         }
+
+        ps.add(new Piece(5, 2, true,"king", ps));
 
         JFrame frame = new JFrame();
         this.setBounds(10, 10, 512, 512 + HEADER_OFFSET);
@@ -49,6 +51,32 @@ public class Board extends JFrame{
                 white=!white;
             }
             white=!white;
+
+            for(Piece p: ps) {
+                int index = 0;
+                if(p.name.equalsIgnoreCase("king")){
+                    index = 0;
+                }
+                if(p.name.equalsIgnoreCase("queen")){
+                    index = 1;
+                }
+                if(p.name.equalsIgnoreCase("bishop")){
+                    index = 2;
+                }
+                if(p.name.equalsIgnoreCase("knight")){
+                    index = 3;
+                }
+                if(p.name.equalsIgnoreCase("rook")){
+                    index = 4;
+                }
+                if(p.name.equalsIgnoreCase("pawn")){
+                    index = 5;
+                }
+                if(!p.isWhite){
+                    index+=5;
+                }
+                g.drawImage(images[index], p.pX * 64, p.pY * 64, this);
+            }
         }
     }
 }
