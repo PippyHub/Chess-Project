@@ -31,5 +31,4 @@ public class Piece {
     public void kill() {
         ps.remove(this);
     }
-
 }
