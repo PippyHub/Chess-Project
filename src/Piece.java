@@ -10,11 +10,13 @@ public class Piece {
     int pY;
     boolean isWhite;
     LinkedList<Piece> ps;
-    public Piece(int pX, int pY, boolean isWhite, LinkedList<Piece> ps) {
+    String name;
+    public Piece(int pX, int pY, boolean isWhite, String n, LinkedList<Piece> ps) {
         this.pX = pX;
         this.pY = pY;
         this.isWhite = isWhite;
         this.ps = ps;
+        name = n;
         ps.add(this);
     }
     public void move(int pX, int pY) {
