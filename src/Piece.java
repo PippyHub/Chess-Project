@@ -8,13 +8,13 @@ import java.util.LinkedList;
 public class Piece {
     int pX;
     int pY;
-    boolean isWhite;
+    boolean isBlack;
     LinkedList<Piece> ps;
     String name;
-    public Piece(int pX, int pY, boolean isWhite, String n, LinkedList<Piece> ps) {
+    public Piece(int pX, int pY, boolean isBlack, String n, LinkedList<Piece> ps) {
         this.pX = pX;
         this.pY = pY;
-        this.isWhite = isWhite;
+        this.isBlack = isBlack;
         this.ps = ps;
         name = n;
         ps.add(this);

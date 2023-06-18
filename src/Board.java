@@ -26,7 +26,10 @@ public class Board extends JFrame{
             }
         }
 
-        Piece wKing = (new Piece(2, 2, true,"king", ps));
+        Piece bKing = (new Piece(4, 0, true,"king", ps));
+        Piece bQueen = (new Piece(3, 0, true,"queen", ps));
+
+        Piece wKing = (new Piece(4, 7, false,"king", ps));
 
         JFrame frame = new JFrame();
         this.setBounds(10, 10, 512, 512 + HEADER_OFFSET);
@@ -45,7 +48,7 @@ public class Board extends JFrame{
                     g.setColor(Color.white);
                 }
                 else {
-                    g.setColor(Color.black);
+                    g.setColor(Color.decode("#769656"));
                 }
                 g.fillRect(boardX * 64, (boardY * 64) + HEADER_OFFSET, 64, 64);
                 white=!white;
@@ -72,10 +75,10 @@ public class Board extends JFrame{
                 if(p.name.equalsIgnoreCase("pawn")){
                     index = 5;
                 }
-                if(!p.isWhite){
-                    index+=5;
+                if(!p.isBlack){
+                    index+=6;
                 }
-                g.drawImage(images[index], p.pX * 64, p.pY * 64, this);
+                g.drawImage(images[index], p.pX * 64, p.pY * 64 + HEADER_OFFSET, this);
             }
         }
     }
