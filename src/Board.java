@@ -18,7 +18,6 @@ public class Board extends JFrame implements ActionListener, MouseListener{
     Image[] images = new Image[12];
     final int HEADER_OFFSET = 30;
     public Board() {
-        System.out.println("test1");
         try {
             BufferedImage all = ImageIO.read(new File("src/ChessPiecesArray.png"));
 
@@ -85,7 +84,10 @@ public class Board extends JFrame implements ActionListener, MouseListener{
     public void mouseExited(MouseEvent e){}
     public void mouseEntered(MouseEvent e){}
     public void mouseReleased(MouseEvent e){}
-    public void mousePressed(MouseEvent e){System.out.println(getPiece(e.getX(), e.getY()).name);}
+    public void mousePressed(MouseEvent e){
+        System.out.println((getPiece(e.getX(), e.getY()).isBlack?"black ":"white ")
+                + getPiece(e.getX(), e.getY()).name);
+    }
     public void mouseClicked(MouseEvent e){}
 
     public void paint(Graphics g) {
@@ -134,8 +136,8 @@ public class Board extends JFrame implements ActionListener, MouseListener{
     }
 
     public static Piece getPiece(int x, int y) {
-        int pX = x/64;
-        int pY = y/64 + 30;
+        int pX = x / 64;
+        int pY = (y - 30) / 64;
         for(Piece p: ps) {
             if (p.pX == pX && p.pY == pY) {
                 return p;
