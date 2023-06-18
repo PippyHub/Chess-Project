@@ -1,3 +1,9 @@
+/**
+ * Write a description of class Board here.
+ *
+ * @author (Piper Inns Hall)
+ * @version (18/06/2023)
+ */
 import javax.swing.*;
 import java.awt.*;
 public class Board extends JFrame{

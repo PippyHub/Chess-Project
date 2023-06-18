@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="Paint board frame">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="Paint board frame(offset)">
+      <change afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +25,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2QdXOie2CjeoICbW0CLG0dGsUV3" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -82,7 +85,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686114260456</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Paint board frame(offset)">
+      <created>1686115563693</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1686115563693</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -91,6 +101,7 @@
     <MESSAGE value="Board frame working" />
     <MESSAGE value="Paint board frame (error)" />
     <MESSAGE value="Paint board frame" />
-    <option name="LAST_COMMIT_MESSAGE" value="Paint board frame" />
+    <MESSAGE value="Paint board frame(offset)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Paint board frame(offset)" />
   </component>
 </project>
