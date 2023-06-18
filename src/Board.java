@@ -19,9 +19,14 @@ public class Board extends JFrame{
     public Board() throws IOException {
         BufferedImage all = ImageIO.read(new File("src/Pieces.png"));
         int index = 0;
-        for(int y = 0; y < 400; y += 200) {
-            for(int x = 0; x < 1200; x += 200) {
-                images[index] = all.getSubimage(x, y, 200, 200).getScaledInstance(64, 64, BufferedImage.SCALE_SMOOTH);
+        for (int y = 0; y < 400; y += 200) {
+            for (int x = 0; x < 1200; x += 200) {
+                // Check if the sub-image coordinates and dimensions are within the source image bounds
+                int subImageWidth = Math.min(200, all.getWidth() - x);
+                int subImageHeight = Math.min(200, all.getHeight() - y);
+
+                images[index] = all.getSubimage(x, y, subImageWidth, subImageHeight)
+                        .getScaledInstance(64, 64, BufferedImage.SCALE_SMOOTH);
                 index++;
             }
         }
@@ -53,7 +58,7 @@ public class Board extends JFrame{
             white=!white;
 
             for(Piece p: ps) {
-                int index;
+                int index = 0;
                 if(p.name.equalsIgnoreCase("king")){
                     index = 0;
                 }
