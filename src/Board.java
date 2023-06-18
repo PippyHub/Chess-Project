@@ -17,31 +17,16 @@ public class Board extends JFrame{
     Image[] images = new Image[12];
     final int HEADER_OFFSET = 30;
     public Board() throws IOException {
-        BufferedImage all = ImageIO.read(new File("src/Pieces.png"));
+        BufferedImage all = ImageIO.read(new File("src/ChessPiecesArray.png"));
         int index = 0;
-        for (int y = 0; y < 400; y += 200) {
-            for (int x = 0; x < 1200; x += 200) {
-                // Calculate the remaining width and height
-                int remainingWidth = all.getWidth() - x;
-                int remainingHeight = all.getHeight() - y;
-
-                // Calculate the actual width and height for the sub-image
-                int subImageWidth = Math.min(200, remainingWidth);
-                int subImageHeight = Math.min(200, remainingHeight);
-
-                // Check if the sub-image dimensions are valid
-                if (subImageWidth <= 0 || subImageHeight <= 0) {
-                    // Handle the case where the dimensions are zero or negative
-                    continue;
-                }
-
-                images[index] = all.getSubimage(x, y, subImageWidth, subImageHeight)
-                        .getScaledInstance(64, 64, BufferedImage.SCALE_SMOOTH);
+        for(int y = 0; y < 120; y += 60) {
+            for(int x = 0; x < 360; x += 60) {
+                images[index] = all.getSubimage(x, y, 60, 60).getScaledInstance(64, 64, BufferedImage.SCALE_SMOOTH);
                 index++;
             }
         }
 
-        Piece wking = (new Piece(2, 2, true,"king", ps));
+        Piece wKing = (new Piece(2, 2, true,"king", ps));
 
         JFrame frame = new JFrame();
         this.setBounds(10, 10, 512, 512 + HEADER_OFFSET);
@@ -69,10 +54,10 @@ public class Board extends JFrame{
 
             for(Piece p: ps) {
                 int index = 0;
-                if(p.name.equalsIgnoreCase("king")){
+                if(p.name.equalsIgnoreCase("queen")){
                     index = 0;
                 }
-                if(p.name.equalsIgnoreCase("queen")){
+                if(p.name.equalsIgnoreCase("king")){
                     index = 1;
                 }
                 if(p.name.equalsIgnoreCase("bishop")){
