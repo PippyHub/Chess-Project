@@ -88,7 +88,7 @@ public class Board extends JFrame implements ActionListener, MouseListener{
     public void mousePressed(MouseEvent e) {
         //System.out.println((getPiece(e.getX(), e.getY()).isBlack?"black ":"white ")
                 //+ getPiece(e.getX(), e.getY()).name);
-        if (selectedPiece == null) {
+        if(selectedPiece == null) {
             // No piece currently selected, attempt to select a piece
             selectedPiece = getPiece(e.getX(), e.getY());
         } else {
@@ -150,7 +150,7 @@ public class Board extends JFrame implements ActionListener, MouseListener{
         int pX = x / 64;
         int pY = (y - 30) / 64;
         for(Piece p: ps) {
-            if (p.pX == pX && p.pY == pY) {
+            if(p.pX == pX && p.pY == pY) {
                 return p;
             }
         }

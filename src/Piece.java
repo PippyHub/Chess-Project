@@ -27,7 +27,13 @@ public class Piece {
         name = n;
         ps.add(this);
     }
+
     public void move(int pX, int pY) {
+        if(Board.getPiece(pX * 64, pY * 64 + HEADER_OFFSET) != null) {
+            //Board.getPiece(pX * 64, pY + HEADER_OFFSET * 64).kill();
+            System.out.println(Board.getPiece(pX * 64, pY * 64 + HEADER_OFFSET).name);
+            Board.getPiece(pX * 64, pY * 64 + HEADER_OFFSET).kill();
+        }
 
         this.pX = pX;
         this.pY = pY;
