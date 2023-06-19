@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="pieces can take">
-      <change afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="menu and image loader class">
+      <change afterPath="$PROJECT_DIR$/src/Images.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687137567662</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="menu and image loader class">
+      <created>1687143743993</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1687143743993</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -277,6 +285,7 @@
     <MESSAGE value="moving pieces 2" />
     <MESSAGE value="moving pieces fixed" />
     <MESSAGE value="pieces can take" />
-    <option name="LAST_COMMIT_MESSAGE" value="pieces can take" />
+    <MESSAGE value="menu and image loader class" />
+    <option name="LAST_COMMIT_MESSAGE" value="menu and image loader class" />
   </component>
 </project>
