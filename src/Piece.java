@@ -2,7 +2,7 @@
  * Constructor for all chess pieces
  *
  * @author (Piper Inns Hall)
- * @version (19/06/2023)
+ * @version (20/06/2023)
  */
 import java.io.IOException;
 import java.util.LinkedList;

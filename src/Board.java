@@ -2,7 +2,7 @@
  * Prints out the chess board and pieces onto the frame
  *
  * @author (Piper Inns Hall)
- * @version (19/06/2023)
+ * @version (20/06/2023)
  */
 import java.awt.*;
 import java.awt.event.*;
@@ -16,24 +16,23 @@ public class Board extends JFrame implements ActionListener, MouseListener{
     final int HEADER_OFFSET = 30;
     public Board() {
 
-        //Load images from a file
         Images img = new Images();
         images = img.loadImages();
 
         pieceList();
 
-        JFrame frame = new JFrame();
-        this.setBounds(10, 10, 512, 512 + HEADER_OFFSET);
-
         addMouseListener(this);
+
+        JFrame frame = new JFrame();
+        this.getContentPane().setPreferredSize(new Dimension(512, 512));
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
         frame.add(panel);
 
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.pack();
         this.setVisible (true);
     }
-
     public void pieceList() {
         Piece bQueen = (new Piece(3, 0, true,"queen", ps));
         Piece wQueen = (new Piece(3, 7, false,"queen", ps));
