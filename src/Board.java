@@ -90,14 +90,27 @@ public class Board extends JFrame implements ActionListener, MouseListener{
                 //+ getPiece(e.getX(), e.getY()).name);
         selectedPiece = getPiece(e.getX(), e.getY());
 
-        if(selectedPiece!=null) {
-            selectedPiece.move(e.getX() / 64, (e.getY() - HEADER_OFFSET) / 64);
-            //selectedPiece = null;
+        if (selectedPiece != null) {
+            // Store the current position of the selected piece
+            int startX = selectedPiece.x;
+            int startY = selectedPiece.y;
+
+            // Calculate the new position of the selected piece
+            int newX = e.getX() / 64;
+            int newY = (e.getY() - HEADER_OFFSET) / 64;
+
+            // Move the piece
+            selectedPiece.move(newX, newY);
+
+            // Update the pX and pY variables of the selected piece
+            selectedPiece.pX = newX;
+            selectedPiece.pY = newY;
+
+            // Repaint the board
             this.repaint();
             System.out.println(selectedPiece);
         }
-
-
+        System.out.println(selectedPiece);
     }
     public void mouseClicked(MouseEvent e) {}
 
