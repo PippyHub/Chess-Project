@@ -28,9 +28,7 @@ public class Piece {
         ps.add(this);
     }
     public void move(int pX, int pY) {
-        ps.stream().filter((p) -> (p.pX == pX && p.pY == pY)).forEachOrdered((p) -> {
-            p.kill();
-        });
+
         this.pX = pX;
         this.pY = pY;
 

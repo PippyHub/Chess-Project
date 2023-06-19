@@ -15,6 +15,7 @@ import javax.swing.*;
 
 public class Board extends JFrame implements ActionListener, MouseListener{
     public static LinkedList<Piece> ps = new LinkedList<>(); //linked list of pieces
+    public static Piece selectedPiece = null;
     Image[] images = new Image[12];
     final int HEADER_OFFSET = 30;
     public Board() {
@@ -71,7 +72,6 @@ public class Board extends JFrame implements ActionListener, MouseListener{
         this.setBounds(10, 10, 512, 512 + HEADER_OFFSET);
 
         addMouseListener(this);
-        //frame.addMouseMotionListener(this);
 
         JPanel panel = new JPanel();
         frame.add(panel);
@@ -80,15 +80,26 @@ public class Board extends JFrame implements ActionListener, MouseListener{
         this.setVisible (true);
     }
 
-    public void actionPerformed(ActionEvent e){}
-    public void mouseExited(MouseEvent e){}
-    public void mouseEntered(MouseEvent e){}
-    public void mouseReleased(MouseEvent e){}
-    public void mousePressed(MouseEvent e){
-        System.out.println((getPiece(e.getX(), e.getY()).isBlack?"black ":"white ")
-                + getPiece(e.getX(), e.getY()).name);
+    public void actionPerformed(ActionEvent e) {}
+    public void mouseExited(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
     }
-    public void mouseClicked(MouseEvent e){}
+    public void mousePressed(MouseEvent e) {
+        //System.out.println((getPiece(e.getX(), e.getY()).isBlack?"black ":"white ")
+                //+ getPiece(e.getX(), e.getY()).name);
+        selectedPiece = getPiece(e.getX(), e.getY());
+
+        if(selectedPiece!=null) {
+            selectedPiece.move(e.getX() / 64, (e.getY() - HEADER_OFFSET) / 64);
+            //selectedPiece = null;
+            this.repaint();
+            System.out.println(selectedPiece);
+        }
+
+
+    }
+    public void mouseClicked(MouseEvent e) {}
 
     public void paint(Graphics g) {
         boolean white = true;
