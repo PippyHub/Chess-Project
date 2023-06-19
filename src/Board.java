@@ -34,6 +34,21 @@ public class Board extends JFrame implements ActionListener, MouseListener{
             e.printStackTrace();
         }
 
+        pieceList();
+
+        JFrame frame = new JFrame();
+        this.setBounds(10, 10, 512, 512 + HEADER_OFFSET);
+
+        addMouseListener(this);
+
+        JPanel panel = new JPanel();
+        frame.add(panel);
+
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible (true);
+    }
+
+    public void pieceList() {
         Piece bKing = (new Piece(4, 0, true,"king", ps));
         Piece bQueen = (new Piece(3, 0, true,"queen", ps));
         Piece bBishop1 = (new Piece(2, 0, true,"bishop", ps));
@@ -67,24 +82,12 @@ public class Board extends JFrame implements ActionListener, MouseListener{
         Piece wPawn6 = (new Piece(5, 6, false,"pawn", ps));
         Piece wPawn7 = (new Piece(6, 6, false,"pawn", ps));
         Piece wPawn8 = (new Piece(7, 6, false,"pawn", ps));
-
-        JFrame frame = new JFrame();
-        this.setBounds(10, 10, 512, 512 + HEADER_OFFSET);
-
-        addMouseListener(this);
-
-        JPanel panel = new JPanel();
-        frame.add(panel);
-
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible (true);
     }
 
     public void actionPerformed(ActionEvent e) {}
     public void mouseExited(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
-    public void mouseReleased(MouseEvent e) {
-    }
+    public void mouseReleased(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
         //System.out.println((getPiece(e.getX(), e.getY()).isBlack?"black ":"white ")
                 //+ getPiece(e.getX(), e.getY()).name);
@@ -115,8 +118,6 @@ public class Board extends JFrame implements ActionListener, MouseListener{
                 white=!white;
             }
             white=!white;
-
-
         }
 
         for(Piece p: ps) {
