@@ -7,7 +7,6 @@
 import java.io.IOException;
 import java.util.LinkedList;
 public class Piece {
-    final int HEADER_OFFSET = 30;
     int pX; //piece x
     int pY; //piece y
     int x; //piece board pos x
@@ -20,7 +19,7 @@ public class Piece {
         this.pY = pY;
 
         x = pX * 64;
-        y = pY * 64 + HEADER_OFFSET;
+        y = pY * 64;
 
         this.isBlack = isBlack;
         this.ps = ps;
@@ -29,9 +28,9 @@ public class Piece {
     }
 
     public void move(int pX, int pY) {
-        if(Board.getPiece(pX * 64, pY * 64 + HEADER_OFFSET) != null) {
-            if(Board.getPiece(pX * 64, pY * 64 + HEADER_OFFSET).isBlack != isBlack) {
-                Board.getPiece(pX * 64, pY * 64 + HEADER_OFFSET).kill();
+        if(Board2.getPiece(pX * 64, pY * 64) != null) {
+            if(Board2.getPiece(pX * 64, pY * 64).isBlack != isBlack) {
+                Board2.getPiece(pX * 64, pY * 64).kill();
             }
         }
 
@@ -39,7 +38,7 @@ public class Piece {
         this.pY = pY;
 
         x = pX * 64;
-        y = pY * 64 + HEADER_OFFSET;
+        y = pY * 64;
     }
 
     public void kill() {
