@@ -4,7 +4,6 @@
  * @author (Piper Inns Hall)
  * @version (20/06/2023)
  */
-import java.io.IOException;
 import java.util.LinkedList;
 public class Piece {
     int pX; //piece x
@@ -26,11 +25,10 @@ public class Piece {
         name = n;
         ps.add(this);
     }
-
     public void move(int pX, int pY) {
-        if(Board2.getPiece(pX * 64, pY * 64) != null) {
-            if(Board2.getPiece(pX * 64, pY * 64).isBlack != isBlack) {
-                Board2.getPiece(pX * 64, pY * 64).kill();
+        if(Board.getPiece(pX * 64, pY * 64) != null) {
+            if(Board.getPiece(pX * 64, pY * 64).isBlack != isBlack) {
+                Board.getPiece(pX * 64, pY * 64).kill();
             }
         }
 
@@ -40,7 +38,6 @@ public class Piece {
         x = pX * 64;
         y = pY * 64;
     }
-
     public void kill() {
         ps.remove(this);
     }

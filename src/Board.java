@@ -9,29 +9,17 @@ import java.awt.event.*;
 import java.util.LinkedList;
 import javax.swing.*;
 
-public class Board extends JFrame implements ActionListener, MouseListener{
+public class Board extends JPanel implements ActionListener, MouseListener{
     public static LinkedList<Piece> ps = new LinkedList<>(); //linked list of pieces
     public static Piece selectedPiece = null;
     private Image[] images;
-    final int HEADER_OFFSET = 30;
     public Board() {
-
         Images img = new Images();
         images = img.loadImages();
 
         pieceList();
 
         addMouseListener(this);
-
-        JFrame frame = new JFrame();
-        this.getContentPane().setPreferredSize(new Dimension(512, 512));
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        JPanel panel = new JPanel();
-        frame.add(panel);
-
-        this.pack();
-        this.setVisible (true);
     }
     public void pieceList() {
         Piece bQueen = new Piece(3, 0, true,"queen", ps);
@@ -69,41 +57,40 @@ public class Board extends JFrame implements ActionListener, MouseListener{
                 else {
                     g.setColor(Color.decode("#769656"));
                 }
-                g.fillRect(boardX * 64, boardY * 64 + HEADER_OFFSET, 64, 64);
+                g.fillRect(boardX * 64, boardY * 64, 64, 64);
                 white=!white;
             }
             white=!white;
         }
-
-        for(Piece p: ps) {
-            int index = 0;
-            if(p.name.equalsIgnoreCase("queen")) {
-                index = 0;
-            }
-            if(p.name.equalsIgnoreCase("king")) {
-                index = 1;
-            }
-            if(p.name.equalsIgnoreCase("rook")) {
-                index = 2;
-            }
-            if(p.name.equalsIgnoreCase("knight")) {
-                index = 3;
-            }
-            if(p.name.equalsIgnoreCase("bishop")) {
-                index = 4;
-            }
-            if(p.name.equalsIgnoreCase("pawn")) {
-                index = 5;
-            }
-            if(!p.isBlack) {
-                index+=6;
-            }
-            g.drawImage(images[index], p.x, p.y, this);
-        }
+         for(Piece p: ps) {
+             int index = 0;
+             if(p.name.equalsIgnoreCase("queen")) {
+                 index = 0;
+             }
+             if(p.name.equalsIgnoreCase("king")) {
+                 index = 1;
+             }
+             if(p.name.equalsIgnoreCase("rook")) {
+                 index = 2;
+             }
+             if(p.name.equalsIgnoreCase("knight")) {
+                 index = 3;
+             }
+             if(p.name.equalsIgnoreCase("bishop")) {
+                 index = 4;
+             }
+             if(p.name.equalsIgnoreCase("pawn")) {
+                 index = 5;
+             }
+             if(!p.isBlack) {
+                 index+=6;
+             }
+             g.drawImage(images[index], p.x, p.y, this);
+         }
     }
     public static Piece getPiece(int x, int y) {
         int pX = x / 64;
-        int pY = (y - 30) / 64;
+        int pY = y / 64;
         for(Piece p: ps) {
             if(p.pX == pX && p.pY == pY) {
                 return p;
@@ -113,14 +100,12 @@ public class Board extends JFrame implements ActionListener, MouseListener{
     }
     public void actionPerformed(ActionEvent e) {}
     public void mousePressed(MouseEvent e) {
-        //System.out.println((getPiece(e.getX(), e.getY()).isBlack?"black ":"white ")
-        //+ getPiece(e.getX(), e.getY()).name);
         if(selectedPiece == null) {
             // No piece currently selected, attempt to select a piece
             selectedPiece = getPiece(e.getX(), e.getY());
         } else {
             // A piece is already selected, attempt to move it
-            selectedPiece.move(e.getX() / 64, (e.getY() - HEADER_OFFSET) / 64);
+            selectedPiece.move(e.getX() / 64, e.getY() / 64);
             selectedPiece = null; // Deselect the piece after moving
         }
 

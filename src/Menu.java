@@ -7,7 +7,7 @@
 import javax.swing.*;
 import java.awt.*;
 public class Menu extends JFrame {
-    Board2 panel = new Board2();
+    Board panel = new Board();
     public Menu() {
         setTitle("Chess");
         this.getContentPane().setPreferredSize(new Dimension(512, 512));
