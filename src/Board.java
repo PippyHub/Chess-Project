@@ -34,24 +34,24 @@ public class Board extends JFrame implements ActionListener, MouseListener{
         this.setVisible (true);
     }
     public void pieceList() {
-        Piece bQueen = (new Piece(3, 0, true,"queen", ps));
-        Piece wQueen = (new Piece(3, 7, false,"queen", ps));
+        Piece bQueen = new Piece(3, 0, true,"queen", ps);
+        Piece wQueen = new Piece(3, 7, false,"queen", ps);
 
-        Piece bKing = (new Piece(4, 0, true,"king", ps));
-        Piece wKing = (new Piece(4, 7, false,"king", ps));
+        Piece bKing = new Piece(4, 0, true,"king", ps);
+        Piece wKing = new Piece(4, 7, false,"king", ps);
 
         for (int r = 0; r < 8; r+=7) { //rooks in link list
-            Piece bRook1 = (new Piece(r, 0, true,"rook", ps));
-            Piece wRook1 = (new Piece(r, 7, false,"rook", ps));
+            Piece bRook1 = new Piece(r, 0, true,"rook", ps);
+            Piece wRook1 = new Piece(r, 7, false,"rook", ps);
 
         }
         for (int k = 1; k < 7; k+=5) { //knights in link list
-            Piece bKnight1 = (new Piece(k, 0, true,"knight", ps));
-            Piece wKnight1 = (new Piece(k, 7, false,"knight", ps));
+            Piece bKnight1 = new Piece(k, 0, true,"knight", ps);
+            Piece wKnight1 = new Piece(k, 7, false,"knight", ps);
         }
         for (int b = 2; b < 6; b+=3) { //bishops in link list
-            Piece bBishop = (new Piece(b, 0, true,"bishop", ps));
-            Piece wBishop = (new Piece(b, 7, false,"bishop", ps));
+            Piece bBishop = new Piece(b, 0, true,"bishop", ps);
+            Piece wBishop = new Piece(b, 7, false,"bishop", ps);
         }
 
         for(int p = 0; p < 8; p++) { //pawns in link list
@@ -59,27 +59,6 @@ public class Board extends JFrame implements ActionListener, MouseListener{
             Piece wPawn = new Piece(p, 6, false,"pawn", ps);
         }
     }
-
-    public void actionPerformed(ActionEvent e) {}
-    public void mouseExited(MouseEvent e) {}
-    public void mouseEntered(MouseEvent e) {}
-    public void mouseReleased(MouseEvent e) {}
-    public void mousePressed(MouseEvent e) {
-        //System.out.println((getPiece(e.getX(), e.getY()).isBlack?"black ":"white ")
-                //+ getPiece(e.getX(), e.getY()).name);
-        if(selectedPiece == null) {
-            // No piece currently selected, attempt to select a piece
-            selectedPiece = getPiece(e.getX(), e.getY());
-        } else {
-            // A piece is already selected, attempt to move it
-            selectedPiece.move(e.getX() / 64, (e.getY() - HEADER_OFFSET) / 64);
-            selectedPiece = null; // Deselect the piece after moving
-        }
-
-        this.repaint();
-    }
-    public void mouseClicked(MouseEvent e) {}
-
     public void paint(Graphics g) {
         boolean white = true;
         for(int boardY = 0; boardY < 8; boardY++) {
@@ -122,7 +101,6 @@ public class Board extends JFrame implements ActionListener, MouseListener{
             g.drawImage(images[index], p.x, p.y, this);
         }
     }
-
     public static Piece getPiece(int x, int y) {
         int pX = x / 64;
         int pY = (y - 30) / 64;
@@ -133,4 +111,23 @@ public class Board extends JFrame implements ActionListener, MouseListener{
         }
         return null;
     }
+    public void actionPerformed(ActionEvent e) {}
+    public void mousePressed(MouseEvent e) {
+        //System.out.println((getPiece(e.getX(), e.getY()).isBlack?"black ":"white ")
+        //+ getPiece(e.getX(), e.getY()).name);
+        if(selectedPiece == null) {
+            // No piece currently selected, attempt to select a piece
+            selectedPiece = getPiece(e.getX(), e.getY());
+        } else {
+            // A piece is already selected, attempt to move it
+            selectedPiece.move(e.getX() / 64, (e.getY() - HEADER_OFFSET) / 64);
+            selectedPiece = null; // Deselect the piece after moving
+        }
+
+        this.repaint();
+    }
+    public void mouseReleased(MouseEvent e) {}
+    public void mouseClicked(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
 }
