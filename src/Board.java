@@ -4,12 +4,13 @@
  * @author (Piper Inns Hall)
  * @version (20/06/2023)
  */
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.LinkedList;
 import javax.swing.*;
 
-public class Board extends JPanel implements ActionListener, MouseListener{
+public class Board extends JPanel implements ActionListener, MouseListener {
     public static LinkedList<Piece> ps = new LinkedList<>(); //linked list of pieces
     public static Piece selectedPiece = null;
     private Image[] images;

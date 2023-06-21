@@ -6,7 +6,8 @@
  */
 import javax.swing.*;
 import java.awt.*;
-public class Menu extends JFrame {
+import java.awt.event.*;
+public class Menu extends JFrame implements ActionListener {
     Board panel = new Board();
     public Menu() {
         setTitle("Chess");
@@ -19,22 +20,38 @@ public class Menu extends JFrame {
         this.pack();
         this.setVisible(true);
     }
-
     public void contents() {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu menu;
-        JMenuItem menuItem;
 
-        menu = new JMenu("Menu");
+        menu = new JMenu("File");
         menuBar.add(menu);
 
-        menuItem = new JMenuItem("menuItem");
+        JMenuItem menuItem;
+
+        menuItem = new JMenuItem("Save");
+        menuItem.addActionListener(this);
         menu.add(menuItem);
 
-        menuItem = new JMenuItem("menuItem2");
+        menuItem = new JMenuItem("Load");
+        menuItem.addActionListener(this);
         menu.add(menuItem);
 
         this.setJMenuBar(menuBar);
+    }
+    public void actionPerformed(ActionEvent e)
+    {
+        String cmd=e.getActionCommand();
+        switch(cmd)
+        {
+            case "Quit" : System.exit(0);
+                break;
+            case "Save" : new Save();
+                break;
+            case "Load" : new Load();
+                break;
+            default : System.out.println("Invalid input");
+        }
     }
 }

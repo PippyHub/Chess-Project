@@ -12,7 +12,7 @@ public class Images {
 
     public Image[] loadImages() {
         try {
-            BufferedImage all = ImageIO.read(new File("src/ChessPiecesArray.png"));
+            BufferedImage all = ImageIO.read(new File("src/Images/ChessPiecesArray.png"));
 
             int index = 0;
             for (int y = 0; y < 120; y += 60) {
