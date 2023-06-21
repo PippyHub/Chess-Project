@@ -2,7 +2,7 @@
  * Prints out the chess board and pieces onto the frame
  *
  * @author (Piper Inns Hall)
- * @version (20/06/2023)
+ * @version (21/06/2023)
  */
 
 import java.awt.*;
@@ -13,7 +13,7 @@ import javax.swing.*;
 public class Board extends JPanel implements ActionListener, MouseListener {
     public static LinkedList<Piece> ps = new LinkedList<>(); //linked list of pieces
     public static Piece selectedPiece = null;
-    private Image[] images;
+    private final Image[] images;
     public Board() {
         Images img = new Images();
         images = img.loadImages();
@@ -43,16 +43,16 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             Piece wBishop = new Piece(b, 7, false,"bishop", ps);
         }
 
-        for(int p = 0; p < 8; p++) { //pawns in link list
+        for (int p = 0; p < 8; p++) { //pawns in link list
             Piece bPawn = new Piece(p, 1, true,"pawn", ps);
             Piece wPawn = new Piece(p, 6, false,"pawn", ps);
         }
     }
     public void paint(Graphics g) {
         boolean white = true;
-        for(int boardY = 0; boardY < 8; boardY++) {
-            for(int boardX = 0; boardX < 8; boardX++) {
-                if(white) {
+        for (int boardY = 0; boardY < 8; boardY++) {
+            for (int boardX = 0; boardX < 8; boardX++) {
+                if (white) {
                     g.setColor(Color.white);
                 }
                 else {
@@ -63,27 +63,27 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             }
             white=!white;
         }
-         for(Piece p: ps) {
+         for (Piece p: ps) {
              int index = 0;
-             if(p.name.equalsIgnoreCase("queen")) {
+             if (p.name.equalsIgnoreCase("queen")) {
                  index = 0;
              }
-             if(p.name.equalsIgnoreCase("king")) {
+             if (p.name.equalsIgnoreCase("king")) {
                  index = 1;
              }
-             if(p.name.equalsIgnoreCase("rook")) {
+             if (p.name.equalsIgnoreCase("rook")) {
                  index = 2;
              }
-             if(p.name.equalsIgnoreCase("knight")) {
+             if (p.name.equalsIgnoreCase("knight")) {
                  index = 3;
              }
-             if(p.name.equalsIgnoreCase("bishop")) {
+             if (p.name.equalsIgnoreCase("bishop")) {
                  index = 4;
              }
-             if(p.name.equalsIgnoreCase("pawn")) {
+             if (p.name.equalsIgnoreCase("pawn")) {
                  index = 5;
              }
-             if(!p.isBlack) {
+             if (!p.isBlack) {
                  index+=6;
              }
              g.drawImage(images[index], p.x, p.y, this);
@@ -109,7 +109,6 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             selectedPiece.move(e.getX() / 64, e.getY() / 64);
             selectedPiece = null; // Deselect the piece after moving
         }
-
         this.repaint();
     }
     public void mouseReleased(MouseEvent e) {}

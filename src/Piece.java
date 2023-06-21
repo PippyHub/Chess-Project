@@ -2,7 +2,7 @@
  * Constructor for all chess pieces
  *
  * @author (Piper Inns Hall)
- * @version (20/06/2023)
+ * @version (21/06/2023)
  */
 import java.util.LinkedList;
 public class Piece {
@@ -26,17 +26,46 @@ public class Piece {
         ps.add(this);
     }
     public void move(int pX, int pY) {
-        if(Board.getPiece(pX * 64, pY * 64) != null) {
-            if(Board.getPiece(pX * 64, pY * 64).isBlack != isBlack) {
-                Board.getPiece(pX * 64, pY * 64).kill();
+        System.out.print(pX + pY);
+        System.out.print(" ");
+        System.out.print(this.pX);
+
+
+        int deltaX = pX - this.pX;
+        int deltaY = pY - this.pY;
+
+        System.out.print(deltaX);
+        System.out.print(deltaY);
+
+        if (legalMove()) {
+            this.pX = pX;
+            this.pY = pY;
+
+            x = pX * 64;
+            y = pY * 64;
+
+            rules();
+        }
+    }
+
+    public void rules() {
+        //piece taking
+        for (Piece piece : ps) {
+            if (piece != this && piece.pX == pX && piece.pY == pY && piece.isBlack != isBlack) {
+                piece.kill();
+                break; // Exit the loop after taking one piece
             }
         }
 
-        this.pX = pX;
-        this.pY = pY;
-
-        x = pX * 64;
-        y = pY * 64;
+        //promotion
+        if (name.equalsIgnoreCase("pawn")) {
+            if ((isBlack && pY == 7) || (!isBlack && pY == 0)) {
+                name = "queen";
+            }
+        }
+    }
+    public boolean legalMove() {
+        return true;
     }
     public void kill() {
         ps.remove(this);

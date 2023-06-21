@@ -2,7 +2,7 @@
  * Menu bar class
  *
  * @author (Piper Inns Hall)
- * @version (20/06/2023)
+ * @version (21/06/2023)
  */
 import javax.swing.*;
 import java.awt.*;

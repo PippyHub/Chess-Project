@@ -15,6 +15,8 @@ public class Load {
             writer.write("Load");
             writer.flush();
             writer.close();
-        }catch(IOException e){};
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
