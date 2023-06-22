@@ -75,6 +75,9 @@ public class Piece {
                 return false;
             }
         } //cannot take own pieces
+        if (!queenMove()) {
+            return false;
+        }
         if (!kingMove()) {
             return false;
         }
@@ -92,7 +95,16 @@ public class Piece {
         }
         return true;
     }
-
+    public boolean queenMove() {
+        if (name.equalsIgnoreCase("queen")) {
+            if (name.equalsIgnoreCase("queen")) {
+                int absDeltaX = Math.abs(deltaX);
+                int absDeltaY = Math.abs(deltaY);
+                return absDeltaX == absDeltaY || deltaX == 0 || deltaY == 0;
+            }
+        } //queen moves
+        return true;
+    }
     public boolean kingMove() {
         if (name.equalsIgnoreCase("king")) {
             return deltaX <= 1 && deltaX >= -1 && deltaY <= 1 && deltaY >= -1;
@@ -110,7 +122,7 @@ public class Piece {
             int absDeltaX = Math.abs(deltaX);
             int absDeltaY = Math.abs(deltaY);
             return (absDeltaX == 2 && absDeltaY == 1) || (absDeltaX == 1 && absDeltaY == 2);
-        }
+        } //knight moves
         return true;
     }
     public boolean bishopMove() {
