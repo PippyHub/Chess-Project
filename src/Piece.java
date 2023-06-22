@@ -70,12 +70,19 @@ public class Piece {
         if (Board.getPiece(legalMovePX * 64, legalMovePY * 64) != null) {
             if (Board.getPiece(legalMovePX * 64, legalMovePY * 64).isBlack == isBlack) {
                 return false;
-            } //cannot take own pieces
-        }
+            }
+        } //cannot take own pieces
         if (!kingMove()) {
             return false;
         }
         if (!pawnMove()) {
+            return false;
+        }
+        if (!bishopMove()) {
+            return false;
+        }
+
+        if (!rookMove()) {
             return false;
         }
         return true;
@@ -90,12 +97,12 @@ public class Piece {
             if (Board.getPiece(legalMovePX * 64, legalMovePY * 64) != null && deltaX == 0) { return false; }
 
             if (!isBlack) { //if piece is white
-                if (!pieceMoved && deltaX != 0 && deltaY < -1) { return false; }
+                if (!pieceMoved && deltaX != 0 && deltaY < -1) { return false; } //can't move two squares to take
                 if (!pieceMoved && deltaY < -2) { return false; } //can't move triple or more on first move
                 if (pieceMoved && deltaY < -1) { return false; } //can't move double or more after first move
                 return deltaY < 0; //can't move backward
             } else { //if piece is black
-                if (!pieceMoved && deltaX != 0 && deltaY > 1) { return false; }
+                if (!pieceMoved && deltaX != 0 && deltaY > 1) { return false; } //can't move two squares to take
                 if (!pieceMoved && deltaY > 2) { return false; } //can't move triple or more on first move
                 if (pieceMoved && deltaY > 1) { return false; } //can't move double or more after first move
                 return deltaY > 0; //can't move backward
@@ -111,6 +118,19 @@ public class Piece {
         return true;
     }
 
+    public boolean bishopMove() {
+        if (name.equalsIgnoreCase("bishop")) {
+            return deltaX == deltaY || deltaX == -deltaY; //move diagonally
+        }
+        return true;
+    }
+
+    public boolean rookMove() {
+        if (name.equalsIgnoreCase("rook")) {
+            return deltaX == 0 || deltaY == 0;
+        }
+        return true;
+    }
     public void kill() {
         ps.remove(this);
     }

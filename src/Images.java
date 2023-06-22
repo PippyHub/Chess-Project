@@ -12,7 +12,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Images {
-    private Image[] images;
+    private final Image[] images;
     public Images() {
         images = new Image[12];
     }
