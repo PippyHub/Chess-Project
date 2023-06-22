@@ -23,29 +23,29 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         addMouseListener(this);
     }
     public void pieceList() {
-        Piece bQueen = new Piece(3, 0, true,"queen", ps);
-        Piece wQueen = new Piece(3, 7, false,"queen", ps);
+        Piece bQueen = new Piece(3, 0, true, false,"queen", ps);
+        Piece wQueen = new Piece(3, 7, false,false,"queen", ps);
 
-        Piece bKing = new Piece(4, 0, true,"king", ps);
-        Piece wKing = new Piece(4, 7, false,"king", ps);
+        Piece bKing = new Piece(4, 0, true,false,"king", ps);
+        Piece wKing = new Piece(4, 7, false,false,"king", ps);
 
         for (int r = 0; r < 8; r+=7) { //rooks in link list
-            Piece bRook1 = new Piece(r, 0, true,"rook", ps);
-            Piece wRook1 = new Piece(r, 7, false,"rook", ps);
+            Piece bRook1 = new Piece(r, 0, true,false,"rook", ps);
+            Piece wRook1 = new Piece(r, 7, false,false,"rook", ps);
 
         }
         for (int k = 1; k < 7; k+=5) { //knights in link list
-            Piece bKnight1 = new Piece(k, 0, true,"knight", ps);
-            Piece wKnight1 = new Piece(k, 7, false,"knight", ps);
+            Piece bKnight1 = new Piece(k, 0, true,false,"knight", ps);
+            Piece wKnight1 = new Piece(k, 7, false,false,"knight", ps);
         }
         for (int b = 2; b < 6; b+=3) { //bishops in link list
-            Piece bBishop = new Piece(b, 0, true,"bishop", ps);
-            Piece wBishop = new Piece(b, 7, false,"bishop", ps);
+            Piece bBishop = new Piece(b, 0, true,false,"bishop", ps);
+            Piece wBishop = new Piece(b, 7, false,false,"bishop", ps);
         }
 
         for (int p = 0; p < 8; p++) { //pawns in link list
-            Piece bPawn = new Piece(p, 1, true,"pawn", ps);
-            Piece wPawn = new Piece(p, 6, false,"pawn", ps);
+            Piece bPawn = new Piece(p, 1, true,false,"pawn", ps);
+            Piece wPawn = new Piece(p, 6, false,false,"pawn", ps);
         }
     }
     public void paint(Graphics g) {
@@ -92,7 +92,8 @@ public class Board extends JPanel implements ActionListener, MouseListener {
     public static Piece getPiece(int x, int y) {
         int pX = x / 64;
         int pY = y / 64;
-        for(Piece p: ps) {
+
+       for (Piece p: ps) {
             if(p.pX == pX && p.pY == pY) {
                 return p;
             }
