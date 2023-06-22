@@ -35,6 +35,9 @@ public class Piece {
         deltaX = pX - this.pX;
         deltaY = pY - this.pY;
 
+        System.out.println(deltaX);
+        System.out.println(deltaY);
+
         legalMovePX = pX;
         legalMovePY = pY;
 
@@ -75,16 +78,45 @@ public class Piece {
         if (!kingMove()) {
             return false;
         }
-        if (!pawnMove()) {
+        if (!rookMove()) {
+            return false;
+        }
+        if (!knightMove()) {
             return false;
         }
         if (!bishopMove()) {
             return false;
         }
-
-        if (!rookMove()) {
+        if (!pawnMove()) {
             return false;
         }
+        return true;
+    }
+
+    public boolean kingMove() {
+        if (name.equalsIgnoreCase("king")) {
+            return deltaX <= 1 && deltaX >= -1 && deltaY <= 1 && deltaY >= -1;
+        } //king moves
+        return true;
+    }
+    public boolean rookMove() {
+        if (name.equalsIgnoreCase("rook")) {
+            return deltaX == 0 || deltaY == 0;
+        } //rook moves
+        return true;
+    }
+    public boolean knightMove() {
+        if (name.equalsIgnoreCase("knight")) {
+            int absDeltaX = Math.abs(deltaX);
+            int absDeltaY = Math.abs(deltaY);
+            return (absDeltaX == 2 && absDeltaY == 1) || (absDeltaX == 1 && absDeltaY == 2);
+        }
+        return true;
+    }
+    public boolean bishopMove() {
+        if (name.equalsIgnoreCase("bishop")) {
+            return deltaX == deltaY || deltaX == -deltaY; //move diagonally
+        } //bishop moves
         return true;
     }
     public boolean pawnMove() {
@@ -108,27 +140,6 @@ public class Piece {
                 return deltaY > 0; //can't move backward
             }
         } //pawn moves
-        return true;
-    }
-
-    public boolean kingMove() {
-        if (name.equalsIgnoreCase("king")) {
-            return deltaX <= 1 && deltaX >= -1 && deltaY <= 1 && deltaY >= -1;
-        } //king moves
-        return true;
-    }
-
-    public boolean bishopMove() {
-        if (name.equalsIgnoreCase("bishop")) {
-            return deltaX == deltaY || deltaX == -deltaY; //move diagonally
-        }
-        return true;
-    }
-
-    public boolean rookMove() {
-        if (name.equalsIgnoreCase("rook")) {
-            return deltaX == 0 || deltaY == 0;
-        }
         return true;
     }
     public void kill() {

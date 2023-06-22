@@ -43,15 +43,11 @@ public class Menu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e)
     {
         String cmd=e.getActionCommand();
-        switch(cmd)
-        {
-            case "Quit" : System.exit(0);
-                break;
-            case "Save" : new Save();
-                break;
-            case "Load" : new Load();
-                break;
-            default : System.out.println("Invalid input");
+        switch (cmd) {
+            case "Quit" -> System.exit(0);
+            case "Save" -> new Save();
+            case "Load" -> new Load();
+            default -> System.out.println("Invalid input");
         }
     }
 }
