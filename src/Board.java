@@ -43,7 +43,6 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             Piece bBishop = new Piece(b, 0, true,false,"bishop", ps);
             Piece wBishop = new Piece(b, 7, false,false,"bishop", ps);
         }
-
         for (int p = 0; p < 8; p++) { //pawns in link list
             Piece bPawn = new Piece(p, 1, true,false,"pawn", ps);
             Piece wPawn = new Piece(p, 6, false,false,"pawn", ps);
@@ -71,7 +70,6 @@ public class Board extends JPanel implements ActionListener, MouseListener {
                 g.fillRect(selectedPiece.pX * 64, selectedPiece.pY * 64, 64, 64);
             }
         }
-
 
         for (Piece p: ps) {
              int index = 0;
@@ -103,7 +101,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         int pX = x / 64;
         int pY = y / 64;
 
-       for (Piece p: ps) {
+        for (Piece p: ps) {
             if(p.pX == pX && p.pY == pY) {
                 return p;
             }

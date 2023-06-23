@@ -8,8 +8,8 @@ import java.util.LinkedList;
 public class Piece {
     int pX; //piece x
     int pY; //piece y
-    int legalMovePX;
-    int legalMovePY;
+    int originX; //for use in calculations set to piece x before changing piece x
+    int originY; //for use in calculations set to piece y before changing piece y
     int x; //piece board pos x
     int y; //piece board pos y
     int deltaX; //change in x when moving piece
@@ -17,9 +17,9 @@ public class Piece {
     boolean isBlack;
     boolean pieceMoved;
     boolean castling;
+    private static boolean isBlackTurn;
     LinkedList<Piece> ps;
     String name;
-    private static boolean isBlackTurn;
     public Piece(int pX, int pY, boolean isBlack, boolean pieceMoved, String n, LinkedList<Piece> ps) {
         this.pX = pX;
         this.pY = pY;
@@ -37,16 +37,14 @@ public class Piece {
         deltaX = pX - this.pX;
         deltaY = pY - this.pY;
 
-        System.out.println(deltaX);
-        System.out.println(deltaY);
-
-        legalMovePX = pX;
-        legalMovePY = pY;
+        originX = pX;
+        originY = pY;
 
         if (legalMove()) {
+
+
             taking();
             promotion();
-            switchTurns();
 
             this.pieceMoved = true;
 
@@ -55,25 +53,28 @@ public class Piece {
 
             x = pX * 64;
             y = pY * 64;
+
+            if (!castling) {
+                switchTurns();
+            }
+
+            castling = false;
         }
     }
     public void taking() {
-        if (Board.getPiece(legalMovePX * 64, legalMovePY * 64) != null) {
-            Board.getPiece(legalMovePX * 64, legalMovePY * 64).kill();
+        if (Board.getPiece(originX * 64, originY * 64) != null) {
+            Board.getPiece(originX * 64, originY * 64).kill();
         } //taking pieces
     }
     public void promotion() {
         if (name.equalsIgnoreCase("pawn")) {
-            if ((isBlack && legalMovePY == 7) || (!isBlack && legalMovePY == 0)) {
+            if ((isBlack && originY == 7) || (!isBlack && originY == 0)) {
                 name = "queen";
             }
         } //promotion
     }
     public boolean highlight() {
-        if ((isBlackTurn && isBlack) || (!isBlackTurn && !isBlack)) {
-            return true;
-        }
-        return false;
+        return (isBlackTurn && isBlack) || (!isBlackTurn && !isBlack);
     }
     public static void switchTurns() {
         isBlackTurn = !isBlackTurn;
@@ -82,8 +83,8 @@ public class Piece {
         if (deltaX == 0 && deltaY == 0) {
             return false;
         } //cannot move to own square
-        if (Board.getPiece(legalMovePX * 64, legalMovePY * 64) != null) {
-            if (Board.getPiece(legalMovePX * 64, legalMovePY * 64).isBlack == isBlack) {
+        if (Board.getPiece(originX * 64, originY * 64) != null) {
+            if (Board.getPiece(originX * 64, originY * 64).isBlack == isBlack) {
                 return false;
             }
         } //cannot take own pieces
@@ -163,11 +164,11 @@ public class Piece {
     public boolean pawnMove() {
         if (name.equalsIgnoreCase("pawn")) {
             //diagonal taking
-            if (Board.getPiece(legalMovePX * 64, legalMovePY * 64) != null && deltaX < -1 || deltaX > 1) { return false;}
+            if (Board.getPiece(originX * 64, originY * 64) != null && deltaX < -1 || deltaX > 1) { return false;}
             //cant move to empty square diagonally
-            if (Board.getPiece(legalMovePX * 64, legalMovePY * 64) == null && deltaX != 0) { return false; }
+            if (Board.getPiece(originX * 64, originY * 64) == null && deltaX != 0) { return false; }
             //cant take non-diagonally
-            if (Board.getPiece(legalMovePX * 64, legalMovePY * 64) != null && deltaX == 0) { return false; }
+            if (Board.getPiece(originX * 64, originY * 64) != null && deltaX == 0) { return false; }
 
             if (!isBlack) { //if piece is white
                 if (!pieceMoved && deltaX != 0 && deltaY < -1) { return false; } //can't move two squares to take
@@ -188,18 +189,14 @@ public class Piece {
             return true;
         } // Knights can jump over other pieces, so no obstruction check is needed
         // Check for obstruction based on the direction of movement
-        int xDirection = Integer.signum(deltaX);
-        int yDirection = Integer.signum(deltaY);
+        int xDirection = Integer.signum(deltaX); //returns 1, 0, -1
+        int yDirection = Integer.signum(deltaY); //returns 1, 0, -1
         int currentX = pX + xDirection;
         int currentY = pY + yDirection;
 
-        while (currentX != legalMovePX || currentY != legalMovePY) {
+        while (currentX != originX || currentY != originY) {
             if (Board.getPiece(currentX * 64, currentY * 64) != null) {
-                if (castling) {
-                    castling = false;
-                    return true;
-                }
-                return false; // Obstruction found
+                return castling;// Obstruction found
             }
             currentX += xDirection;
             currentY += yDirection;
