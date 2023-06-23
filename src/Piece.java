@@ -18,6 +18,7 @@ public class Piece {
     boolean pieceMoved;
     LinkedList<Piece> ps;
     String name;
+    private static boolean isBlackTurn = false;
     public Piece(int pX, int pY, boolean isBlack, boolean pieceMoved, String n, LinkedList<Piece> ps) {
         this.pX = pX;
         this.pY = pY;
@@ -44,6 +45,7 @@ public class Piece {
         if (legalMove()) {
             taking();
             promotion();
+            switchTurns();
 
             this.pieceMoved = true;
 
@@ -66,6 +68,9 @@ public class Piece {
             }
         } //promotion
     }
+    public static void switchTurns() {
+        isBlackTurn = !isBlackTurn;
+    }
     public boolean legalMove() {
         if (deltaX == 0 && deltaY == 0) {
             return false;
@@ -75,6 +80,10 @@ public class Piece {
                 return false;
             }
         } //cannot take own pieces
+        // Check if it's the turn of the current piece's color
+        if ((isBlackTurn && !isBlack) || (!isBlackTurn && isBlack)) {
+            return false;
+        }
         if (!queenMove()) {
             return false;
         }
@@ -93,7 +102,8 @@ public class Piece {
         if (!pawnMove()) {
             return false;
         }
-        return true;
+        // check for obstruction between current position and desired position
+        return noObstruction();
     }
     public boolean queenMove() {
         if (name.equalsIgnoreCase("queen")) {
@@ -153,6 +163,28 @@ public class Piece {
             }
         } //pawn moves
         return true;
+    }
+    public boolean noObstruction() {
+        if (name.equalsIgnoreCase("knight")) {
+            // Knights can jump over other pieces, so no obstruction check is needed
+            return true;
+        }
+
+        // Check for obstruction based on the direction of movement
+        int xDirection = Integer.signum(deltaX);
+        int yDirection = Integer.signum(deltaY);
+        int currentX = pX + xDirection;
+        int currentY = pY + yDirection;
+
+        while (currentX != legalMovePX || currentY != legalMovePY) {
+            if (Board.getPiece(currentX * 64, currentY * 64) != null) {
+                return false; // Obstruction found
+            }
+            currentX += xDirection;
+            currentY += yDirection;
+        }
+
+        return true; // No obstruction found
     }
     public void kill() {
         ps.remove(this);
