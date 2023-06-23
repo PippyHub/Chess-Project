@@ -2,7 +2,7 @@
  * Prints out the chess board and pieces onto the frame
  *
  * @author (Piper Inns Hall)
- * @version (23/06/2023)
+ * @version (24/06/2023)
  */
 
 import java.awt.*;
@@ -14,6 +14,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
     public static LinkedList<Piece> ps = new LinkedList<>(); //linked list of pieces
     public static Piece selectedPiece = null;
     private final Image[] images;
+    boolean highlight;
     public Board() {
         Images img = new Images();
         images = img.loadImages();
@@ -63,7 +64,16 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             }
             white=!white;
         }
-         for (Piece p: ps) {
+
+        if (highlight) {
+            g.setColor(Color.yellow);
+            //if ((!selectedPiece.isBlack && !selectedPiece.publicBlackTurn) || (selectedPiece.isBlack && selectedPiece.publicBlackTurn)) {
+                g.fillRect(selectedPiece.pX * 64, selectedPiece.pY * 64, 64, 64);
+            //}
+        }
+
+
+        for (Piece p: ps) {
              int index = 0;
              if (p.name.equalsIgnoreCase("queen")) {
                  index = 0;
@@ -105,9 +115,13 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         if(selectedPiece == null) {
             // No piece currently selected, attempt to select a piece
             selectedPiece = getPiece(e.getX(), e.getY());
+            if(selectedPiece != null) {
+                highlight = true;
+            }
         } else {
             // A piece is already selected, attempt to move it
             selectedPiece.move(e.getX() / 64, e.getY() / 64);
+            highlight = false;
             selectedPiece = null; // Deselect the piece after moving
         }
         this.repaint();

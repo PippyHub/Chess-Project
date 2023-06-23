@@ -2,7 +2,7 @@
  * Constructor for all chess pieces
  *
  * @author (Piper Inns Hall)
- * @version (23/06/2023)
+ * @version (24/06/2023)
  */
 import java.util.LinkedList;
 public class Piece {
@@ -19,7 +19,8 @@ public class Piece {
     boolean castling;
     LinkedList<Piece> ps;
     String name;
-    private static boolean isBlackTurn = false;
+    private static boolean isBlackTurn;
+    public boolean publicBlackTurn;
     public Piece(int pX, int pY, boolean isBlack, boolean pieceMoved, String n, LinkedList<Piece> ps) {
         this.pX = pX;
         this.pY = pY;
@@ -48,6 +49,8 @@ public class Piece {
             promotion();
             switchTurns();
 
+            publicBlackTurn = !publicBlackTurn;
+
             this.pieceMoved = true;
 
             this.pX = pX;
@@ -55,6 +58,8 @@ public class Piece {
 
             x = pX * 64;
             y = pY * 64;
+
+
         }
     }
     public void taking() {
@@ -82,9 +87,9 @@ public class Piece {
             }
         } //cannot take own pieces
         // Check if it's the turn of the current piece's color
-        /*if ((isBlackTurn && !isBlack) || (!isBlackTurn && isBlack)) {
+        if ((isBlackTurn && !isBlack) || (!isBlackTurn && isBlack)) {
             return false;
-        }*/
+        }
         if (!queenMove()) {
             return false;
         }
