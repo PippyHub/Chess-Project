@@ -30,6 +30,10 @@ public class Menu extends JFrame implements ActionListener {
 
         JMenuItem menuItem;
 
+        menuItem = new JMenuItem("New");
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+
         menuItem = new JMenuItem("Save");
         menuItem.addActionListener(this);
         menu.add(menuItem);
@@ -44,7 +48,7 @@ public class Menu extends JFrame implements ActionListener {
     {
         String cmd=e.getActionCommand();
         switch (cmd) {
-            case "Quit" -> System.exit(0);
+            case "New" -> System.exit(0);
             case "Save" -> new Save();
             case "Load" -> new Load();
             default -> System.out.println("Invalid input");

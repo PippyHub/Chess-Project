@@ -30,13 +30,13 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         Piece wKing = new Piece(4, 7, false,false,"king", ps);
 
         for (int r = 0; r < 8; r+=7) { //rooks in link list
-            Piece bRook1 = new Piece(r, 0, true,false,"rook", ps);
-            Piece wRook1 = new Piece(r, 7, false,false,"rook", ps);
+            Piece bRook = new Piece(r, 0, true,false,"rook", ps);
+            Piece wRook = new Piece(r, 7, false,false,"rook", ps);
 
         }
         for (int k = 1; k < 7; k+=5) { //knights in link list
-            Piece bKnight1 = new Piece(k, 0, true,false,"knight", ps);
-            Piece wKnight1 = new Piece(k, 7, false,false,"knight", ps);
+            Piece bKnight = new Piece(k, 0, true,false,"knight", ps);
+            Piece wKnight = new Piece(k, 7, false,false,"knight", ps);
         }
         for (int b = 2; b < 6; b+=3) { //bishops in link list
             Piece bBishop = new Piece(b, 0, true,false,"bishop", ps);

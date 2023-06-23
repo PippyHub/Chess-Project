@@ -16,6 +16,7 @@ public class Piece {
     int deltaY; //change in y when moving piece
     boolean isBlack;
     boolean pieceMoved;
+    boolean castling;
     LinkedList<Piece> ps;
     String name;
     private static boolean isBlackTurn = false;
@@ -81,9 +82,9 @@ public class Piece {
             }
         } //cannot take own pieces
         // Check if it's the turn of the current piece's color
-        if ((isBlackTurn && !isBlack) || (!isBlackTurn && isBlack)) {
+        /*if ((isBlackTurn && !isBlack) || (!isBlackTurn && isBlack)) {
             return false;
-        }
+        }*/
         if (!queenMove()) {
             return false;
         }
@@ -107,18 +108,30 @@ public class Piece {
     }
     public boolean queenMove() {
         if (name.equalsIgnoreCase("queen")) {
-            if (name.equalsIgnoreCase("queen")) {
-                int absDeltaX = Math.abs(deltaX);
-                int absDeltaY = Math.abs(deltaY);
-                return absDeltaX == absDeltaY || deltaX == 0 || deltaY == 0;
-            }
+            int absDeltaX = Math.abs(deltaX);
+            int absDeltaY = Math.abs(deltaY);
+            return absDeltaX == absDeltaY || deltaX == 0 || deltaY == 0;
         } //queen moves
         return true;
     }
     public boolean kingMove() {
         if (name.equalsIgnoreCase("king")) {
-            return deltaX <= 1 && deltaX >= -1 && deltaY <= 1 && deltaY >= -1;
-        } //king moves
+            if (!pieceMoved && deltaY == 0 && Math.abs(deltaX) == 2) {
+                int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting position
+                int rookY = pY; // Rook stays in the same row
+
+                Piece rook = Board.getPiece(rookX * 64, rookY * 64);
+                if (rook != null && rook.name.equalsIgnoreCase("rook") && !rook.pieceMoved) {
+                    castling = true;
+                    // Move the rook
+                    int newRookX = (deltaX > 0) ? pX + 1 : pX - 1;
+                    int newRookY = pY;
+                    rook.move(newRookX, newRookY);
+                }
+                return true;
+            }
+            return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1;
+        }//king moves
         return true;
     }
     public boolean rookMove() {
@@ -166,10 +179,8 @@ public class Piece {
     }
     public boolean noObstruction() {
         if (name.equalsIgnoreCase("knight")) {
-            // Knights can jump over other pieces, so no obstruction check is needed
             return true;
-        }
-
+        } // Knights can jump over other pieces, so no obstruction check is needed
         // Check for obstruction based on the direction of movement
         int xDirection = Integer.signum(deltaX);
         int yDirection = Integer.signum(deltaY);
@@ -178,12 +189,15 @@ public class Piece {
 
         while (currentX != legalMovePX || currentY != legalMovePY) {
             if (Board.getPiece(currentX * 64, currentY * 64) != null) {
+                if (castling) {
+                    castling = false;
+                    return true;
+                }
                 return false; // Obstruction found
             }
             currentX += xDirection;
             currentY += yDirection;
         }
-
         return true; // No obstruction found
     }
     public void kill() {
