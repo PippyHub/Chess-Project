@@ -20,7 +20,6 @@ public class Piece {
     LinkedList<Piece> ps;
     String name;
     private static boolean isBlackTurn;
-    public boolean publicBlackTurn;
     public Piece(int pX, int pY, boolean isBlack, boolean pieceMoved, String n, LinkedList<Piece> ps) {
         this.pX = pX;
         this.pY = pY;
@@ -49,8 +48,6 @@ public class Piece {
             promotion();
             switchTurns();
 
-            publicBlackTurn = !publicBlackTurn;
-
             this.pieceMoved = true;
 
             this.pX = pX;
@@ -58,8 +55,6 @@ public class Piece {
 
             x = pX * 64;
             y = pY * 64;
-
-
         }
     }
     public void taking() {
@@ -73,6 +68,12 @@ public class Piece {
                 name = "queen";
             }
         } //promotion
+    }
+    public boolean highlight() {
+        if ((isBlackTurn && isBlack) || (!isBlackTurn && !isBlack)) {
+            return true;
+        }
+        return false;
     }
     public static void switchTurns() {
         isBlackTurn = !isBlackTurn;

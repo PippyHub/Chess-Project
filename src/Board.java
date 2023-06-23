@@ -67,9 +67,9 @@ public class Board extends JPanel implements ActionListener, MouseListener {
 
         if (highlight) {
             g.setColor(Color.yellow);
-            //if ((!selectedPiece.isBlack && !selectedPiece.publicBlackTurn) || (selectedPiece.isBlack && selectedPiece.publicBlackTurn)) {
+            if (selectedPiece.highlight()) {
                 g.fillRect(selectedPiece.pX * 64, selectedPiece.pY * 64, 64, 64);
-            //}
+            }
         }
 
 
