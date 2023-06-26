@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="pieces get highlighted on their turn">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="fixed castling double move">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
@@ -354,7 +354,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687528613518</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="fixed castling double move">
+      <created>1687530853336</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1687530853336</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -369,7 +376,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated headers" />
     <MESSAGE value="fixing click pieces" />
     <MESSAGE value="clicking pieces gets name and colour" />
     <MESSAGE value="moving pieces" />
@@ -394,6 +400,7 @@
     <MESSAGE value="updating headers" />
     <MESSAGE value="all pieces get highlighted" />
     <MESSAGE value="pieces get highlighted on their turn" />
-    <option name="LAST_COMMIT_MESSAGE" value="pieces get highlighted on their turn" />
+    <MESSAGE value="fixed castling double move" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed castling double move" />
   </component>
 </project>

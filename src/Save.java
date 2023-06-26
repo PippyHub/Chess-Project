@@ -2,7 +2,7 @@
  * Saves chess position
  *
  * @author (Piper)
- * @version (24/02/2023)
+ * @version (26/02/2023)
  */
 import java.io.IOException;
 import java.io.File;
