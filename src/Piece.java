@@ -2,7 +2,7 @@
  * Constructor for all chess pieces
  *
  * @author (Piper Inns Hall)
- * @version (28/06/2023)
+ * @version (29/06/2023)
  */
 import java.util.LinkedList;
 
@@ -41,10 +41,10 @@ public class Piece {
         originX = pX;
         originY = pY;
 
-        if (legalMove()) {
+        if (legalMove(true)) {
             taking();
             promotion();
-
+            kingCheck();
 
             this.pieceMoved = true;
 
@@ -54,11 +54,47 @@ public class Piece {
             x = pX * 64;
             y = pY * 64;
 
-            //isKingInCheck();
-
             if (!castling) switchTurns();
             castling = false;
         }
+    }
+    public void kingCheck() {
+        int tempDeltaX = deltaX;
+        int tempDeltaY = deltaY;
+        int tempPX = pX;
+        int tempPY = pY;
+
+        Piece oppositeKing = null;
+        for (Piece p : ps) {
+            if (p.isBlack != this.isBlack && p.name.equalsIgnoreCase("king")) {
+                oppositeKing = p;
+            }
+            if (p.isBlack == this.isBlack) {
+
+                assert oppositeKing != null;
+
+                deltaX = oppositeKing.pX - p.pX;
+                deltaY = oppositeKing.pY - p.pY;
+
+                pX = p.pX;
+                pY = p.pY;
+
+                if (p == Board.selectedPiece) {
+                    deltaX = tempDeltaX;
+                    deltaY = tempDeltaY;
+
+                    pX = tempPX;
+                    pY = tempPY;
+                }
+                if (p.legalMove(false)) System.out.println("check");
+            }
+        }
+
+        deltaX = tempDeltaX;
+        deltaY = tempDeltaY;
+
+        pX = tempPX;
+        pY = tempPY;
     }
     public void taking() {
         if (Board.getPiece(originX * 64, originY * 64) != null)
@@ -74,7 +110,7 @@ public class Piece {
     public static void switchTurns() {
         isBlackTurn = !isBlackTurn;
     }
-    public boolean legalMove() {
+    public boolean legalMove(boolean checkTurn) {
         if (deltaX == 0 && deltaY == 0) return false; //cannot move to own square
 
         if (Board.getPiece(originX * 64, originY * 64) != null) {
@@ -82,7 +118,7 @@ public class Piece {
         } //cannot take own pieces
 
         // Check if it's the turn of the current piece's color
-        if ((isBlackTurn && !isBlack) || (!isBlackTurn && isBlack)) return false;
+        if (checkTurn && ((isBlackTurn && !isBlack) || (!isBlackTurn && isBlack))) return false;
 
         if (!queenMove()) return false;
         if (!kingMove()) return false;
@@ -94,6 +130,7 @@ public class Piece {
 
         // check for obstruction between current position and desired position
         return noObstruction();
+
     }
     public boolean queenMove() {
         if (name.equalsIgnoreCase("queen")) {
@@ -122,33 +159,6 @@ public class Piece {
             return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1;
         } //king moves
         return true;
-    }
-    public void isKingInCheck() {
-        if (!name.equalsIgnoreCase("king")) {
-            int kingX = 0;
-            int kingY = 0;
-            Piece king = null;
-
-            for (Piece p : ps) {
-                if (p.isBlack == !isBlack && p.name.equalsIgnoreCase("king")) {
-                    king = p;
-                    kingX = p.pX;
-                    kingY = p.pY;
-                    break;
-                }
-            }
-
-            if (king != null) {
-                king.deltaX = kingX - pX;
-                king.deltaY = kingY - pY;
-
-                if (king.queenMove() && king.rookMove() && king.bishopMove()) {
-                    if (king.noObstruction()) {
-                        System.out.println("King is in check!");
-                    }
-                }
-            }
-        }
     }
     public boolean rookMove() {
         if (name.equalsIgnoreCase("rook")) return deltaX == 0 || deltaY == 0; //rook moves

@@ -2,7 +2,7 @@
  * Loads chess position
  *
  * @author (Piper)
- * @version (26/02/2023)
+ * @version (29/02/2023)
  */
 import java.io.IOException;
 import java.io.File;

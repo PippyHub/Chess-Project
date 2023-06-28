@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="code shortening and updated headers">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="king check and updated headers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Images.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Images.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Load.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Load.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Save.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Save.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -368,7 +372,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687772300334</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="king check and updated headers">
+      <created>1687922195238</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1687922195238</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -383,7 +394,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="clicking pieces gets name and colour" />
     <MESSAGE value="moving pieces" />
     <MESSAGE value="moving pieces 2" />
     <MESSAGE value="moving pieces fixed" />
@@ -408,6 +418,7 @@
     <MESSAGE value="pieces get highlighted on their turn" />
     <MESSAGE value="fixed castling double move" />
     <MESSAGE value="code shortening and updated headers" />
-    <option name="LAST_COMMIT_MESSAGE" value="code shortening and updated headers" />
+    <MESSAGE value="king check and updated headers" />
+    <option name="LAST_COMMIT_MESSAGE" value="king check and updated headers" />
   </component>
 </project>
