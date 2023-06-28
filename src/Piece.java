@@ -2,9 +2,10 @@
  * Constructor for all chess pieces
  *
  * @author (Piper Inns Hall)
- * @version (26/06/2023)
+ * @version (28/06/2023)
  */
 import java.util.LinkedList;
+
 public class Piece {
     int pX; //piece x
     int pY; //piece y
@@ -34,7 +35,7 @@ public class Piece {
         ps.add(this);
     }
     public void move(int pX, int pY) {
-        deltaX = pX - this.pX;
+        deltaX = pX - this.pX; //where the piece is going to move minus its starting position
         deltaY = pY - this.pY;
 
         originX = pX;
@@ -44,6 +45,7 @@ public class Piece {
             taking();
             promotion();
 
+
             this.pieceMoved = true;
 
             this.pX = pX;
@@ -51,6 +53,8 @@ public class Piece {
 
             x = pX * 64;
             y = pY * 64;
+
+            //isKingInCheck();
 
             if (!castling) switchTurns();
             castling = false;
@@ -118,6 +122,33 @@ public class Piece {
             return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1;
         } //king moves
         return true;
+    }
+    public void isKingInCheck() {
+        if (!name.equalsIgnoreCase("king")) {
+            int kingX = 0;
+            int kingY = 0;
+            Piece king = null;
+
+            for (Piece p : ps) {
+                if (p.isBlack == !isBlack && p.name.equalsIgnoreCase("king")) {
+                    king = p;
+                    kingX = p.pX;
+                    kingY = p.pY;
+                    break;
+                }
+            }
+
+            if (king != null) {
+                king.deltaX = kingX - pX;
+                king.deltaY = kingY - pY;
+
+                if (king.queenMove() && king.rookMove() && king.bishopMove()) {
+                    if (king.noObstruction()) {
+                        System.out.println("King is in check!");
+                    }
+                }
+            }
+        }
     }
     public boolean rookMove() {
         if (name.equalsIgnoreCase("rook")) return deltaX == 0 || deltaY == 0; //rook moves

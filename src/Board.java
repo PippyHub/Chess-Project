@@ -2,7 +2,7 @@
  * Prints out the chess board and pieces onto the frame
  *
  * @author (Piper Inns Hall)
- * @version (26/06/2023)
+ * @version (28/06/2023)
  */
 
 import java.awt.*;
@@ -13,14 +13,12 @@ import javax.swing.*;
 public class Board extends JPanel implements ActionListener, MouseListener {
     public static LinkedList<Piece> ps = new LinkedList<>(); //linked list of pieces
     public static Piece selectedPiece = null;
+    Images img = new Images();
     private final Image[] images;
     boolean highlight;
     public Board() {
-        Images img = new Images();
         images = img.loadImages();
-
         pieceList();
-
         addMouseListener(this);
     }
     public void pieceList() {
