@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="noObstruction working">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="noObstruction working added err math.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
     </list>
@@ -65,20 +65,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Board frame working">
-      <created>1686112967150</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1686112967150</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Paint board frame (error)">
-      <created>1686114044583</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1686114044583</updated>
     </task>
     <task id="LOCAL-00005" summary="Paint board frame">
       <created>1686114260456</created>
@@ -409,7 +395,21 @@
       <option name="project" value="LOCAL" />
       <updated>1689239679673</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="noObstruction working (again)">
+      <created>1689240974086</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1689240974086</updated>
+    </task>
+    <task id="LOCAL-00053" summary="noObstruction working added err math.">
+      <created>1689241012581</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1689241012582</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -424,8 +424,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="deleted original Board class" />
-    <MESSAGE value="starting save and load classes" />
     <MESSAGE value="changed piece taking method" />
     <MESSAGE value="king and pawn movements are correct (no en passant and no castling)" />
     <MESSAGE value="updated headers for tomorrow" />
@@ -449,6 +447,8 @@
     <MESSAGE value="noObstruction changed: Bresenham's line algorithm" />
     <MESSAGE value="added diagonal to Bresenham's line algorithm" />
     <MESSAGE value="noObstruction working" />
-    <option name="LAST_COMMIT_MESSAGE" value="noObstruction working" />
+    <MESSAGE value="noObstruction working (again)" />
+    <MESSAGE value="noObstruction working added err math." />
+    <option name="LAST_COMMIT_MESSAGE" value="noObstruction working added err math." />
   </component>
 </project>

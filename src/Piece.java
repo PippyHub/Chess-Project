@@ -140,64 +140,50 @@ public class Piece {
         return clickX <= 7 && clickY <= 7 && clickX >= 0 && clickY >= 0;
     }
     public boolean noObstruction() {
-        if (name.equalsIgnoreCase("knight")) {
-            return true;
-        }
-
-        int startX = pX;
-        int startY = pY;
-        int targetX = clickX;
-        int targetY = clickY;
-
-        int dx = Math.abs(targetX - startX);
-        int dy = Math.abs(targetY - startY);
-        int sx = startX < targetX ? 1 : -1;
-        int sy = startY < targetY ? 1 : -1;
-        int err = dx - dy;
-        int err2;
-
-        // Check for diagonal movement
-        if (dx == dy) {
-            while (startX != targetX && startY != targetY) {
-                if (startX != pX || startY != pY) {
-                    if (Board.getPiece(startX * 64, startY * 64) != null) {
-                        return castling; // Check if castling
-                    }
-                }
-
-                err2 = 2 * err;
-                if (err2 > -dy) {
-                    err -= dy;
-                    startX += sx;
-                }
-                if (err2 < dx) {
-                    err += dx;
-                    startY += sy;
-                }
-            }
-        }
-        // Check for horizontal/vertical movement
-        else if (dx == 0 || dy == 0) {
-            while (startX != targetX || startY != targetY) {
-                if (startX != pX || startY != pY) {
-                    if (Board.getPiece(startX * 64, startY * 64) != null) {
-                        return castling; // Check if castling
-                    }
-                }
-
-                if (dx == 0) {
-                    startY += sy;
-                } else {
-                    startX += sx;
-                }
-            }
-        } else {
-            return false; // Invalid move (neither horizontal/vertical nor diagonal)
-        }
-
-        return true; // No obstruction found
+        if (name.equalsIgnoreCase("knight")) return true;
+        int sx = (int) Math.signum(this.deltaX);
+        int sy = (int) Math.signum(this.deltaY);
+        int err = this.deltaX - this.deltaY;
+        return checkDiagonalMovement(pX, pY, Math.abs(deltaX), Math.abs(deltaY), sx, sy, err)
+                || checkOrthogonalMovement(pX, pY, Math.abs(deltaX), Math.abs(deltaY), sx, sy);
     }
-
+    public boolean checkDiagonalMovement(int pX, int pY, int dx, int dy, int sx, int sy, int err) {
+        if (this.deltaX == this.deltaY) {
+            while (pX != this.clickX && pY != this.clickY) {
+                if (pX != this.pX || pY != this.pY) {
+                    if (Board.getPiece(pX * 64, pY * 64) != null) {
+                        return castling; // Check if castling
+                    }
+                }
+                if (2 * err > -this.deltaY) {
+                    err -= this.deltaY;
+                    pX += sx;
+                }
+                if (2 * err < this.deltaX) {
+                    err += dx;
+                    pY += sy;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean checkOrthogonalMovement(int pX, int pY, int dx, int dy, int sx, int sy) {
+        if (dx == 0 || dy == 0) {
+            while (pX != this.clickX || pY != this.clickY) {
+                if (pX != this.pX || pY != this.pY) {
+                    if (Board.getPiece(pX * 64, pY * 64) != null) {
+                        return castling; // Check if castling
+                    }
+                }
+                if (dx == 0) {
+                    pX += sy;
+                } else {
+                    pX += sx;
+                }
+            }
+        }
+        return false;
+    }
     public boolean kingCheck() {
         boolean check = false;
         Piece opponentKing = null;
