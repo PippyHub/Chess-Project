@@ -73,8 +73,7 @@ public class Piece {
         if (!bishopMove()) return false;
         if (!pawnMove()) return false;
         if (!boardBoundary()) return false;
-        return true;
-        //return noObstruction();
+        return noObstruction();
     }
     public boolean checkTurn() {
         return (isBlackTurn && this.isBlack) || (!isBlackTurn && !this.isBlack);
@@ -138,7 +137,10 @@ public class Piece {
         }
     }
     public boolean noObstruction() {
-        if (name.equalsIgnoreCase("knight")) return true;
+        if (name.equalsIgnoreCase("knight")) {
+            return true;
+        }
+
         int startX = pX;
         int startY = pY;
         int targetX = clickX;
@@ -149,24 +151,49 @@ public class Piece {
         int sx = startX < targetX ? 1 : -1;
         int sy = startY < targetY ? 1 : -1;
         int err = dx - dy;
-        while (startX != targetX || startY != targetY) {
-            if (startX != pX || startY != pY) {
-                if (Board.getPiece(startX * 64, startY * 64) != null) {
-                    return castling; // Check if castling
+        int err2;
+
+        // Check for diagonal movement
+        if (dx == dy) {
+            while (startX != targetX && startY != targetY) {
+                if (startX != pX || startY != pY) {
+                    if (Board.getPiece(startX * 64, startY * 64) != null) {
+                        return castling; // Check if castling
+                    }
+                }
+
+                err2 = 2 * err;
+                if (err2 > -dy) {
+                    err -= dy;
+                    startX += sx;
+                }
+                if (err2 < dx) {
+                    err += dx;
+                    startY += sy;
                 }
             }
-            int e2 = 2 * err;
-            if (e2 > -dy) {
-                err -= dy;
-                startX += sx;
+        }
+        // Check for horizontal/vertical movement
+        else if (dx == 0 || dy == 0) {
+            while (startX != targetX || startY != targetY) {
+                if (startX != pX || startY != pY) {
+                    if (Board.getPiece(startX * 64, startY * 64) != null) {
+                        return castling; // Check if castling
+                    }
+                }
+
+                if (dx == 0) {
+                    startY += sy;
+                } else {
+                    startX += sx;
+                }
             }
-            if (e2 < dx) {
-                err += dx;
-                startY += sy;
-            }
+        } else {
+            return false; // Invalid move (neither horizontal/vertical nor diagonal)
         }
         return true; // No obstruction found
     }
+
 
     public boolean boardBoundary() {
         return clickX <= 7 && clickY <= 7 && clickX >= 0 && clickY >= 0;
@@ -181,17 +208,12 @@ public class Piece {
             }
         }
         for (Piece p : ps) {
-            int tempPX = p.pX, tempPY = p.pY;
             if (p.isBlack == this.isBlack) {
-
                 p.tempSave();
 
                 if (p == Board.selectedPiece) {
                     p.pX = clickX;
                     p.pY = clickY;
-                } else {
-                    p.pX = tempPX;
-                    p.pY = tempPY;
                 }
                 p.deltaX = opponentKing.pX - p.clickX;
                 p.deltaY = opponentKing.pY - p.clickY;
