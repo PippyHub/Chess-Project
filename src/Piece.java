@@ -161,16 +161,23 @@ public class Piece {
         }
         for (Piece p : ps) {
             if (p.isBlack == this.isBlack) {
+                int pX = this.pX, pY = this.pY;
                 p.tempSave();
 
-                p.pX = p.pX;
-                p.pY = p.pY;
+
+                if (p == Board.selectedPiece) {
+                    p.pX = clickX;
+                    p.pY = clickY;
+                } else {
+                    p.pX = pX;
+                    p.pY = pY;
+                }
                 p.deltaX = opponentKing.pX - p.clickX;
                 p.deltaY = opponentKing.pY - p.clickY;
                 p.clickX = opponentKing.pX;
                 p.clickY = opponentKing.pY;
 
-                System.out.println(p.name);
+                /*System.out.println(p.name);
                 System.out.println("kingX " + opponentKing.pX);
                 System.out.println("kingY " + opponentKing.pY);
                 System.out.println("pX " + p.pX);
@@ -180,13 +187,18 @@ public class Piece {
                 System.out.println("cX " + p.clickX);
                 System.out.println("cY " + p.clickY);
                 System.out.println(p.legalMove());
-                System.out.println();
+                System.out.println();*/
 
+                String str = (p.isBlack) ? "black" : "white";
+                System.out.println(str);
+                System.out.println(p.name);
+                System.out.println(p.legalMove());
 
 
                 p.tempLoad();
             }
         }
+        System.out.println();
     }
     public void tempSave() {
         this.tempPX = this.pX;
