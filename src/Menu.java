@@ -18,6 +18,7 @@ public class Menu extends JFrame implements ActionListener {
         this.add(panel);
 
         this.pack();
+        this.setResizable(false);
         this.setVisible(true);
     }
     public void contents() {

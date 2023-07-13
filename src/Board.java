@@ -50,7 +50,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         boolean white = true;
         for (int boardY = 0; boardY < 8; boardY++) {
             for (int boardX = 0; boardX < 8; boardX++) {
-                if (white) {
+                if(white) {
                     g.setColor(Color.white);
                 }
                 else {
@@ -64,19 +64,19 @@ public class Board extends JPanel implements ActionListener, MouseListener {
 
         if (highlight) {
             g.setColor(Color.yellow);
-            if (selectedPiece.highlight())
+            if(selectedPiece.checkTurn())
                 g.fillRect(selectedPiece.pX * 64, selectedPiece.pY * 64, 64, 64);
         }
 
         for (Piece p: ps) {
              int index = 0;
-             if (p.name.equalsIgnoreCase("queen")) index = 0;
-             if (p.name.equalsIgnoreCase("king")) index = 1;
-             if (p.name.equalsIgnoreCase("rook")) index = 2;
-             if (p.name.equalsIgnoreCase("knight")) index = 3;
-             if (p.name.equalsIgnoreCase("bishop")) index = 4;
-             if (p.name.equalsIgnoreCase("pawn")) index = 5;
-             if (!p.isBlack) index+=6;
+             if(p.name.equalsIgnoreCase("queen")) index = 0;
+             if(p.name.equalsIgnoreCase("king")) index = 1;
+             if(p.name.equalsIgnoreCase("rook")) index = 2;
+             if(p.name.equalsIgnoreCase("knight")) index = 3;
+             if(p.name.equalsIgnoreCase("bishop")) index = 4;
+             if(p.name.equalsIgnoreCase("pawn")) index = 5;
+             if(!p.isBlack) index+=6;
              g.drawImage(images[index], p.x, p.y, this);
          }
     }
