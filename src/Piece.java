@@ -7,14 +7,15 @@
 import java.util.LinkedList;
 
 public class Piece {
+    int x; //piece board pos x
+    int y; //piece board pos y
     int pX; //piece x
     int pY; //piece y
     int clickX; //where mouse is clicked
     int clickY; //where mouse is clicked
-    int x; //piece board pos x
-    int y; //piece board pos y
     int deltaX; //change in x when moving piece
     int deltaY; //change in y when moving piece
+    int tempPX, tempPY, tempDX, tempDY , tempCX, tempCY; //temporary values
     boolean isBlack;
     boolean pieceMoved;
     private static boolean isBlackTurn;
@@ -153,47 +154,56 @@ public class Piece {
     public void kingCheck() {
         boolean check = false;
         Piece opponentKing = null;
-
         for (Piece p : ps) {
             if (p.name.equalsIgnoreCase("king") && p.isBlack != this.isBlack) {
                 opponentKing = p;
             }
         }
+        for (Piece p : ps) {
+            if (p.isBlack == this.isBlack) {
+                p.tempSave();
 
-        int tempPX = this.pX;
-        int tempPY = this.pY;
-        int tempDX = this.deltaX;
-        int tempDY = this.deltaY;
-        int tempCX = this.clickX;
-        int tempCY = this.clickY;
+                p.pX = p.pX;
+                p.pY = p.pY;
+                p.deltaX = opponentKing.pX - p.clickX;
+                p.deltaY = opponentKing.pY - p.clickY;
+                p.clickX = opponentKing.pX;
+                p.clickY = opponentKing.pY;
 
-        this.pX = this.clickX;
-        this.pY = this.clickY;
-        this.deltaX = opponentKing.pX - this.clickX;
-        this.deltaY = opponentKing.pY - this.clickY;
-        this.clickX = opponentKing.pX;
-        this.clickY = opponentKing.pY;
+                System.out.println(p.name);
+                System.out.println("kingX " + opponentKing.pX);
+                System.out.println("kingY " + opponentKing.pY);
+                System.out.println("pX " + p.pX);
+                System.out.println("pY " + p.pY);
+                System.out.println("dX " + p.deltaX);
+                System.out.println("dY " + p.deltaY);
+                System.out.println("cX " + p.clickX);
+                System.out.println("cY " + p.clickY);
+                System.out.println(p.legalMove());
+                System.out.println();
 
-        System.out.println("kingX " + opponentKing.pX);
-        System.out.println("kingY " + opponentKing.pY);
 
-        System.out.println("pX " + pX);
-        System.out.println("pY " + pY);
-        System.out.println("dX " + deltaX);
-        System.out.println("dY " + deltaY);
-        System.out.println("cX " + clickX);
-        System.out.println("cY " + clickY);
 
-        System.out.println(legalMove());
-
-        this.pX = tempPX;
-        this.pY = tempPY;
-        this.deltaX = tempDX;
-        this.deltaY = tempDY;
-        this.clickX = tempCX;
-        this.clickY = tempCY;
+                p.tempLoad();
+            }
+        }
     }
-
+    public void tempSave() {
+        this.tempPX = this.pX;
+        this.tempPY = this.pY;
+        this.tempDX = this.deltaX;
+        this.tempDY = this.deltaY;
+        this.tempCX = this.clickX;
+        this.tempCY = this.clickY;
+    }
+    public void tempLoad() {
+        this.pX = this.tempPX;
+        this.pY = this.tempPY;
+        this.deltaX = this.tempDX;
+        this.deltaY = this.tempDY;
+        this.clickX = this.tempCX;
+        this.clickY = this.tempCY;
+    }
 
     public void kill() {
         ps.remove(this);
