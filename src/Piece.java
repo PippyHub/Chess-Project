@@ -137,24 +137,26 @@ public class Piece {
         }
     }
     public boolean noObstruction() {
-        if (name.equalsIgnoreCase("knight")) {
-            return true;
-        }
+        if (name.equalsIgnoreCase("knight")) return true;
 
         int startX = pX;
         int startY = pY;
         int targetX = clickX;
         int targetY = clickY;
 
-        int dx = Math.abs(targetX - startX);
-        int dy = Math.abs(targetY - startY);
-        int sx = startX < targetX ? 1 : -1;
-        int sy = startY < targetY ? 1 : -1;
-        int err = dx - dy;
+        int absDifX = Math.abs(targetX - startX);
+        int absDifY = Math.abs(targetY - startY);
+        int signX = startX < targetX ? 1 : -1;
+        int signY = startY < targetY ? 1 : -1;
+        int err = absDifX - absDifY;
         int err2;
 
+        //if (diagonalMove()) { return castling; }
+        //else if (OrthogonalMove()) { return castling; }
+        //else { return false; }
+
         // Check for diagonal movement
-        if (dx == dy) {
+        if (absDifX == absDifY) {
             while (startX != targetX && startY != targetY) {
                 if (startX != pX || startY != pY) {
                     if (Board.getPiece(startX * 64, startY * 64) != null) {
@@ -163,18 +165,18 @@ public class Piece {
                 }
 
                 err2 = 2 * err;
-                if (err2 > -dy) {
-                    err -= dy;
-                    startX += sx;
+                if (err2 > -absDifY) {
+                    err -= absDifY;
+                    startX += signY;
                 }
-                if (err2 < dx) {
-                    err += dx;
-                    startY += sy;
+                if (err2 < absDifX) {
+                    err += absDifX;
+                    startY += signX;
                 }
             }
         }
         // Check for horizontal/vertical movement
-        else if (dx == 0 || dy == 0) {
+        else if (absDifX == 0 || absDifY == 0) {
             while (startX != targetX || startY != targetY) {
                 if (startX != pX || startY != pY) {
                     if (Board.getPiece(startX * 64, startY * 64) != null) {
@@ -182,10 +184,10 @@ public class Piece {
                     }
                 }
 
-                if (dx == 0) {
-                    startY += sy;
+                if (absDifY == 0) {
+                    startY += signY;
                 } else {
-                    startX += sx;
+                    startX += signX;
                 }
             }
         } else {
@@ -194,17 +196,17 @@ public class Piece {
         return true; // No obstruction found
     }
 
-
     public boolean boardBoundary() {
         return clickX <= 7 && clickY <= 7 && clickX >= 0 && clickY >= 0;
     }
 
-    public void kingCheck() {
+    public boolean kingCheck() {
         boolean check = false;
         Piece opponentKing = null;
         for (Piece p : ps) {
             if (p.name.equalsIgnoreCase("king") && p.isBlack != this.isBlack) {
                 opponentKing = p;
+                break;
             }
         }
         for (Piece p : ps) {
@@ -215,20 +217,16 @@ public class Piece {
                     p.pX = clickX;
                     p.pY = clickY;
                 }
-                p.deltaX = opponentKing.pX - p.clickX;
-                p.deltaY = opponentKing.pY - p.clickY;
-                p.clickX = opponentKing.pX;
-                p.clickY = opponentKing.pY;
-
-                String str = (p.isBlack) ? "black" : "white";
-                System.out.println(str);
-                System.out.println(p.name);
-                System.out.println(p.legalMove());
-
+                if (opponentKing != null) {
+                    p.deltaX = opponentKing.pX - p.clickX;
+                    p.deltaY = opponentKing.pY - p.clickY;
+                    p.clickX = opponentKing.pX;
+                    p.clickY = opponentKing.pY;
+                }
                 p.tempLoad();
             }
         }
-        System.out.println();
+        return true;
     }
 
     public void tempSave() {

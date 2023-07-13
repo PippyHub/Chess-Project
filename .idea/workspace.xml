@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="noObstruction changed: Bresenham's line algorithm">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="added diagonal to Bresenham's line algorithm">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
     </list>
@@ -65,13 +65,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00001" summary="First Commit">
-      <created>1685684680482</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1685684680482</updated>
     </task>
     <task id="LOCAL-00002" summary="Board frame">
       <created>1686112460459</created>
@@ -409,7 +402,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689231879282</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="added diagonal to Bresenham's line algorithm">
+      <created>1689232631865</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1689232631867</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -424,7 +424,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adding menu bar" />
     <MESSAGE value="fixed menu bar" />
     <MESSAGE value="deleted original Board class" />
     <MESSAGE value="starting save and load classes" />
@@ -449,6 +448,7 @@
     <MESSAGE value="king check (super slow loop)" />
     <MESSAGE value="king check (another slow loop)" />
     <MESSAGE value="noObstruction changed: Bresenham's line algorithm" />
-    <option name="LAST_COMMIT_MESSAGE" value="noObstruction changed: Bresenham's line algorithm" />
+    <MESSAGE value="added diagonal to Bresenham's line algorithm" />
+    <option name="LAST_COMMIT_MESSAGE" value="added diagonal to Bresenham's line algorithm" />
   </component>
 </project>
