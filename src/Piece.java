@@ -154,6 +154,7 @@ public class Piece {
         int sx = startX < targetX ? 1 : -1;
         int sy = startY < targetY ? 1 : -1;
         int err = dx - dy;
+        int err2;
 
         // Check for diagonal movement
         if (dx == dy) {
@@ -164,8 +165,15 @@ public class Piece {
                     }
                 }
 
-                startX += sx;
-                startY += sy;
+                err2 = 2 * err;
+                if (err2 > -dy) {
+                    err -= dy;
+                    startX += sx;
+                }
+                if (err2 < dx) {
+                    err += dx;
+                    startY += sy;
+                }
             }
         }
         // Check for horizontal/vertical movement
@@ -189,6 +197,7 @@ public class Piece {
 
         return true; // No obstruction found
     }
+
     public boolean kingCheck() {
         boolean check = false;
         Piece opponentKing = null;
