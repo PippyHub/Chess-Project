@@ -51,17 +51,14 @@ public class Piece {
     }
     public void moveType() {
         kingCheck();
-        //Taking pieces
         if (Board.getPiece(clickX * 64, clickY * 64) != null)
-            Board.getPiece(clickX * 64, clickY * 64).kill();
-        //Promoting pawns
+            Board.getPiece(clickX * 64, clickY * 64).kill(); //Taking pieces
         if (name.equalsIgnoreCase("pawn"))
-            if ((this.isBlack && clickY == 7) || (!this.isBlack && clickY == 0)) name = "queen";
+            if ((this.isBlack && clickY == 7) || (!this.isBlack && clickY == 0)) name = "queen";//Promoting pawns
     }
     public static void switchTurn() {
         isBlackTurn = !isBlackTurn;
     }
-
     public boolean legalMove() {
         if (!checkTurn()) return false;
         if (ownSquareMove()) return false;
@@ -141,48 +138,14 @@ public class Piece {
     }
     public boolean noObstruction() {
         if (name.equalsIgnoreCase("knight")) return true;
-        int sx = (int) Math.signum(this.deltaX);
-        int sy = (int) Math.signum(this.deltaY);
-        int err = this.deltaX - this.deltaY;
-        return checkDiagonalMovement(pX, pY, Math.abs(deltaX), Math.abs(deltaY), sx, sy, err)
-                || checkOrthogonalMovement(pX, pY, Math.abs(deltaX), Math.abs(deltaY), sx, sy);
-    }
-    public boolean checkDiagonalMovement(int pX, int pY, int dx, int dy, int sx, int sy, int err) {
-        if (this.deltaX == this.deltaY) {
-            while (pX != this.clickX && pY != this.clickY) {
-                if (pX != this.pX || pY != this.pY) {
-                    if (Board.getPiece(pX * 64, pY * 64) != null) {
-                        return castling; // Check if castling
-                    }
-                }
-                if (2 * err > -this.deltaY) {
-                    err -= this.deltaY;
-                    pX += sx;
-                }
-                if (2 * err < this.deltaX) {
-                    err += dx;
-                    pY += sy;
-                }
-            }
+        int currentX = this.pX + Integer.signum(this.deltaX);
+        int currentY = this.pY + Integer.signum(this.deltaY);
+        while (Math.abs(currentX - clickX) > 0 || Math.abs(currentY - clickY) > 0) {
+            if (Board.getPiece(currentX * 64, currentY * 64) != null) return this.castling; // Check if castling
+            currentX += Integer.signum(this.deltaX);
+            currentY += Integer.signum(this.deltaY);
         }
-        return false;
-    }
-    public boolean checkOrthogonalMovement(int pX, int pY, int dx, int dy, int sx, int sy) {
-        if (dx == 0 || dy == 0) {
-            while (pX != this.clickX || pY != this.clickY) {
-                if (pX != this.pX || pY != this.pY) {
-                    if (Board.getPiece(pX * 64, pY * 64) != null) {
-                        return castling; // Check if castling
-                    }
-                }
-                if (dx == 0) {
-                    pX += sy;
-                } else {
-                    pX += sx;
-                }
-            }
-        }
-        return false;
+        return true; // No obstruction found
     }
     public boolean kingCheck() {
         boolean check = false;
@@ -202,17 +165,17 @@ public class Piece {
                     p.pY = clickY;
                 }
                 if (opponentKing != null) {
-                    p.deltaX = opponentKing.pX - p.clickX;
-                    p.deltaY = opponentKing.pY - p.clickY;
+                    p.deltaX = opponentKing.pX - p.pX;
+                    p.deltaY = opponentKing.pY - p.pY;
                     p.clickX = opponentKing.pX;
                     p.clickY = opponentKing.pY;
                 }
+                System.out.println(p.legalMove());
                 p.tempLoad();
             }
         }
         return true;
     }
-
     public void tempSave() {
         this.tempPX = this.pX;
         this.tempPY = this.pY;
@@ -229,7 +192,6 @@ public class Piece {
         this.clickX = this.tempCX;
         this.clickY = this.tempCY;
     }
-
     public void kill() {
         ps.remove(this);
     }
