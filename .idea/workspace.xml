@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="king check (super slow loop)">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="king check (another slow loop)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
     </list>
@@ -395,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689227571289</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="king check (another slow loop)">
+      <created>1689230016677</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1689230016677</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -410,7 +417,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="menu and image loader class" />
     <MESSAGE value="reformatting code" />
     <MESSAGE value="adding menu bar" />
     <MESSAGE value="fixed menu bar" />
@@ -435,6 +441,7 @@
     <MESSAGE value="king check third iteration" />
     <MESSAGE value="king check fourth iteration (progress!)" />
     <MESSAGE value="king check (super slow loop)" />
-    <option name="LAST_COMMIT_MESSAGE" value="king check (super slow loop)" />
+    <MESSAGE value="king check (another slow loop)" />
+    <option name="LAST_COMMIT_MESSAGE" value="king check (another slow loop)" />
   </component>
 </project>

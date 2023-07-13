@@ -73,7 +73,8 @@ public class Piece {
         if (!bishopMove()) return false;
         if (!pawnMove()) return false;
         if (!boardBoundary()) return false;
-        return noObstruction();
+        return true;
+        //return noObstruction();
     }
     public boolean checkTurn() {
         return (isBlackTurn && this.isBlack) || (!isBlackTurn && !this.isBlack);
@@ -138,15 +139,35 @@ public class Piece {
     }
     public boolean noObstruction() {
         if (name.equalsIgnoreCase("knight")) return true;
-        int currentX = this.pX + Integer.signum(this.deltaX);
-        int currentY = this.pY + Integer.signum(this.deltaY);
-        while (currentX != clickX || currentY != clickY) {
-            if (Board.getPiece(currentX * 64, currentY * 64) != null) return this.castling; // Check if castling
-            currentX += Integer.signum(this.deltaX);
-            currentY += Integer.signum(this.deltaY);
+        int startX = pX;
+        int startY = pY;
+        int targetX = clickX;
+        int targetY = clickY;
+
+        int dx = Math.abs(targetX - startX);
+        int dy = Math.abs(targetY - startY);
+        int sx = startX < targetX ? 1 : -1;
+        int sy = startY < targetY ? 1 : -1;
+        int err = dx - dy;
+        while (startX != targetX || startY != targetY) {
+            if (startX != pX || startY != pY) {
+                if (Board.getPiece(startX * 64, startY * 64) != null) {
+                    return castling; // Check if castling
+                }
+            }
+            int e2 = 2 * err;
+            if (e2 > -dy) {
+                err -= dy;
+                startX += sx;
+            }
+            if (e2 < dx) {
+                err += dx;
+                startY += sy;
+            }
         }
         return true; // No obstruction found
     }
+
     public boolean boardBoundary() {
         return clickX <= 7 && clickY <= 7 && clickX >= 0 && clickY >= 0;
     }
@@ -160,46 +181,34 @@ public class Piece {
             }
         }
         for (Piece p : ps) {
+            int tempPX = p.pX, tempPY = p.pY;
             if (p.isBlack == this.isBlack) {
-                int pX = this.pX, pY = this.pY;
-                p.tempSave();
 
+                p.tempSave();
 
                 if (p == Board.selectedPiece) {
                     p.pX = clickX;
                     p.pY = clickY;
                 } else {
-                    p.pX = pX;
-                    p.pY = pY;
+                    p.pX = tempPX;
+                    p.pY = tempPY;
                 }
                 p.deltaX = opponentKing.pX - p.clickX;
                 p.deltaY = opponentKing.pY - p.clickY;
                 p.clickX = opponentKing.pX;
                 p.clickY = opponentKing.pY;
 
-                /*System.out.println(p.name);
-                System.out.println("kingX " + opponentKing.pX);
-                System.out.println("kingY " + opponentKing.pY);
-                System.out.println("pX " + p.pX);
-                System.out.println("pY " + p.pY);
-                System.out.println("dX " + p.deltaX);
-                System.out.println("dY " + p.deltaY);
-                System.out.println("cX " + p.clickX);
-                System.out.println("cY " + p.clickY);
-                System.out.println(p.legalMove());
-                System.out.println();*/
-
                 String str = (p.isBlack) ? "black" : "white";
                 System.out.println(str);
                 System.out.println(p.name);
                 System.out.println(p.legalMove());
-
 
                 p.tempLoad();
             }
         }
         System.out.println();
     }
+
     public void tempSave() {
         this.tempPX = this.pX;
         this.tempPY = this.pY;
