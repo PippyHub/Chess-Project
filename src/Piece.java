@@ -82,8 +82,8 @@ public class Piece {
         return this.deltaX == 0 && this.deltaY == 0; //cannot move to own square
     }
     public boolean ownPieceMove() {
-        return Board.getPiece(clickX * 64, clickY * 64) != null &&
-                Board.getPiece(clickX * 64, clickY * 64).isBlack == isBlack;//cannot take own pieces
+        Piece clickedPiece = Board.getPiece(clickX * 64, clickY * 64);
+        return clickedPiece != null && clickedPiece.isBlack == isBlack; // cannot take own pieces
     }
     public boolean queenMove() {
         if (!name.equalsIgnoreCase("queen")) return true;
@@ -176,9 +176,11 @@ public class Piece {
         return deltaX == 0 || deltaY == 0;
     } //rook moves
     public boolean knightMove() {
-        if (!name.equalsIgnoreCase("knight")) return true;
+        if (name.equalsIgnoreCase("knight")) {
         return Math.abs(this.deltaX) == 2 && Math.abs(this.deltaY) == 1 ||
                 Math.abs(this.deltaX) == 1 && Math.abs(this.deltaY) == 2;
+        }
+        return true;
     } //knight moves
     public boolean bishopMove() {
         if (!name.equalsIgnoreCase("bishop")) return true;
