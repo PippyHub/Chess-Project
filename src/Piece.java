@@ -98,50 +98,42 @@ public class Piece {
                 int newRookY = pY;
                 rook.move(newRookX, newRookY);
             }
-            return true; // castling logic
+            return true;
         }
         return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1; // king moves
     }
-    public void kingInCheck() {
-        Piece myKing = null;
+    public boolean kingInCheck() {
+        Piece myKing = kingPos();
+        return check(myKing, myKing.pX, myKing.pY);
+    }
+    public Piece kingPos() {
         for (Piece p : ps) {
             if (p.name.equalsIgnoreCase("king") && p.isBlack == this.isBlack) {
-                myKing = p;
-                break;
+                return p;
             }
         }
-
-        System.out.println("king X " + myKing.pX);
-        System.out.println("king Y " + myKing.pY);
-        System.out.println(myKing.isBlack ? "king color black" : "king color white");
-        System.out.println();
+        return null; // Return null if the king is not found
+    }
+    public boolean check(Piece myKing, int kingPosX, int kingPosY) {
         for (Piece p : ps) {
-            if (!this.isBlack == p.isBlack) {
+            if (this.isBlack != p.isBlack) {
                 p.tempSave();
                 if (myKing != null) {
-                    p.deltaX = myKing.pX - p.pX;
-                    p.deltaY = myKing.pY - p.pY;
-                    p.clickX = myKing.pX;
-                    p.clickY = myKing.pY;
+                    p.deltaX = kingPosX - p.pX;
+                    p.deltaY = kingPosY - p.pY;
+                    p.clickX = kingPosX;
+                    p.clickY = kingPosY;
                 }
-                //if(p.legalMove()) return true;
-                System.out.println(p.name);
-                System.out.println(p.isBlack ? "black" : "white");
-                System.out.println("px " + p.pX);
-                System.out.println("py " + p.pY);
-                System.out.println("dx " + p.deltaX);
-                System.out.println("dy " + p.deltaY);
-                System.out.println("cx " + p.clickX);
-                System.out.println("cy " + p.clickY);
-                System.out.println(p.legalMove(false));
-                System.out.println();
-
-
+                if (p.legalMove()) {
+                    p.tempLoad();
+                    return true;
+                }
                 p.tempLoad();
             }
         }
-        System.out.println();
+        return false;
     }
+
     public boolean rookMove() {
         if (!name.equalsIgnoreCase("rook")) return true;
         return deltaX == 0 || deltaY == 0;
