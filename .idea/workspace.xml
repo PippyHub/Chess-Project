@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="check works for own pieces">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="separated check into multiple methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
     </list>
@@ -65,20 +65,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00008" summary="added kill and move">
-      <created>1687082839328</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1687082839328</updated>
-    </task>
-    <task id="LOCAL-00009" summary="changed moved to use ps.stream">
-      <created>1687082861234</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1687082861234</updated>
     </task>
     <task id="LOCAL-00010" summary="take piece image and store in array imgs">
       <created>1687084868756</created>
@@ -409,7 +395,21 @@
       <option name="project" value="LOCAL" />
       <updated>1689308889837</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="separated check into multiple methods">
+      <created>1689312676150</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1689312676150</updated>
+    </task>
+    <task id="LOCAL-00058" summary="separated check into multiple methods">
+      <created>1689312825465</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1689312825465</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -424,7 +424,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="rook and bishop move correctly" />
     <MESSAGE value="knight moves correctly" />
     <MESSAGE value="queen moves correctly" />
     <MESSAGE value="turns working correctly" />
@@ -449,6 +448,7 @@
     <MESSAGE value="noObstruction changed to have more this.* code" />
     <MESSAGE value="fixed kingCheck and noObstruction" />
     <MESSAGE value="check works for own pieces" />
-    <option name="LAST_COMMIT_MESSAGE" value="check works for own pieces" />
+    <MESSAGE value="separated check into multiple methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="separated check into multiple methods" />
   </component>
 </project>

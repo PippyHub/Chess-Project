@@ -40,17 +40,17 @@ public class Piece {
         clickY = pY;
         if (legalMove(true)) {
             moveType();
+            this.castling = false;
             this.pieceMoved = true;
             this.pX = pX;
             this.pY = pY;
             this.x = pX * 64;
             this.y = pY * 64;
-            if (!this.castling) switchTurn();
-            this.castling = false;
+
         }
     }
     public void moveType() {
-        kingInCheck();
+        if (!this.castling) switchTurn();
         if (Board.getPiece(clickX * 64, clickY * 64) != null)
             Board.getPiece(clickX * 64, clickY * 64).kill(); //Taking pieces
         if (name.equalsIgnoreCase("pawn"))
@@ -61,6 +61,7 @@ public class Piece {
     }
     public boolean legalMove(boolean realMove) {
         if (realMove && !checkTurn()) return false;
+        if (realMove && !resolveCheck()) return false;
         if (ownSquareMove()) return false;
         if (ownPieceMove()) return false;
         if (!queenMove()) return false;
@@ -102,6 +103,17 @@ public class Piece {
         }
         return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1; // king moves
     }
+    public boolean resolveCheck() {
+        this.tempSave();
+        this.pX = clickX;
+        this.pY = clickY;
+        if (kingInCheck()) {
+            this.tempLoad();
+            return false;
+        }
+        this.tempLoad();
+        return true;
+    }
     public boolean kingInCheck() {
         Piece myKing = kingPos();
         return check(myKing, myKing.pX, myKing.pY);
@@ -133,6 +145,7 @@ public class Piece {
         }
         return false;
     }
+
     public boolean rookMove() {
         if (!name.equalsIgnoreCase("rook")) return true;
         return deltaX == 0 || deltaY == 0;
