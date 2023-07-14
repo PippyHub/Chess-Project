@@ -124,7 +124,7 @@ public class Piece {
                     p.clickX = kingPosX;
                     p.clickY = kingPosY;
                 }
-                if (p.legalMove()) {
+                if (p.legalMove(false)) {
                     p.tempLoad();
                     return true;
                 }
@@ -133,7 +133,6 @@ public class Piece {
         }
         return false;
     }
-
     public boolean rookMove() {
         if (!name.equalsIgnoreCase("rook")) return true;
         return deltaX == 0 || deltaY == 0;
