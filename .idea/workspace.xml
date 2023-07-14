@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="noObstruction changed to have more this.* code">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="fixed kingCheck and noObstruction">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
     </list>
@@ -65,13 +65,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Paint board frame(offset)">
-      <created>1686115563693</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1686115563693</updated>
     </task>
     <task id="LOCAL-00007" summary="Added headers">
       <created>1687081489100</created>
@@ -409,7 +402,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689243435879</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="fixed kingCheck and noObstruction">
+      <created>1689244242664</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1689244242664</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -424,7 +424,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="king and pawn movements are correct (no en passant and no castling)" />
     <MESSAGE value="updated headers for tomorrow" />
     <MESSAGE value="rook and bishop move correctly" />
     <MESSAGE value="knight moves correctly" />
@@ -449,6 +448,7 @@
     <MESSAGE value="noObstruction working (again)" />
     <MESSAGE value="noObstruction working added err math." />
     <MESSAGE value="noObstruction changed to have more this.* code" />
-    <option name="LAST_COMMIT_MESSAGE" value="noObstruction changed to have more this.* code" />
+    <MESSAGE value="fixed kingCheck and noObstruction" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed kingCheck and noObstruction" />
   </component>
 </project>
