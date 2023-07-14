@@ -61,11 +61,11 @@ public class Piece {
     }
     public boolean legalMove(boolean realMove) {
         if (realMove && !checkTurn()) return false;
-        if (realMove && !resolveCheck()) return false;
         if (ownSquareMove()) return false;
         if (ownPieceMove()) return false;
         if (!queenMove()) return false;
         if (!kingMove()) return false;
+        if (realMove && !resolveCheck()) return false;
         if (!rookMove()) return false;
         if (!knightMove()) return false;
         if (!bishopMove()) return false;
@@ -107,7 +107,9 @@ public class Piece {
         this.tempSave();
         this.pX = clickX;
         this.pY = clickY;
-        if (kingInCheck()) {
+        Piece attackedPiece = Board.getPiece(clickX * 64, clickY * 64);
+        boolean canCaptureAttacker = (attackedPiece != null && attackedPiece.isBlack != this.isBlack);
+        if (kingInCheck() && !canCaptureAttacker) {
             this.tempLoad();
             return false;
         }
@@ -145,7 +147,28 @@ public class Piece {
         }
         return false;
     }
-
+    public boolean checkmate() {
+        if (!kingInCheck()) return false; // Not in check, not checkmate
+        for (Piece p : ps) {
+            if (p.isBlack == isBlackTurn) { // Check moves for the current player's pieces
+                for (int x = 0; x < 8; x++) {
+                    for (int y = 0; y < 8; y++) {
+                        p.tempSave();
+                        p.deltaX = x - p.pX;
+                        p.deltaY = y - p.pY;
+                        p.clickX = x;
+                        p.clickY = y;
+                        if (p.legalMove(true)) {
+                            p.tempLoad();
+                            return false; // At least one legal move is available
+                        }
+                        p.tempLoad();
+                    }
+                }
+            }
+        }
+        return true; // No legal moves available, it's checkmate
+    }
     public boolean rookMove() {
         if (!name.equalsIgnoreCase("rook")) return true;
         return deltaX == 0 || deltaY == 0;
