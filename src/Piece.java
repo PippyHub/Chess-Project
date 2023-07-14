@@ -38,6 +38,7 @@ public class Piece {
         deltaY = pY - this.pY;
         clickX = pX;
         clickY = pY;
+
         if (legalMove(true)) {
             moveType();
             this.castling = false;
@@ -66,6 +67,7 @@ public class Piece {
         if (!queenMove()) return false;
         if (!kingMove()) return false;
         if (realMove && !resolveCheck()) return false;
+        if (realMove && checkmate()) return false;
         if (!rookMove()) return false;
         if (!knightMove()) return false;
         if (!bishopMove()) return false;
@@ -105,10 +107,10 @@ public class Piece {
     }
     public boolean resolveCheck() {
         this.tempSave();
-        this.pX = clickX;
-        this.pY = clickY;
         Piece attackedPiece = Board.getPiece(clickX * 64, clickY * 64);
         boolean canCaptureAttacker = (attackedPiece != null && attackedPiece.isBlack != this.isBlack);
+        this.pX = this.clickX;
+        this.pY = this.clickY;
         if (kingInCheck() && !canCaptureAttacker) {
             this.tempLoad();
             return false;

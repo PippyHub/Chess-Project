@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="can escape check">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="adding checkmate">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
     </list>
@@ -65,13 +65,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00011" summary="finished piece array">
-      <created>1687085757381</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1687085757381</updated>
     </task>
     <task id="LOCAL-00012" summary="finished piece array">
       <created>1687085778242</created>
@@ -409,7 +402,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689316849748</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="adding checkmate">
+      <created>1689318016931</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1689318016932</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -424,7 +424,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="queen moves correctly" />
     <MESSAGE value="turns working correctly" />
     <MESSAGE value="king castles but rook doesn't move" />
     <MESSAGE value="castling working" />
@@ -449,6 +448,7 @@
     <MESSAGE value="check works for own pieces" />
     <MESSAGE value="separated check into multiple methods" />
     <MESSAGE value="can escape check" />
-    <option name="LAST_COMMIT_MESSAGE" value="can escape check" />
+    <MESSAGE value="adding checkmate" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding checkmate" />
   </component>
 </project>
