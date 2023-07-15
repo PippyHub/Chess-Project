@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="checkmate message">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="cant take non attacking piece in check">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
@@ -66,13 +66,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00016" summary="fixed board colour">
-      <created>1687089637037</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1687089637037</updated>
     </task>
     <task id="LOCAL-00017" summary="filled out chess board">
       <created>1687126358250</created>
@@ -410,7 +403,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689423774844</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="cant take non attacking piece in check">
+      <created>1689432126155</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1689432126155</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -425,7 +425,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="pieces get highlighted on their turn" />
     <MESSAGE value="fixed castling double move" />
     <MESSAGE value="code shortening and updated headers" />
     <MESSAGE value="king check and updated headers" />
@@ -450,6 +449,7 @@
     <MESSAGE value="check works" />
     <MESSAGE value="checkmate works" />
     <MESSAGE value="checkmate message" />
-    <option name="LAST_COMMIT_MESSAGE" value="checkmate message" />
+    <MESSAGE value="cant take non attacking piece in check" />
+    <option name="LAST_COMMIT_MESSAGE" value="cant take non attacking piece in check" />
   </component>
 </project>

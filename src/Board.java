@@ -4,15 +4,14 @@
  * @author (Piper Inns Hall)
  * @version (29/06/2023)
  */
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.LinkedList;
 import javax.swing.*;
-
 public class Board extends JPanel implements ActionListener, MouseListener {
-    static final int SQUARE_SIZE = 64;
-    static final int SQUARE_AMOUNT = 8;
+    static final int SQR_SIZE = 64;
+    static final int SQR_AMOUNT = 8;
+    static final int BOARD_SIZE = SQR_SIZE * SQR_AMOUNT;
     public static LinkedList<Piece> ps = new LinkedList<>(); //linked list of pieces
     public static Piece selectedPiece = null;
     Images img = new Images();
@@ -50,15 +49,15 @@ public class Board extends JPanel implements ActionListener, MouseListener {
     }
     public void paint(Graphics g) {
         boolean white = true;
-        for (int boardY = 0; boardY < SQUARE_AMOUNT; boardY++) {
-            for (int boardX = 0; boardX < SQUARE_AMOUNT; boardX++) {
+        for (int boardY = 0; boardY < SQR_AMOUNT; boardY++) {
+            for (int boardX = 0; boardX < SQR_AMOUNT; boardX++) {
                 if(white) {
                     g.setColor(Color.white);
                 }
                 else {
                     g.setColor(Color.decode("#769656"));
                 }
-                g.fillRect(boardX * SQUARE_SIZE, boardY * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+                g.fillRect(boardX * SQR_SIZE, boardY * SQR_SIZE, SQR_SIZE, SQR_SIZE);
                 white=!white;
             }
             white=!white;
@@ -66,7 +65,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         if (highlight) {
             g.setColor(Color.yellow);
             if(selectedPiece.checkTurn())
-                g.fillRect(selectedPiece.pX * SQUARE_SIZE, selectedPiece.pY * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+                g.fillRect(selectedPiece.pX * SQR_SIZE, selectedPiece.pY * SQR_SIZE, SQR_SIZE, SQR_SIZE);
         }
         for (Piece p: ps) {
              int index = 0;
@@ -82,39 +81,36 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         if (Piece.checkmated) {
             int squareX = 256;
             int squareY = 128;
+            int centerX = (BOARD_SIZE - squareX) / 2;
+            int centerY = (BOARD_SIZE - squareY) / 2;
             int cornerRadius = 10; // Adjust the corner radius as needed
 
-            // Calculate the center position for the square
-            int centerX = (getWidth() - squareX) / 2;
-            int centerY = (getHeight() - squareY) / 2;
-
-            // Draw the tinted background rectangle
             Color tintedColor = new Color(0, 0, 0, 100); // Adjust the transparency and color as needed
             g.setColor(tintedColor);
-            g.fillRect(0, 0, SQUARE_SIZE * SQUARE_AMOUNT, SQUARE_SIZE * SQUARE_AMOUNT);
+            g.fillRect(0, 0, BOARD_SIZE, BOARD_SIZE);// Draw the tinted background rectangle
 
             g.setColor(Color.white);
-            g.fillRoundRect(centerX, centerY, squareX, squareY, cornerRadius, cornerRadius); // Use fillRoundRect for rounded corners
+            g.fillRoundRect(centerX, centerY, squareX, squareY, cornerRadius, cornerRadius); // rounded corners
 
             g.setColor(Color.BLACK);
-            g.setFont(new Font("Arial", Font.BOLD, 24)); // Adjust the font size as needed
+            g.setFont(new Font("Arial", Font.BOLD, 24));
             String message = "Checkmate";
             int messageWidth = g.getFontMetrics().stringWidth(message);
-            g.drawString(message, (getWidth() - messageWidth) / 2, centerY + squareY / 2 - 16);
+            g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2 - 16);
 
             String winner = Piece.winner ? "black" : "white";
             message = winner + " has won";
             messageWidth = g.getFontMetrics().stringWidth(message);
-            g.drawString(message, (getWidth() - messageWidth) / 2, centerY + squareY / 2);
+            g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2);
 
             message = "File > New to play again";
             messageWidth = g.getFontMetrics().stringWidth(message);
-            g.drawString(message, (getWidth() - messageWidth) / 2, centerY + squareY / 2 + 16);
+            g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2 + 16);
         }
     }
     public static Piece getPiece(int x, int y) {
-        int pX = x / SQUARE_SIZE;
-        int pY = y / SQUARE_SIZE;
+        int pX = x / SQR_SIZE;
+        int pY = y / SQR_SIZE;
         for (Piece p: ps) {
             if(p.pX == pX && p.pY == pY) return p;
         }
@@ -122,17 +118,19 @@ public class Board extends JPanel implements ActionListener, MouseListener {
     }
     public void actionPerformed(ActionEvent e) {}
     public void mousePressed(MouseEvent e) {
-        if(selectedPiece == null) {
-            // No piece currently selected, attempt to select a piece
-            selectedPiece = getPiece(e.getX(), e.getY());
-            if(selectedPiece != null) highlight = true;
-        } else {
-            // A piece is already selected, attempt to move it
-            selectedPiece.move(e.getX() / SQUARE_SIZE, e.getY() / SQUARE_SIZE);
-            highlight = false;
-            selectedPiece = null; // Deselect the piece after moving
+        if (!Piece.checkmated) {
+            if (selectedPiece == null) {
+                // No piece currently selected, attempt to select a piece
+                selectedPiece = getPiece(e.getX(), e.getY());
+                if (selectedPiece != null) highlight = true;
+            } else {
+                // A piece is already selected, attempt to move it
+                selectedPiece.move(e.getX() / SQR_SIZE, e.getY() / SQR_SIZE);
+                highlight = false;
+                selectedPiece = null; // Deselect the piece after moving
+            }
+            this.repaint();
         }
-        this.repaint();
     }
     public void mouseReleased(MouseEvent e) {}
     public void mouseClicked(MouseEvent e) {}
