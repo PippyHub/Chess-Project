@@ -1,15 +1,15 @@
 /**
- * Loads chess position
+ * Loads chess savePosition
  *
  * @author (Piper)
- * @version (29/02/2023)
+ * @version (16/07/2023)
  */
 import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
 public class Load {
     public Load() {
-        File file = new File ("src/position");
+        File file = new File ("src/savePosition");
         try{
             FileWriter writer = new FileWriter(file);
             writer.write("Load");

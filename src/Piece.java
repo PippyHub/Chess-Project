@@ -2,19 +2,12 @@
  * Constructor for all chess pieces
  *
  * @author (Piper Inns Hall)
- * @version (29/06/2023)
+ * @version (16/07/2023)
  */
 import java.util.LinkedList;
 public class Piece {
     static final int SQR_SIZE = Board.SQR_SIZE;
-    int x; // Piece board pos x
-    int y; // Piece board pos y
-    int pX; // Piece x
-    int pY; // Piece y
-    int clickX; // Where mouse is clicked
-    int clickY; // Where mouse is clicked
-    int deltaX; // Change in x when moving piece
-    int deltaY; // Change in y when moving piece
+    int x, y, pX, pY, clickX, clickY, deltaX, deltaY; // Piece values
     int tempPX, tempPY, tempDX, tempDY , tempCX, tempCY; // Temporary stored values
     boolean isBlack;
     boolean pieceMoved;
@@ -115,7 +108,7 @@ public class Piece {
     public boolean kingMove() {
         if (!name.equalsIgnoreCase("king")) return true;
         if (!pieceMoved && deltaY == 0 && Math.abs(deltaX) == 2) {
-            int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting position
+            int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting savePosition
             int rookY = pY; // Rook stays in the same row
             Piece rook = Board.getPiece(rookX * SQR_SIZE, rookY * SQR_SIZE);
             if (rook != null && rook.name.equalsIgnoreCase("rook") && !rook.pieceMoved) {
@@ -264,7 +257,7 @@ public class Piece {
                     enPassantPawn.kill();
                     return true;
                 }
-                return false; // Can't move to empty square diagonally without en passant
+                return false; // Can't move to empty square without en passant
             }
         }
         if (!isBlack) { // If piece is white

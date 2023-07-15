@@ -2,7 +2,7 @@
  * Loads all image assets
  *
  * @author (Piper Inns Hall)
- * @version (29/06/2023)
+ * @version (16/07/2023)
  */
 
 import java.awt.Image;
@@ -16,11 +16,9 @@ public class Images {
     public Images() {
         images = new Image[12];
     }
-
     public Image[] loadImages() {
         try {
             BufferedImage all = ImageIO.read(new File("src/Images/ChessPiecesArray.png"));
-
             int index = 0;
             for (int y = 0; y < 120; y += 60) {
                 for (int x = 0; x < 360; x += 60) {
@@ -32,7 +30,6 @@ public class Images {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return images;
     }
 }

@@ -2,7 +2,7 @@
  * Prints out the chess board and pieces onto the frame
  *
  * @author (Piper Inns Hall)
- * @version (29/06/2023)
+ * @version (16/07/2023)
  */
 import java.awt.*;
 import java.awt.event.*;

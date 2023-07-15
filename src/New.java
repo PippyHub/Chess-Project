@@ -7,8 +7,8 @@
 import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
-public class Save {
-    public Save() {
+public class New {
+    public New() {
         File file = new File ("src/savePosition");
         try {
             FileWriter writer = new FileWriter(file);
