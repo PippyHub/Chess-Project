@@ -61,13 +61,11 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             }
             white=!white;
         }
-
         if (highlight) {
             g.setColor(Color.yellow);
             if(selectedPiece.checkTurn())
                 g.fillRect(selectedPiece.pX * 64, selectedPiece.pY * 64, 64, 64);
         }
-
         for (Piece p: ps) {
              int index = 0;
              if(p.name.equalsIgnoreCase("queen")) index = 0;
@@ -79,6 +77,25 @@ public class Board extends JPanel implements ActionListener, MouseListener {
              if(!p.isBlack) index+=6;
              g.drawImage(images[index], p.x, p.y, this);
          }
+        if (selectedPiece.checkmate()) {
+            g.setColor(Color.RED);
+            g.fillRect(0, 0, 8 * 64, 8 * 64);
+
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Arial", Font.BOLD, 32));
+            String message = "Checkmate";
+            int messageWidth = g.getFontMetrics().stringWidth(message);
+            g.drawString(message, (8 * 64 - messageWidth) / 2, 8 * 32);
+
+            String winner = !selectedPiece.isBlack ? "White" : "Black";
+            message = winner + " has won";
+            messageWidth = g.getFontMetrics().stringWidth(message);
+            g.drawString(message, (8 * 64 - messageWidth) / 2, 8 * 40);
+
+            message = "File > New to play again";
+            messageWidth = g.getFontMetrics().stringWidth(message);
+            g.drawString(message, (8 * 64 - messageWidth) / 2, 8 * 48);
+        }
     }
     public static Piece getPiece(int x, int y) {
         int pX = x / 64;

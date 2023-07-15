@@ -39,6 +39,8 @@ public class Piece {
         clickX = pX;
         clickY = pY;
 
+        System.out.println(checkmate());
+
         if (legalMove(true)) {
             moveType();
             this.castling = false;
@@ -47,18 +49,26 @@ public class Piece {
             this.pY = pY;
             this.x = pX * 64;
             this.y = pY * 64;
-
         }
     }
     public void moveType() {
         if (!this.castling) switchTurn();
-        if (Board.getPiece(clickX * 64, clickY * 64) != null)
-            Board.getPiece(clickX * 64, clickY * 64).kill(); //Taking pieces
-        if (name.equalsIgnoreCase("pawn"))
-            if ((this.isBlack && clickY == 7) || (!this.isBlack && clickY == 0)) name = "queen";//Promoting pawns
+        pieceTake();
+        pawnPromote();
     }
     public static void switchTurn() {
-        isBlackTurn = !isBlackTurn;
+        isBlackTurn = !isBlackTurn; //switching turns
+    }
+    public void pieceTake() {
+        Piece take = Board.getPiece(clickX * 64, clickY * 64);
+        if (take != null) take.kill(); //Taking pieces
+    }
+    public void kill() {
+        ps.remove(this);
+    }
+    public void pawnPromote() {
+        if (name.equalsIgnoreCase("pawn"))
+            if ((this.isBlack && clickY == 7) || (!this.isBlack && clickY == 0)) name = "queen"; //Promoting pawns
     }
     public boolean legalMove(boolean realMove) {
         if (realMove && !checkTurn()) return false;
@@ -67,7 +77,6 @@ public class Piece {
         if (!queenMove()) return false;
         if (!kingMove()) return false;
         if (realMove && !resolveCheck()) return false;
-        if (realMove && checkmate()) return false;
         if (!rookMove()) return false;
         if (!knightMove()) return false;
         if (!bishopMove()) return false;
@@ -233,8 +242,5 @@ public class Piece {
         this.deltaY = this.tempDY;
         this.clickX = this.tempCX;
         this.clickY = this.tempCY;
-    }
-    public void kill() {
-        ps.remove(this);
     }
 }
