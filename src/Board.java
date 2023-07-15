@@ -11,6 +11,8 @@ import java.util.LinkedList;
 import javax.swing.*;
 
 public class Board extends JPanel implements ActionListener, MouseListener {
+    static final int SQUARE_SIZE = 64;
+    static final int SQUARE_AMOUNT = 8;
     public static LinkedList<Piece> ps = new LinkedList<>(); //linked list of pieces
     public static Piece selectedPiece = null;
     Images img = new Images();
@@ -48,15 +50,15 @@ public class Board extends JPanel implements ActionListener, MouseListener {
     }
     public void paint(Graphics g) {
         boolean white = true;
-        for (int boardY = 0; boardY < 8; boardY++) {
-            for (int boardX = 0; boardX < 8; boardX++) {
+        for (int boardY = 0; boardY < SQUARE_AMOUNT; boardY++) {
+            for (int boardX = 0; boardX < SQUARE_AMOUNT; boardX++) {
                 if(white) {
                     g.setColor(Color.white);
                 }
                 else {
                     g.setColor(Color.decode("#769656"));
                 }
-                g.fillRect(boardX * 64, boardY * 64, 64, 64);
+                g.fillRect(boardX * SQUARE_SIZE, boardY * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
                 white=!white;
             }
             white=!white;
@@ -64,7 +66,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         if (highlight) {
             g.setColor(Color.yellow);
             if(selectedPiece.checkTurn())
-                g.fillRect(selectedPiece.pX * 64, selectedPiece.pY * 64, 64, 64);
+                g.fillRect(selectedPiece.pX * SQUARE_SIZE, selectedPiece.pY * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
         }
         for (Piece p: ps) {
              int index = 0;
@@ -80,16 +82,22 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         if (Piece.checkmated) {
             int squareX = 256;
             int squareY = 128;
+            int cornerRadius = 10; // Adjust the corner radius as needed
 
             // Calculate the center position for the square
             int centerX = (getWidth() - squareX) / 2;
             int centerY = (getHeight() - squareY) / 2;
 
+            // Draw the tinted background rectangle
+            Color tintedColor = new Color(0, 0, 0, 100); // Adjust the transparency and color as needed
+            g.setColor(tintedColor);
+            g.fillRect(0, 0, SQUARE_SIZE * SQUARE_AMOUNT, SQUARE_SIZE * SQUARE_AMOUNT);
+
             g.setColor(Color.white);
-            g.fillRect(centerX, centerY, squareX, squareY);
+            g.fillRoundRect(centerX, centerY, squareX, squareY, cornerRadius, cornerRadius); // Use fillRoundRect for rounded corners
 
             g.setColor(Color.BLACK);
-            g.setFont(new Font("Arial", Font.BOLD, 32));
+            g.setFont(new Font("Arial", Font.BOLD, 24)); // Adjust the font size as needed
             String message = "Checkmate";
             int messageWidth = g.getFontMetrics().stringWidth(message);
             g.drawString(message, (getWidth() - messageWidth) / 2, centerY + squareY / 2 - 16);
@@ -105,8 +113,8 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         }
     }
     public static Piece getPiece(int x, int y) {
-        int pX = x / 64;
-        int pY = y / 64;
+        int pX = x / SQUARE_SIZE;
+        int pY = y / SQUARE_SIZE;
         for (Piece p: ps) {
             if(p.pX == pX && p.pY == pY) return p;
         }
@@ -120,7 +128,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             if(selectedPiece != null) highlight = true;
         } else {
             // A piece is already selected, attempt to move it
-            selectedPiece.move(e.getX() / 64, e.getY() / 64);
+            selectedPiece.move(e.getX() / SQUARE_SIZE, e.getY() / SQUARE_SIZE);
             highlight = false;
             selectedPiece = null; // Deselect the piece after moving
         }

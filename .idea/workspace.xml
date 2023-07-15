@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="checkmate works">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="checkmate message">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
@@ -66,13 +66,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00015" summary="fixed image errors">
-      <created>1687087776884</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1687087776884</updated>
     </task>
     <task id="LOCAL-00016" summary="fixed board colour">
       <created>1687089637037</created>
@@ -410,7 +403,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689419945633</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="checkmate message">
+      <created>1689423774844</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1689423774844</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -425,7 +425,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="all pieces get highlighted" />
     <MESSAGE value="pieces get highlighted on their turn" />
     <MESSAGE value="fixed castling double move" />
     <MESSAGE value="code shortening and updated headers" />
@@ -450,6 +449,7 @@
     <MESSAGE value="bishop breaks game during fools mate" />
     <MESSAGE value="check works" />
     <MESSAGE value="checkmate works" />
-    <option name="LAST_COMMIT_MESSAGE" value="checkmate works" />
+    <MESSAGE value="checkmate message" />
+    <option name="LAST_COMMIT_MESSAGE" value="checkmate message" />
   </component>
 </project>
