@@ -77,30 +77,36 @@ public class Board extends JPanel implements ActionListener, MouseListener {
              if(!p.isBlack) index+=6;
              g.drawImage(images[index], p.x, p.y, this);
          }
-        if (selectedPiece.checkmate()) {
-            g.setColor(Color.RED);
-            g.fillRect(0, 0, 8 * 64, 8 * 64);
+        if (Piece.checkmated) {
+            int squareX = 256;
+            int squareY = 128;
 
-            g.setColor(Color.WHITE);
+            // Calculate the center position for the square
+            int centerX = (getWidth() - squareX) / 2;
+            int centerY = (getHeight() - squareY) / 2;
+
+            g.setColor(Color.white);
+            g.fillRect(centerX, centerY, squareX, squareY);
+
+            g.setColor(Color.BLACK);
             g.setFont(new Font("Arial", Font.BOLD, 32));
             String message = "Checkmate";
             int messageWidth = g.getFontMetrics().stringWidth(message);
-            g.drawString(message, (8 * 64 - messageWidth) / 2, 8 * 32);
+            g.drawString(message, (getWidth() - messageWidth) / 2, centerY + squareY / 2 - 16);
 
-            String winner = !selectedPiece.isBlack ? "White" : "Black";
+            String winner = Piece.winner ? "black" : "white";
             message = winner + " has won";
             messageWidth = g.getFontMetrics().stringWidth(message);
-            g.drawString(message, (8 * 64 - messageWidth) / 2, 8 * 40);
+            g.drawString(message, (getWidth() - messageWidth) / 2, centerY + squareY / 2);
 
             message = "File > New to play again";
             messageWidth = g.getFontMetrics().stringWidth(message);
-            g.drawString(message, (8 * 64 - messageWidth) / 2, 8 * 48);
+            g.drawString(message, (getWidth() - messageWidth) / 2, centerY + squareY / 2 + 16);
         }
     }
     public static Piece getPiece(int x, int y) {
         int pX = x / 64;
         int pY = y / 64;
-
         for (Piece p: ps) {
             if(p.pX == pX && p.pY == pY) return p;
         }

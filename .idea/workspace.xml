@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="bishop breaks game during fools mate">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="checkmate works">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
@@ -28,7 +28,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2QdXOie2CjeoICbW0CLG0dGsUV3" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -66,13 +66,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00014" summary="fixing image errors 2">
-      <created>1687087114239</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1687087114240</updated>
     </task>
     <task id="LOCAL-00015" summary="fixed image errors">
       <created>1687087776884</created>
@@ -410,7 +403,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689320003374</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="checkmate works">
+      <created>1689419945633</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1689419945633</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -425,8 +425,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="castling working" />
-    <MESSAGE value="updating headers" />
     <MESSAGE value="all pieces get highlighted" />
     <MESSAGE value="pieces get highlighted on their turn" />
     <MESSAGE value="fixed castling double move" />
@@ -450,6 +448,8 @@
     <MESSAGE value="adding checkmate" />
     <MESSAGE value="fixed check so pieces can be taken" />
     <MESSAGE value="bishop breaks game during fools mate" />
-    <option name="LAST_COMMIT_MESSAGE" value="bishop breaks game during fools mate" />
+    <MESSAGE value="check works" />
+    <MESSAGE value="checkmate works" />
+    <option name="LAST_COMMIT_MESSAGE" value="checkmate works" />
   </component>
 </project>

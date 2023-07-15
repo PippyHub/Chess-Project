@@ -18,10 +18,12 @@ public class Piece {
     int tempPX, tempPY, tempDX, tempDY , tempCX, tempCY; //temporary values
     boolean isBlack;
     boolean pieceMoved;
-    private static boolean isBlackTurn;
     String name;
-    boolean castling;
     LinkedList<Piece> ps;
+    boolean castling;
+    private static boolean isBlackTurn;
+    public static boolean checkmated;
+    public static boolean winner;
     public Piece(int pX, int pY, boolean isBlack, boolean pieceMoved, String n, LinkedList<Piece> ps) {
         this.x = pX * 64;
         this.y = pY * 64;
@@ -38,9 +40,6 @@ public class Piece {
         deltaY = pY - this.pY;
         clickX = pX;
         clickY = pY;
-
-        System.out.println(checkmate());
-
         if (legalMove(true)) {
             moveType();
             this.castling = false;
@@ -49,7 +48,12 @@ public class Piece {
             this.pY = pY;
             this.x = pX * 64;
             this.y = pY * 64;
+            checkmate(checkmated(), this.isBlack);
         }
+    }
+    public static void checkmate(boolean checkmated, boolean winner) {
+        Piece.checkmated = checkmated;
+        Piece.winner = winner;
     }
     public void moveType() {
         if (!this.castling) switchTurn();
@@ -141,7 +145,7 @@ public class Piece {
     }
     public boolean check(Piece myKing, int kingPosX, int kingPosY) {
         for (Piece p : ps) {
-            if (this.isBlack != p.isBlack) {
+            if (p.isBlack != isBlackTurn) {
                 p.tempSave();
                 if (myKing != null) {
                     p.deltaX = kingPosX - p.pX;
@@ -158,10 +162,9 @@ public class Piece {
         }
         return false;
     }
-    public boolean checkmate() {
-        if (!kingInCheck()) return false; // Not in check, not checkmate
+    public boolean checkmated() {
         for (Piece p : ps) {
-            if (p.isBlack == isBlackTurn) { // Check moves for the current player's pieces
+            if (p.isBlack == isBlackTurn) { // Check moves for the opposite player's pieces (turn has already changed)
                 for (int x = 0; x < 8; x++) {
                     for (int y = 0; y < 8; y++) {
                         p.tempSave();
