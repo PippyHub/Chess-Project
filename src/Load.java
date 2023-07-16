@@ -1,5 +1,5 @@
 /**
- * Loadss saved chess game
+ * Loads saved chess game
  *
  * @author (Piper)
  * @version (16/07/2023)

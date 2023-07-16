@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.Scanner;
 public class Loader {
     private static File load;
-    private static File loadTurn;
     static final int PIECE_AMOUNT = 32;
     static int[] pX;
     static int[] pY;
@@ -29,9 +28,8 @@ public class Loader {
         fileRead();
     }
     public void loadTurn(File file) {
-        loadTurn = file;
         try {
-            Scanner readFile = new Scanner(loadTurn);
+            Scanner readFile = new Scanner(file);
             if (readFile.hasNextLine()) {
                 String lineRead = readFile.nextLine();
                 turn = Boolean.parseBoolean(lineRead);

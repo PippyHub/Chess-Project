@@ -40,17 +40,19 @@ public class Piece {
         boolean checking = oppositeKingInCheck();
         if (legalMove(true)) {
             moveType();
+
+
             this.pieceMoved = true;
             this.pX = pX;
             this.pY = pY;
             this.x = pX * SQR_SIZE;
             this.y = pY * SQR_SIZE;
+            if (!this.castling) switchTurn();
+            this.castling = false;
             if (checking) checkmate(checkmated(), this.isBlack); // At the bottom of move() so selected piece has moved
         }
     }
     public void moveType() {
-        if (!this.castling) switchTurn();
-        this.castling = false;
         pieceTake();
         pawnPromote();
         pawnDouble();
@@ -117,18 +119,18 @@ public class Piece {
     public boolean kingMove() {
         if (!name.equalsIgnoreCase("king")) return true;
         if (!pieceMoved && deltaY == 0 && Math.abs(deltaX) == 2) {
-            int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting savePosition
+            int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting position
             int rookY = pY; // Rook stays in the same row
-            Piece rook = Board.getPiece(rookX * SQR_SIZE, rookY * SQR_SIZE);
+            Piece rook = Board.getPiece(rookX * 64, rookY * 64);
             if (rook != null && rook.name.equalsIgnoreCase("rook") && !rook.pieceMoved) {
                 this.castling = true;
                 int newRookX = (deltaX > 0) ? pX + 1 : pX - 1;
                 int newRookY = pY;
                 rook.move(newRookX, newRookY);
             }
-            return true;
+            return true; // castling logic
         }
-        return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1; // King moves
+        return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1; // king moves
     }
     public boolean resolveCheck() {
         this.tempSave();

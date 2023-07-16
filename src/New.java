@@ -12,12 +12,12 @@ public class New {
         resetPieces();
         Menu.panel.repaint();
     }
-    public void emptyBoardList() {
+    public static void emptyBoardList() {
         while (!Board.ps.isEmpty()) {
             Board.ps.removeFirst();
         }
     }
-    public void resetVariables() {
+    public static void resetVariables() {
         Piece.checkmated = false;
         Piece.resetTurn();
     }
