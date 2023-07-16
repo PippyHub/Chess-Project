@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 public class Menu extends JFrame implements ActionListener {
-    Board panel = new Board();
+    public static Board panel = new Board();
     public Menu() {
         setTitle("Chess");
         this.getContentPane().setPreferredSize(new Dimension(512, 512));
@@ -45,13 +45,12 @@ public class Menu extends JFrame implements ActionListener {
 
         this.setJMenuBar(menuBar);
     }
-    public void actionPerformed(ActionEvent e)
-    {
+    public void actionPerformed(ActionEvent e) {
         String cmd=e.getActionCommand();
         switch (cmd) {
-            case "New" -> System.exit(0);
+            case "New" -> new New();
             case "Save" -> new Save();
-            case "Load" -> new Load();
+            case "Load" -> System.exit(0);//new Load();
             default -> System.out.println("Invalid input");
         }
     }

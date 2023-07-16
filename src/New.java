@@ -1,22 +1,34 @@
+import java.io.File;
+
 /**
- * Saves chess savePosition
+ * Starts new chess game
  *
  * @author (Piper)
  * @version (16/07/2023)
  */
-import java.io.IOException;
-import java.io.File;
-import java.io.FileWriter;
 public class New {
     public New() {
-        File file = new File ("src/savePosition");
-        try {
-            FileWriter writer = new FileWriter(file);
-            writer.write("Save");
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        emptyBoardList();
+        resetVariables();
+        resetPieces();
+        Menu.panel.repaint();
+    }
+    public void emptyBoardList() {
+        while (!Board.ps.isEmpty()) {
+            Board.ps.removeFirst();
         }
+    }
+    public void resetVariables() {
+        Piece.checkmated = false;
+        Piece.resetTurn();
+    }
+    public static void resetPieces(){
+        File file = new File("src/Positions/defaultPosition");
+        Load load = new Load();
+        load.loadFile(file);
+        for (int piece = 0; piece < Load.PIECE_AMOUNT; piece++) {
+            System.out.println(Load.pX[piece]);
+            Board.pieceList(Load.pX[piece], Load.pY[piece], Load.isBlack[piece], Load.name[piece]);
+        } // Access the loaded values from the arrays
     }
 }

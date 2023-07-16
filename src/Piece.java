@@ -58,6 +58,9 @@ public class Piece {
     public static void switchTurn() {
         isBlackTurn = !isBlackTurn; // Switching turns
     }
+    public static void resetTurn() {
+        isBlackTurn = false; // Reset turns
+    }
     public void pieceTake() {
         Piece take = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
         if (take != null) take.kill(); // Taking pieces

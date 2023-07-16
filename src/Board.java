@@ -6,6 +6,7 @@
  */
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.util.LinkedList;
 import javax.swing.*;
 public class Board extends JPanel implements ActionListener, MouseListener {
@@ -19,33 +20,10 @@ public class Board extends JPanel implements ActionListener, MouseListener {
     boolean highlight;
     public Board() {
         images = img.loadImages();
-        pieceList();
         addMouseListener(this);
     }
-    public void pieceList() {
-        Piece bQueen = new Piece(3, 0, true, false,"queen", ps);
-        Piece wQueen = new Piece(3, 7, false,false,"queen", ps);
-
-        Piece bKing = new Piece(4, 0, true,false,"king", ps);
-        Piece wKing = new Piece(4, 7, false,false,"king", ps);
-
-        for (int r = 0; r < 8; r+=7) { //rooks in link list
-            Piece bRook = new Piece(r, 0, true,false,"rook", ps);
-            Piece wRook = new Piece(r, 7, false,false,"rook", ps);
-
-        }
-        for (int k = 1; k < 7; k+=5) { //knights in link list
-            Piece bKnight = new Piece(k, 0, true,false,"knight", ps);
-            Piece wKnight = new Piece(k, 7, false,false,"knight", ps);
-        }
-        for (int b = 2; b < 6; b+=3) { //bishops in link list
-            Piece bBishop = new Piece(b, 0, true,false,"bishop", ps);
-            Piece wBishop = new Piece(b, 7, false,false,"bishop", ps);
-        }
-        for (int p = 0; p < 8; p++) { //pawns in link list
-            Piece bPawn = new Piece(p, 1, true,false,"pawn", ps);
-            Piece wPawn = new Piece(p, 6, false,false,"pawn", ps);
-        }
+    public static void pieceList(int pX, int pY, boolean isBlack, String name) {
+        new Piece(pX, pY, isBlack, false,name, ps);
     }
     public void paint(Graphics g) {
         boolean white = true;
@@ -108,7 +86,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2 + 16);
         }
     }
-    public static Piece getPiece(int x, int y) {
+   public static Piece getPiece(int x, int y) {
         int pX = x / SQR_SIZE;
         int pY = y / SQR_SIZE;
         for (Piece p: ps) {

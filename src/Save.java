@@ -9,9 +9,9 @@ import java.io.File;
 import java.io.FileWriter;
 public class Save {
     public Save() {
-        File file = new File ("src/savePosition");
+        File save = new File ("src/Positions/savePosition");
         try {
-            FileWriter writer = new FileWriter(file);
+            FileWriter writer = new FileWriter(save);
             writer.write("Save");
             writer.flush();
             writer.close();
