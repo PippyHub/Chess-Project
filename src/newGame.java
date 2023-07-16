@@ -5,8 +5,8 @@
  * @version (16/07/2023)
  */
 import java.io.File;
-public class New {
-    public New() {
+public class newGame {
+    public newGame() {
         emptyBoardList();
         resetVariables();
         resetPieces();

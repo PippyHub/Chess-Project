@@ -19,8 +19,8 @@ public class Piece {
     public static boolean checkmated;
     public static boolean winner;
     public static Piece enPassantPawn;
+    Piece castleRook;
     Piece attacker;
-
     public Piece(int pX, int pY, boolean isBlack, boolean pieceMoved, String n, LinkedList<Piece> ps) {
         this.x = pX * SQR_SIZE;
         this.y = pY * SQR_SIZE;
@@ -38,36 +38,27 @@ public class Piece {
         clickX = pX;
         clickY = pY;
         boolean checking = oppositeKingInCheck();
+        System.out.println(checking);
         if (legalMove(true)) {
             moveType();
-
-
             this.pieceMoved = true;
             this.pX = pX;
             this.pY = pY;
             this.x = pX * SQR_SIZE;
             this.y = pY * SQR_SIZE;
-            if (!this.castling) switchTurn();
-            this.castling = false;
+            switchTurn();
             if (checking) checkmate(checkmated(), this.isBlack); // At the bottom of move() so selected piece has moved
         }
     }
+    public static void switchTurn() { isBlackTurn = !isBlackTurn; } // Switching turns
+    public static void resetTurn() { isBlackTurn = false; } // Reset turns
+    public static void loadTurn(boolean blackTurn) { isBlackTurn = blackTurn; } // Loads turns
+    public static boolean saveTurn() { return isBlackTurn; } // Saves turns
     public void moveType() {
         pieceTake();
         pawnPromote();
         pawnDouble();
-    }
-    public static void switchTurn() {
-        isBlackTurn = !isBlackTurn; // Switching turns
-    }
-    public static void resetTurn() {
-        isBlackTurn = false; // Reset turns
-    }
-    public static void loadTurn(boolean blackTurn) {
-        isBlackTurn = blackTurn; // Saves turns
-    }
-    public static boolean saveTurn() {
-        return isBlackTurn; // Saves turns
+        if (this.castling) castle();
     }
     public void pieceTake() {
         Piece take = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
@@ -88,6 +79,12 @@ public class Piece {
             enPassantPawn = this;
         }
     }
+    public void castle() {
+        castleRook.pX = (deltaX > 0) ? this.pX + 1 : this.pX - 1;
+        castleRook.x = castleRook.pX * SQR_SIZE;
+        castleRook.y = castleRook.pY * SQR_SIZE;
+        castling = false;
+    }
     public boolean legalMove(boolean realMove) {
         if (realMove && !checkTurn()) return false;
         if (ownSQRMove()) return false;
@@ -102,12 +99,8 @@ public class Piece {
         if (!boardBoundary()) return false;
         return noObstruction();
     }
-    public boolean checkTurn() {
-        return (isBlackTurn && this.isBlack) || (!isBlackTurn && !this.isBlack);
-    }
-    public boolean ownSQRMove() {
-        return this.deltaX == 0 && this.deltaY == 0; // Cannot move to own SQR
-    }
+    public boolean checkTurn() { return (isBlackTurn && this.isBlack) || (!isBlackTurn && !this.isBlack); }
+    public boolean ownSQRMove() { return this.deltaX == 0 && this.deltaY == 0; } // Cannot move to own SQR
     public boolean ownPieceMove() {
         Piece clickedPiece = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
         return clickedPiece != null && clickedPiece.isBlack == isBlack; // Cannot take own pieces
@@ -121,16 +114,14 @@ public class Piece {
         if (!pieceMoved && deltaY == 0 && Math.abs(deltaX) == 2) {
             int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting position
             int rookY = pY; // Rook stays in the same row
-            Piece rook = Board.getPiece(rookX * 64, rookY * 64);
-            if (rook != null && rook.name.equalsIgnoreCase("rook") && !rook.pieceMoved) {
-                this.castling = true;
-                int newRookX = (deltaX > 0) ? pX + 1 : pX - 1;
-                int newRookY = pY;
-                rook.move(newRookX, newRookY);
+            castleRook = Board.getPiece(rookX * SQR_SIZE, rookY * SQR_SIZE);
+            if (castleRook != null && castleRook.name.equalsIgnoreCase("rook") && !castleRook.pieceMoved) {
+                castling = true;
+                return true; // Castling successful
             }
-            return true; // castling logic
+            return false; // Castling is not valid
         }
-        return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1; // king moves
+        return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1; // King moves
     }
     public boolean resolveCheck() {
         this.tempSave();
@@ -279,15 +270,13 @@ public class Piece {
             return deltaY > 0; // Can't move backward
         }
     }
-    public boolean boardBoundary() {
-        return clickX <= 7 && clickY <= 7 && clickX >= 0 && clickY >= 0;
-    }
+    public boolean boardBoundary() { return clickX <= 7 && clickY <= 7 && clickX >= 0 && clickY >= 0; }
     public boolean noObstruction() {
         if (name.equalsIgnoreCase("knight")) return true;
         int currentX = this.pX + Integer.signum(this.deltaX);
         int currentY = this.pY + Integer.signum(this.deltaY);
         while (Math.abs(currentX - clickX) > 0 || Math.abs(currentY - clickY) > 0) {
-            if (Board.getPiece(currentX * SQR_SIZE, currentY * SQR_SIZE) != null) return this.castling;
+            if (Board.getPiece(currentX * SQR_SIZE, currentY * SQR_SIZE) != null) return false;
             currentX += Integer.signum(this.deltaX);
             currentY += Integer.signum(this.deltaY);
         }

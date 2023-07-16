@@ -19,10 +19,11 @@ public class Board extends JPanel implements ActionListener, MouseListener {
     boolean highlight;
     public Board() {
         images = img.loadImages();
+        newGame.resetPieces();
         addMouseListener(this);
     }
     public static void pieceList(int pX, int pY, boolean isBlack, boolean pieceMoved, String name) {
-        new Piece(pX, pY, isBlack, pieceMoved,name, ps);
+        new Piece(pX, pY, isBlack, pieceMoved, name, ps);
     }
     public void paint(Graphics g) {
         boolean white = true;
@@ -56,8 +57,8 @@ public class Board extends JPanel implements ActionListener, MouseListener {
              g.drawImage(images[index], p.x, p.y, this);
          }
         if (Piece.checkmated) {
-            int squareX = 256;
-            int squareY = 128;
+            int squareX = 300;
+            int squareY = 160;
             int centerX = (BOARD_SIZE - squareX) / 2;
             int centerY = (BOARD_SIZE - squareY) / 2;
             int cornerRadius = 10; // Adjust the corner radius as needed
@@ -71,18 +72,20 @@ public class Board extends JPanel implements ActionListener, MouseListener {
 
             g.setColor(Color.BLACK);
             g.setFont(new Font("Arial", Font.BOLD, 24));
-            String message = "Checkmate";
+            String message = "Checkmate!";
             int messageWidth = g.getFontMetrics().stringWidth(message);
-            g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2 - 16);
+            g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2 - 40);
 
+            g.setFont(new Font("Arial", Font.PLAIN, 20));
             String winner = Piece.winner ? "black" : "white";
             message = winner + " has won";
             messageWidth = g.getFontMetrics().stringWidth(message);
-            g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2);
+            g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2 - 17);
 
-            message = "File > New to play again";
+            g.setFont(new Font("Arial", Font.PLAIN, 15));
+            message = "'File > New' to play again";
             messageWidth = g.getFontMetrics().stringWidth(message);
-            g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2 + 16);
+            g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2 + 43);
         }
     }
    public static Piece getPiece(int x, int y) {
