@@ -49,7 +49,7 @@ public class Menu extends JFrame implements ActionListener {
         String cmd=e.getActionCommand();
         switch (cmd) {
             case "New" -> new New();
-            case "Save" -> new Save();
+            case "Save" -> new Save(Board.ps);
             case "Load" -> System.exit(0);//new Load();
             default -> System.out.println("Invalid input");
         }

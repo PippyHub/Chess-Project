@@ -6,7 +6,6 @@
  */
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import java.util.LinkedList;
 import javax.swing.*;
 public class Board extends JPanel implements ActionListener, MouseListener {
