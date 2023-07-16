@@ -61,6 +61,12 @@ public class Piece {
     public static void resetTurn() {
         isBlackTurn = false; // Reset turns
     }
+    public static void loadTurn(boolean blackTurn) {
+        isBlackTurn = blackTurn; // Saves turns
+    }
+    public static boolean saveTurn() {
+        return isBlackTurn; // Saves turns
+    }
     public void pieceTake() {
         Piece take = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
         if (take != null) take.kill(); // Taking pieces

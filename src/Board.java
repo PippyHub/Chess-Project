@@ -21,8 +21,8 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         images = img.loadImages();
         addMouseListener(this);
     }
-    public static void pieceList(int pX, int pY, boolean isBlack, String name) {
-        new Piece(pX, pY, isBlack, false,name, ps);
+    public static void pieceList(int pX, int pY, boolean isBlack, boolean pieceMoved, String name) {
+        new Piece(pX, pY, isBlack, pieceMoved,name, ps);
     }
     public void paint(Graphics g) {
         boolean white = true;

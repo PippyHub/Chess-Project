@@ -1,11 +1,10 @@
-import java.io.File;
-
 /**
  * Starts new chess game
  *
  * @author (Piper)
  * @version (16/07/2023)
  */
+import java.io.File;
 public class New {
     public New() {
         emptyBoardList();
@@ -24,11 +23,10 @@ public class New {
     }
     public static void resetPieces(){
         File file = new File("src/Positions/defaultPosition");
-        Load load = new Load();
-        load.loadFile(file);
-        for (int piece = 0; piece < Load.PIECE_AMOUNT; piece++) {
-            System.out.println(Load.pX[piece]);
-            Board.pieceList(Load.pX[piece], Load.pY[piece], Load.isBlack[piece], Load.name[piece]);
+        Loader loader = new Loader();
+        loader.loadFile(file);
+        for (int piece = 0; piece < Loader.PIECE_AMOUNT; piece++) {
+            Board.pieceList(Loader.pX[piece], Loader.pY[piece], Loader.isBlack[piece], false, Loader.name[piece]);
         } // Access the loaded values from the arrays
     }
 }

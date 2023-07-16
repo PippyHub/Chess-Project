@@ -11,15 +11,22 @@ import java.util.LinkedList;
 
 public class Save {
     public Save(LinkedList<Piece> ps) {
-        File save = new File("src/Positions/savePosition");
+        File position = new File("src/Positions/savePosition");
+        File turn = new File("src/Positions/saveTurn");
         try {
-            FileWriter writer = new FileWriter(save);
+            FileWriter positionWrite = new FileWriter(position);
             for (Piece piece : ps) {
-                String line = piece.pX + "," + piece.pY + "," + piece.isBlack + "," + piece.name + "\n";
-                writer.write(line);
+                String line = piece.pX + "," + piece.pY + "," +
+                        piece.isBlack + "," + piece.pieceMoved + "," + piece.name + "\n";
+                positionWrite.write(line);
             }
-            writer.flush();
-            writer.close();
+            positionWrite.flush();
+            positionWrite.close();
+
+            FileWriter turnWrite = new FileWriter(turn);
+            turnWrite.write( Piece.saveTurn() + "");
+            turnWrite.flush();
+            turnWrite.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

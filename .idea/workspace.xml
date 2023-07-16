@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="save pieces to text file" />
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="save and load working">
+      <change afterPath="$PROJECT_DIR$/src/Loader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Positions/saveTurn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Load.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Load.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/New.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/New.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Positions/defaultPosition" beforeDir="false" afterPath="$PROJECT_DIR$/src/Positions/defaultPosition" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Positions/savePosition" beforeDir="false" afterPath="$PROJECT_DIR$/src/Positions/savePosition" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Save.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Save.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,13 +76,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00021" summary="moving pieces">
-      <created>1687135357916</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1687135357916</updated>
     </task>
     <task id="LOCAL-00022" summary="moving pieces 2">
       <created>1687135506305</created>
@@ -408,7 +413,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689482089542</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="save and load working">
+      <created>1689483886522</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1689483886522</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -423,7 +435,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="king check third iteration" />
     <MESSAGE value="king check fourth iteration (progress!)" />
     <MESSAGE value="king check (super slow loop)" />
     <MESSAGE value="king check (another slow loop)" />
@@ -448,6 +459,7 @@
     <MESSAGE value="updated headers" />
     <MESSAGE value="load pieces from text file" />
     <MESSAGE value="save pieces to text file" />
-    <option name="LAST_COMMIT_MESSAGE" value="save pieces to text file" />
+    <MESSAGE value="save and load working" />
+    <option name="LAST_COMMIT_MESSAGE" value="save and load working" />
   </component>
 </project>

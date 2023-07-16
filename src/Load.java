@@ -1,43 +1,42 @@
 /**
- * Loads chess savePosition
+ * Loadss saved chess game
  *
  * @author (Piper)
  * @version (16/07/2023)
  */
 import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
 public class Load {
-    private static File load;
-    static final int PIECE_AMOUNT = 32;
-    static int[] pX;
-    static int[] pY;
-    static boolean[] isBlack;
-    static String[] name;
     public Load() {
-        pX = new int[PIECE_AMOUNT];
-        pY = new int[PIECE_AMOUNT];
-        isBlack = new boolean[PIECE_AMOUNT];
-        name = new String[PIECE_AMOUNT];
+        emptyBoardList();
+        resetVariables();
+        resetPieces();
+        loadTurn();
+        Menu.panel.repaint();
     }
-    public void loadFile(File file){
-        load = file;
-        fileRead();
-    }
-    public static void fileRead() {
-        try {
-            Scanner readFile = new Scanner(load);
-            for (int piece = 0; piece < PIECE_AMOUNT; piece++) {
-                String lineRead = readFile.nextLine();
-                String[] parts = lineRead.split(",");
-                pX[piece] = Integer.parseInt(parts[0]);
-                pY[piece] = Integer.parseInt(parts[1]);
-                isBlack[piece] = Boolean.parseBoolean(parts[2]);
-                name[piece] = parts[3];
-            }
-            readFile.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void emptyBoardList() {
+        while (!Board.ps.isEmpty()) {
+            Board.ps.removeFirst();
         }
+    }
+    public void resetVariables() {
+        Piece.checkmated = false;
+        Piece.resetTurn();
+    }
+    public static void resetPieces() {
+        File file = new File("src/Positions/savePosition");
+        Loader loader = new Loader();
+        loader.loadFile(file);
+            for (int piece = 0; piece < Loader.PIECE_AMOUNT; piece++) {
+                if (Loader.name[piece] != null) {
+                    Board.pieceList(Loader.pX[piece], Loader.pY[piece],
+                            Loader.isBlack[piece], false, Loader.name[piece]);
+                }
+            } // Access the loaded values from the arrays
+    }
+    public void loadTurn() {
+        File file = new File("src/Positions/saveTurn");
+        Loader loader = new Loader();
+        loader.loadTurn(file);
+        Piece.loadTurn(Loader.turn);
     }
 }
