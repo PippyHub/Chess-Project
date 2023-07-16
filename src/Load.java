@@ -7,7 +7,6 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-
 public class Load {
     private static File load;
     static final int PIECE_AMOUNT = 32;
@@ -15,7 +14,6 @@ public class Load {
     static int[] pY;
     static boolean[] isBlack;
     static String[] name;
-
     public Load() {
         pX = new int[PIECE_AMOUNT];
         pY = new int[PIECE_AMOUNT];
@@ -26,7 +24,6 @@ public class Load {
         load = file;
         fileRead();
     }
-
     public static void fileRead() {
         try {
             Scanner readFile = new Scanner(load);
