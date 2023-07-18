@@ -266,8 +266,8 @@ public class Piece {
     } // Rook moves
     public boolean knightMove() {
         if (name.equalsIgnoreCase("knight")) {
-        return Math.abs(this.deltaX) == 2 && Math.abs(this.deltaY) == 1 ||
-                Math.abs(this.deltaX) == 1 && Math.abs(this.deltaY) == 2;
+            return Math.abs(this.deltaX) == 2 && Math.abs(this.deltaY) == 1 ||
+                    Math.abs(this.deltaX) == 1 && Math.abs(this.deltaY) == 2;
         }
         return true;
     } // Knight moves
