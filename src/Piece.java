@@ -125,22 +125,19 @@ public class Piece {
     }
     public boolean resolveCheck() {
         boolean kingInCheck = myKingInCheck();
-
-        this.tempSave();
-
+        Piece attack = attacker;
         Piece attackedPiece = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
-        boolean canCaptureAttacker = (attackedPiece == attacker && attackedPiece != null);
-
-        if (kingInCheck && !canCaptureAttacker) {
-            this.tempLoad();
-            return false; // King cannot escape check
-        }
-        if (kingInCheck && isPieceProtected(attacker)) {
-            if (Board.selectedPiece.name.equalsIgnoreCase("king") && attackedPiece == attacker) {
+        boolean attackClicked = (attack == attackedPiece);
+        if (kingInCheck) {
+            if (Board.selectedPiece.name.equalsIgnoreCase("king") && isPieceProtected(attacker) &&
+                    attackClicked) {
                 this.tempLoad();
-                return false;
+                return false; // King cannot take protected piece
             }
-            return true;
+            else if (!Board.selectedPiece.name.equalsIgnoreCase("king") && !attackClicked) {
+                this.tempLoad();
+                return false; // King cannot escape check
+            }
         }
         this.tempLoad();
         return true; // King can escape check with this move
