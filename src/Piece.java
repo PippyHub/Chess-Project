@@ -124,37 +124,24 @@ public class Piece {
         return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1; // King moves
     }
     public boolean resolveCheck() {
-
-        System.out.println("myking" + myKingInCheck());
-
-        System.out.println("black" + Board.selectedPiece.isBlack);
-
+        boolean kingInCheck = myKingInCheck();
 
         this.tempSave();
+
         Piece attackedPiece = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
         boolean canCaptureAttacker = (attackedPiece == attacker && attackedPiece != null);
-        this.pX = this.clickX;
-        this.pY = this.clickY;
 
-        System.out.println(attackedPiece == attacker);
-        System.out.println("capt" + canCaptureAttacker);
-        System.out.println();
-
-        if (myKingInCheck() && !canCaptureAttacker) {
-            //isPieceProtected(attacker); // Check if the attacker is protected
-
-            //if (isAttackerProtected) {
-                this.tempLoad();
-                return false; // King cannot capture a protected attacker
-            //}
+        if (kingInCheck && !canCaptureAttacker) {
+            this.tempLoad();
+            return false; // King cannot escape check
         }
-
-
-
-        //if (myKingInCheck() && canCaptureAttacker) {
-            //System.out.println(isPieceProtected(attacker));
-        //}
-
+        if (kingInCheck && isPieceProtected(attacker)) {
+            if (Board.selectedPiece.name.equalsIgnoreCase("king") && attackedPiece == attacker) {
+                this.tempLoad();
+                return false;
+            }
+            return true;
+        }
         this.tempLoad();
         return true; // King can escape check with this move
     }
