@@ -127,17 +127,11 @@ public class Piece {
         return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1; // King moves
     }
     public boolean resolveCheck() {
-        this.tempSave();
-        //Board.selectedPiece.pX = clickX;
-        //Board.selectedPiece.pY = clickY;
-        boolean kingInCheck = Board.selectedPiece.myKingInCheck();
+        boolean kingInCheck = myKingInCheck();
         Piece attack = attacker;
         Piece attackedPiece = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
         boolean attackClicked = (attack == attackedPiece);
-
-
         if (kingInCheck) {
-
             if (Board.selectedPiece.name.equalsIgnoreCase("king") && isPieceProtected(attacker) &&
                     attackClicked) {
                 this.tempLoad();
