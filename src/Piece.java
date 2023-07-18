@@ -115,7 +115,10 @@ public class Piece {
             int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting position
             int rookY = pY; // Rook stays in the same row
             castleRook = Board.getPiece(rookX * SQR_SIZE, rookY * SQR_SIZE);
-            if (castleRook != null && castleRook.name.equalsIgnoreCase("rook") && !castleRook.pieceMoved) {
+            Piece bFile = Board.getPiece(SQR_SIZE, pY * SQR_SIZE);
+            boolean bFilePiece = (bFile != null && deltaX < 0);
+            if (castleRook != null && castleRook.name.equalsIgnoreCase("rook") && !castleRook.pieceMoved
+            && !bFilePiece) {
                 castling = true;
                 return true; // Castling successful
             }
@@ -128,6 +131,8 @@ public class Piece {
         Piece attack = attacker;
         Piece attackedPiece = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
         boolean attackClicked = (attack == attackedPiece);
+        //Board.selectedPiece.pX = clickX;
+        //Board.selectedPiece.pY = clickY;
         if (kingInCheck) {
             if (Board.selectedPiece.name.equalsIgnoreCase("king") && isPieceProtected(attacker) &&
                     attackClicked) {
@@ -168,7 +173,7 @@ public class Piece {
     }
     private boolean isPieceProtected(Piece attacker) {
         for (Piece p : ps) {
-            if (p.isBlack != isBlackTurn) {
+            if (p.isBlack != Board.selectedPiece.isBlack) {
                 p.tempSave();
                 p.deltaX = attacker.pX - p.pX;
                 p.deltaY = attacker.pY - p.pY;
@@ -185,7 +190,11 @@ public class Piece {
     }
     public boolean check(Piece myKing, int kingPosX, int kingPosY) {
         for (Piece p : ps) {
-            if (p.isBlack != isBlackTurn) {
+            if (p.isBlack != Board.selectedPiece.isBlack) {
+                System.out.println("P " + p.isBlack);
+                System.out.println("B " + Board.selectedPiece.isBlack);
+                System.out.println("Y " + kingPosY);
+                System.out.println();
                 p.tempSave();
                 if (myKing != null) {
                     p.deltaX = kingPosX - p.pX;
@@ -205,7 +214,7 @@ public class Piece {
     }
     public boolean checking(Piece oppositeKing, int kingPosX, int kingPosY) {
         for (Piece p : ps) {
-            if (p.isBlack == isBlackTurn) {
+            if (p.isBlack == Board.selectedPiece.isBlack) {
                 p.tempSave();
                 if (p == Board.selectedPiece) {
                     p.pX = Board.selectedPiece.clickX;
@@ -232,7 +241,7 @@ public class Piece {
     }
     public boolean checkmated() {
         for (Piece p : ps) {
-            if (p.isBlack == isBlackTurn) { // Check moves for the opposite player's pieces (turn has already changed)
+            if (p.isBlack == Board.selectedPiece.isBlack) { // Check moves for the opposite player's pieces (turn has already changed)
                 for (int x = 0; x < 8; x++) {
                     for (int y = 0; y < 8; y++) {
                         p.tempSave();

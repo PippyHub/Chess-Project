@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="king cant take protected pieces">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="king cant take protected pieces fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Positions/savePosition" beforeDir="false" afterPath="$PROJECT_DIR$/src/Positions/savePosition" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,13 +69,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00027" summary="reformatting code">
-      <created>1687217931912</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1687217931912</updated>
     </task>
     <task id="LOCAL-00028" summary="adding menu bar">
       <created>1687221697804</created>
@@ -412,7 +406,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689656522651</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="king cant take protected pieces fixed">
+      <created>1689657348499</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1689657348499</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -427,7 +428,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="noObstruction working" />
     <MESSAGE value="noObstruction working (again)" />
     <MESSAGE value="noObstruction working added err math." />
     <MESSAGE value="noObstruction changed to have more this.* code" />
@@ -452,6 +452,7 @@
     <MESSAGE value="fixed castling and checkmate" />
     <MESSAGE value="fixing king cant take protected pieces" />
     <MESSAGE value="king cant take protected pieces" />
-    <option name="LAST_COMMIT_MESSAGE" value="king cant take protected pieces" />
+    <MESSAGE value="king cant take protected pieces fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="king cant take protected pieces fixed" />
   </component>
 </project>
