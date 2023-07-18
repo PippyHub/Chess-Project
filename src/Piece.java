@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class Piece {
     static final int SQR_SIZE = Board.SQR_SIZE;
     int x, y, pX, pY, clickX, clickY, deltaX, deltaY; // Piece values
-    int tempPX, tempPY, tempDX, tempDY , tempCX, tempCY; // Temporary stored values
+    int tempPX, tempPY, tempDX, tempDY, tempCX, tempCY; // Temporary stored values
     boolean isBlack;
     boolean pieceMoved;
     String name;
@@ -115,7 +115,10 @@ public class Piece {
             int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting position
             int rookY = pY; // Rook stays in the same row
             castleRook = Board.getPiece(rookX * SQR_SIZE, rookY * SQR_SIZE);
-            if (castleRook != null && castleRook.name.equalsIgnoreCase("rook") && !castleRook.pieceMoved) {
+            Piece bFile = Board.getPiece(SQR_SIZE, pY * SQR_SIZE);
+            boolean bFilePiece = (bFile != null && deltaX < 0);
+            if (castleRook != null && castleRook.name.equalsIgnoreCase("rook") && !castleRook.pieceMoved
+                    && !bFilePiece) {
                 castling = true;
                 return true; // Castling successful
             }
@@ -257,8 +260,8 @@ public class Piece {
     } // Rook moves
     public boolean knightMove() {
         if (name.equalsIgnoreCase("knight")) {
-        return Math.abs(this.deltaX) == 2 && Math.abs(this.deltaY) == 1 ||
-                Math.abs(this.deltaX) == 1 && Math.abs(this.deltaY) == 2;
+            return Math.abs(this.deltaX) == 2 && Math.abs(this.deltaY) == 1 ||
+                    Math.abs(this.deltaX) == 1 && Math.abs(this.deltaY) == 2;
         }
         return true;
     } // Knight moves
