@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.LinkedList;
-
 public class Save {
     public Save(LinkedList<Piece> ps) {
         File position = new File("src/Positions/savePosition");

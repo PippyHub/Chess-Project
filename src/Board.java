@@ -19,7 +19,6 @@ public class Board extends JPanel implements ActionListener, MouseListener {
     boolean highlight;
     public Board() {
         images = img.loadImages();
-        newGame.resetPieces();
         addMouseListener(this);
     }
     public static void pieceList(int pX, int pY, boolean isBlack, boolean pieceMoved, String name) {
