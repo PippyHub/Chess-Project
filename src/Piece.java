@@ -115,7 +115,10 @@ public class Piece {
             int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting position
             int rookY = pY; // Rook stays in the same row
             castleRook = Board.getPiece(rookX * SQR_SIZE, rookY * SQR_SIZE);
-            if (castleRook != null && castleRook.name.equalsIgnoreCase("rook") && !castleRook.pieceMoved) {
+            Piece bFile = Board.getPiece(SQR_SIZE, pY * SQR_SIZE);
+            boolean bFilePiece = (bFile != null && deltaX < 0);
+            if (castleRook != null && castleRook.name.equalsIgnoreCase("rook") && !castleRook.pieceMoved
+                    && !bFilePiece) {
                 castling = true;
                 return true; // Castling successful
             }
