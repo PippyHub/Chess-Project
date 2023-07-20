@@ -54,7 +54,7 @@ public class Menu extends JFrame implements ActionListener {
             case "New" -> new newGame();
             case "Save" -> { if (!Piece.checkmated) new Save(Board.ps); else System.out.println("can't save checkmate"); }
             case "Load" -> new Load();
-            case "Clear" -> { newGame.emptyBoardList(); newGame.resetVariables(); panel.repaint();}
+            case "Clear" -> {  newGame.clearing(); panel.repaint(); }
             default -> System.out.println("Invalid input");
         }
     }

@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class Piece {
     static final int SQR_SIZE = Board.SQR_SIZE;
     int x, y, pX, pY, clickX, clickY, deltaX, deltaY; // Piece values
-    int tempPX, tempPY, tempDX, tempDY , tempCX, tempCY; // Temporary stored values
+    int tempPX, tempPY, tempDX, tempDY, tempCX, tempCY; // Temporary stored values
     boolean isBlack;
     boolean pieceMoved;
     String name;
@@ -38,8 +38,7 @@ public class Piece {
         clickX = pX;
         clickY = pY;
         boolean checking = oppositeKingInCheck();
-        System.out.println(checking);
-        if (legalMove(true)) {
+        if (legalMove(true, false)) {
             moveType();
             this.pieceMoved = true;
             this.pX = pX;
@@ -47,9 +46,10 @@ public class Piece {
             this.x = pX * SQR_SIZE;
             this.y = pY * SQR_SIZE;
             switchTurn();
-            if (checking) checkmate(checkmated(), this.isBlack); // At the bottom of move() so selected piece has moved
+            if (checking) checkmate(checkmated(), this.isBlack);
         }
     }
+
     public static void switchTurn() { isBlackTurn = !isBlackTurn; } // Switching turns
     public static void resetTurn() { isBlackTurn = false; } // Reset turns
     public static void loadTurn(boolean blackTurn) { isBlackTurn = blackTurn; } // Loads turns
@@ -85,10 +85,10 @@ public class Piece {
         castleRook.y = castleRook.pY * SQR_SIZE;
         castling = false;
     }
-    public boolean legalMove(boolean realMove) {
+    public boolean legalMove(boolean realMove, boolean resolveCheck) {
         if (realMove && !checkTurn()) return false;
         if (ownSQRMove()) return false;
-        if (ownPieceMove()) return false;
+        if (!resolveCheck && ownPieceMove()) return false;
         if (!queenMove()) return false;
         if (!kingMove()) return false;
         if (realMove && !resolveCheck()) return false;
@@ -127,14 +127,20 @@ public class Piece {
         return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1; // King moves
     }
     public boolean resolveCheck() {
-        this.tempSave();
+        boolean kingInCheck = myKingInCheck();
+        Piece attack = attacker;
         Piece attackedPiece = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
-        boolean canCaptureAttacker = (attackedPiece != null && attackedPiece == attacker);
-        this.pX = this.clickX;
-        this.pY = this.clickY;
-        if (myKingInCheck() && !canCaptureAttacker) {
-            this.tempLoad();
-            return false; // King cannot escape check with this move
+        boolean attackClicked = (attack == attackedPiece);
+        if (kingInCheck) {
+            if (Board.selectedPiece.name.equalsIgnoreCase("king") && isPieceProtected(attacker) &&
+                    attackClicked) {
+                this.tempLoad();
+                return false; // King cannot take protected piece
+            }
+            else if (!Board.selectedPiece.name.equalsIgnoreCase("king") && !attackClicked) {
+                this.tempLoad();
+                return false; // King cannot escape check
+            }
         }
         this.tempLoad();
         return true; // King can escape check with this move
@@ -163,6 +169,23 @@ public class Piece {
         }
         return null; // Return null if the king is not found
     }
+    private boolean isPieceProtected(Piece attacker) {
+        for (Piece p : ps) {
+            if (p.isBlack != isBlackTurn) {
+                p.tempSave();
+                p.deltaX = attacker.pX - p.pX;
+                p.deltaY = attacker.pY - p.pY;
+                p.clickX = attacker.pX;
+                p.clickY = attacker.pY;
+                if (p.legalMove(false, true)) {
+                    p.tempLoad();
+                    return true; // Piece is protected
+                }
+                p.tempLoad();
+            }
+        }
+        return false; // Piece is not protected
+    }
     public boolean check(Piece myKing, int kingPosX, int kingPosY) {
         for (Piece p : ps) {
             if (p.isBlack != isBlackTurn) {
@@ -173,7 +196,7 @@ public class Piece {
                     p.clickX = kingPosX;
                     p.clickY = kingPosY;
                 }
-                if (p.legalMove(false)) {
+                if (p.legalMove(false, false)) {
                     attacker = p;
                     p.tempLoad();
                     return true;
@@ -197,7 +220,7 @@ public class Piece {
                     p.clickX = kingPosX;
                     p.clickY = kingPosY;
                 }
-                if (p.legalMove(false)) {
+                if (p.legalMove(false, false)) {
                     p.tempLoad();
                     return true;
                 }
@@ -220,7 +243,7 @@ public class Piece {
                         p.deltaY = y - p.pY;
                         p.clickX = x;
                         p.clickY = y;
-                        if (p.legalMove(true)) {
+                        if (p.legalMove(true, false)) {
                             p.tempLoad();
                             return false; // At least one legal move is available
                         }
@@ -237,8 +260,8 @@ public class Piece {
     } // Rook moves
     public boolean knightMove() {
         if (name.equalsIgnoreCase("knight")) {
-        return Math.abs(this.deltaX) == 2 && Math.abs(this.deltaY) == 1 ||
-                Math.abs(this.deltaX) == 1 && Math.abs(this.deltaY) == 2;
+            return Math.abs(this.deltaX) == 2 && Math.abs(this.deltaY) == 1 ||
+                    Math.abs(this.deltaX) == 1 && Math.abs(this.deltaY) == 2;
         }
         return true;
     } // Knight moves

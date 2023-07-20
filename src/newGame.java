@@ -7,21 +7,18 @@
 import java.io.File;
 public class newGame {
     public newGame() {
-        emptyBoardList();
-        resetVariables();
+        clearing();
         resetPieces();
         Menu.panel.repaint();
     }
-    public static void emptyBoardList() {
+    public static void clearing() {
         while (!Board.ps.isEmpty()) {
             Board.ps.removeFirst();
         }
-    }
-    public static void resetVariables() {
         Piece.checkmated = false;
         Piece.resetTurn();
     }
-    public static void resetPieces(){
+    public void resetPieces(){
         File file = new File("src/Positions/defaultPosition");
         Loader loader = new Loader();
         loader.loadFile(file);
@@ -29,4 +26,5 @@ public class newGame {
             Board.pieceList(Loader.pX[piece], Loader.pY[piece], Loader.isBlack[piece], false, Loader.name[piece]);
         } // Access the loaded values from the arrays
     }
+
 }

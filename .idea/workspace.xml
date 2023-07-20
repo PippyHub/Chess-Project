@@ -40,6 +40,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
   }
 }</component>
@@ -67,34 +68,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00024" summary="pieces can take">
-      <created>1687137567662</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1687137567662</updated>
-    </task>
-    <task id="LOCAL-00025" summary="menu and image loader class">
-      <created>1687143743993</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1687143743993</updated>
-    </task>
-    <task id="LOCAL-00026" summary="adding menu bar">
-      <created>1687152256603</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1687152256603</updated>
-    </task>
-    <task id="LOCAL-00027" summary="reformatting code">
-      <created>1687217931912</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1687217931912</updated>
     </task>
     <task id="LOCAL-00028" summary="adding menu bar">
       <created>1687221697804</created>
@@ -411,7 +384,35 @@
       <option name="project" value="LOCAL" />
       <updated>1689489904670</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="fixed castling and checkmate">
+      <created>1689498317226</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1689498317227</updated>
+    </task>
+    <task id="LOCAL-00074" summary="fixing king cant take protected pieces">
+      <created>1689655436130</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1689655436131</updated>
+    </task>
+    <task id="LOCAL-00075" summary="king cant take protected pieces">
+      <created>1689656522651</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1689656522651</updated>
+    </task>
+    <task id="LOCAL-00076" summary="king cant take protected pieces fixed">
+      <created>1689657348499</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1689657348499</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -426,10 +427,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="king check (another slow loop)" />
-    <MESSAGE value="noObstruction changed: Bresenham's line algorithm" />
-    <MESSAGE value="added diagonal to Bresenham's line algorithm" />
-    <MESSAGE value="noObstruction working" />
     <MESSAGE value="noObstruction working (again)" />
     <MESSAGE value="noObstruction working added err math." />
     <MESSAGE value="noObstruction changed to have more this.* code" />
@@ -451,6 +448,10 @@
     <MESSAGE value="save and load working" />
     <MESSAGE value="save and load fully implemented" />
     <MESSAGE value="fixed castling" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed castling" />
+    <MESSAGE value="fixed castling and checkmate" />
+    <MESSAGE value="fixing king cant take protected pieces" />
+    <MESSAGE value="king cant take protected pieces" />
+    <MESSAGE value="king cant take protected pieces fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="king cant take protected pieces fixed" />
   </component>
 </project>
