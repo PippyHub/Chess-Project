@@ -38,7 +38,6 @@ public class Piece {
         clickX = pX;
         clickY = pY;
         boolean checking = oppositeKingInCheck();
-        System.out.println(checking);
         if (legalMove(true)) {
             moveType();
             this.pieceMoved = true;
@@ -47,7 +46,7 @@ public class Piece {
             this.x = pX * SQR_SIZE;
             this.y = pY * SQR_SIZE;
             switchTurn();
-            if (checking) checkmate(checkmated(), this.isBlack); // At the bottom of move() so selected piece has moved
+           if (checking) checkmate(checkmated(), this.isBlack); // At the bottom of move() so selected piece has moved
         }
     }
     public static void switchTurn() { isBlackTurn = !isBlackTurn; } // Switching turns
@@ -244,7 +243,7 @@ public class Piece {
     } // Knight moves
     public boolean bishopMove() {
         if (!name.equalsIgnoreCase("bishop")) return true;
-        return this.deltaX == deltaY || deltaX == -deltaY;
+        return deltaX == deltaY || deltaX == -deltaY;
     } // Bishop moves
     public boolean pawnMove() {
         if (!name.equalsIgnoreCase("pawn")) return true;

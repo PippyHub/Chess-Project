@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="uncommited changes">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="stable game state">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Positions/savePosition" beforeDir="false" afterPath="$PROJECT_DIR$/src/Positions/savePosition" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,20 +69,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00028" summary="adding menu bar">
-      <created>1687221697804</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1687221697804</updated>
-    </task>
-    <task id="LOCAL-00029" summary="fixed menu bar">
-      <created>1687229129023</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1687229129023</updated>
     </task>
     <task id="LOCAL-00030" summary="deleted original Board class">
       <created>1687229448102</created>
@@ -412,7 +399,21 @@
       <option name="project" value="LOCAL" />
       <updated>1689657348499</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="stable game state - merge">
+      <created>1689820969116</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1689820969116</updated>
+    </task>
+    <task id="LOCAL-00078" summary="stable game state">
+      <created>1689820989764</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1689820989764</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -427,8 +428,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="noObstruction working (again)" />
-    <MESSAGE value="noObstruction working added err math." />
     <MESSAGE value="noObstruction changed to have more this.* code" />
     <MESSAGE value="fixed kingCheck and noObstruction" />
     <MESSAGE value="check works for own pieces" />
@@ -452,6 +451,8 @@
     <MESSAGE value="fixing king cant take protected pieces" />
     <MESSAGE value="king cant take protected pieces" />
     <MESSAGE value="king cant take protected pieces fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="king cant take protected pieces fixed" />
+    <MESSAGE value="stable game state - merge" />
+    <MESSAGE value="stable game state" />
+    <option name="LAST_COMMIT_MESSAGE" value="stable game state" />
   </component>
 </project>
