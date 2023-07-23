@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="protected attacker makes game lag">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_07_23__9_02_pm__Changes_.xml" beforeDir="false" />
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="finished protected check">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Positions/savePosition" beforeDir="false" afterPath="$PROJECT_DIR$/src/Positions/savePosition" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,13 +68,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00032" summary="changed piece taking method">
-      <created>1687338066000</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1687338066000</updated>
     </task>
     <task id="LOCAL-00033" summary="king and pawn movements are correct (no en passant and no castling)">
       <created>1687434536889</created>
@@ -414,7 +405,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689891285206</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="finished protected check">
+      <created>1690150922549</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1690150922549</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -429,7 +427,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="check works for own pieces" />
     <MESSAGE value="separated check into multiple methods" />
     <MESSAGE value="can escape check" />
     <MESSAGE value="adding checkmate" />
@@ -454,6 +451,7 @@
     <MESSAGE value="stable game state" />
     <MESSAGE value="fixed revealed check" />
     <MESSAGE value="protected attacker makes game lag" />
-    <option name="LAST_COMMIT_MESSAGE" value="protected attacker makes game lag" />
+    <MESSAGE value="finished protected check" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished protected check" />
   </component>
 </project>

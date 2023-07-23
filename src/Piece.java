@@ -127,11 +127,12 @@ public class Piece {
     }
     public boolean resolveCheck() {
         this.tempSave();
-
+        Piece attackedPiece = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
+        boolean canCaptureAttacker = (attackedPiece != null && attackedPiece == attacker);
+        if (canCaptureAttacker) System.out.println(attacker.name);
         Board.selectedPiece.pX = Board.selectedPiece.clickX;
         Board.selectedPiece.pY = Board.selectedPiece.clickY;
-
-        if (myKingInCheck()) {
+        if (myKingInCheck() && !canCaptureAttacker) {
             this.tempLoad();
             return false; // King cannot escape check with this move
         }
