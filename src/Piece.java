@@ -128,46 +128,15 @@ public class Piece {
     public boolean resolveCheck() {
         this.tempSave();
 
-        boolean protectedAttacker = false;
-        if (attacker != null) protectedAttacker = (protectedPiece(attacker, attacker.pX, attacker.pY));
+        Board.selectedPiece.pX = Board.selectedPiece.clickX;
+        Board.selectedPiece.pY = Board.selectedPiece.clickY;
 
-        System.out.println(protectedAttacker);
-
-        Piece attackedPiece = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
-        boolean canCaptureAttacker = (attackedPiece != null && attackedPiece == attacker);
-
-
-
-
-
-
-        this.pX = this.clickX;
-        this.pY = this.clickY;
-        if (myKingInCheck() && !canCaptureAttacker) {
+        if (myKingInCheck()) {
             this.tempLoad();
             return false; // King cannot escape check with this move
         }
         this.tempLoad();
         return true; // King can escape check with this move
-    }
-    public boolean protectedPiece(Piece attacker, int attackerX, int attackerY) {
-        for (Piece p : ps) {
-            if (p.isBlack == isBlackTurn) {
-                p.tempSave();
-                if (attacker != null) {
-                    p.deltaX = attackerX - p.pX;
-                    p.deltaY = attackerY - p.pY;
-                    p.clickX = attackerX;
-                    p.clickY = attackerY;
-                }
-                if (p.legalMove(false)) {
-                    p.tempLoad();
-                    return true;
-                }
-                p.tempLoad();
-            }
-        }
-        return false;
     }
     public boolean myKingInCheck() {
         Piece myKing = myKingPos();
