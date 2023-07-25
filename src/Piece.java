@@ -20,7 +20,6 @@ public class Piece {
     public static boolean winner;
     public static Piece enPassantPawn;
     Piece castleRook;
-    Piece attacker;
     public Piece(int pX, int pY, boolean isBlack, boolean pieceMoved, String n, LinkedList<Piece> ps) {
         this.x = pX * SQR_SIZE;
         this.y = pY * SQR_SIZE;
@@ -46,7 +45,8 @@ public class Piece {
             this.x = pX * SQR_SIZE;
             this.y = pY * SQR_SIZE;
             switchTurn();
-           if (checking) checkmate(checkmated(), this.isBlack); // At the bottom of move() so selected piece has moved
+            if (checking)
+                checkmate(this.checkmated(), this.isBlack); // At the bottom of move() so selected piece has moved
         }
     }
     public static void switchTurn() { isBlackTurn = !isBlackTurn; } // Switching turns
@@ -125,14 +125,15 @@ public class Piece {
         }
         return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1; // King moves
     }
+
     public boolean resolveCheck() {
         this.tempSave();
-        Piece attackedPiece = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
-        boolean canCaptureAttacker = (attackedPiece != null && attackedPiece == attacker);
-        if (canCaptureAttacker) System.out.println(attacker.name);
+
         Board.selectedPiece.pX = Board.selectedPiece.clickX;
         Board.selectedPiece.pY = Board.selectedPiece.clickY;
-        if (myKingInCheck() && !canCaptureAttacker) {
+
+
+        if (myKingInCheck()) {
             this.tempLoad();
             return false; // King cannot escape check with this move
         }
@@ -174,7 +175,6 @@ public class Piece {
                     p.clickY = kingPosY;
                 }
                 if (p.legalMove(false)) {
-                    attacker = p;
                     p.tempLoad();
                     return true;
                 }
