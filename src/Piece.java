@@ -129,9 +129,15 @@ public class Piece {
     public boolean resolveCheck() {
         this.tempSave();
 
+        //Piece attacker = getCheckingPiece();
+        //Piece defender = Board.getPiece(this.clickX * SQR_SIZE, this.clickY * SQR_SIZE);
+        //boolean canDefend = attacker == defender && attacker != null;
+        //boolean isProtected = false;
+
+        //if (attacker != null) System.out.println(checkingPieceProtected(attacker, attacker.pX, attacker.pY));
+
         Board.selectedPiece.pX = Board.selectedPiece.clickX;
         Board.selectedPiece.pY = Board.selectedPiece.clickY;
-
 
         if (myKingInCheck()) {
             this.tempLoad();
@@ -147,6 +153,10 @@ public class Piece {
     public boolean oppositeKingInCheck() {
         Piece oppositeKing = oppositeKingPos();
         return checking(oppositeKing, oppositeKing.pX, oppositeKing.pY);
+    }
+    public Piece getCheckingPiece() {
+        Piece myKing = myKingPos();
+        return getPieceCheckingKing(myKing.pX, myKing.pY);
     }
     public Piece myKingPos() {
         for (Piece p : ps) {
@@ -196,6 +206,42 @@ public class Piece {
                     p.deltaY = kingPosY - p.pY;
                     p.clickX = kingPosX;
                     p.clickY = kingPosY;
+                }
+                if (p.legalMove(false)) {
+                    p.tempLoad();
+                    return true;
+                }
+                p.tempLoad();
+            }
+        }
+        return false;
+    }
+    public Piece getPieceCheckingKing(int kingPosX, int kingPosY) {
+        for (Piece p : ps) {
+            if (p.isBlack != isBlackTurn) {
+                p.tempSave();
+                p.deltaX = kingPosX - p.pX;
+                p.deltaY = kingPosY - p.pY;
+                p.clickX = kingPosX;
+                p.clickY = kingPosY;
+                if (p.legalMove(false)) {
+                    p.tempLoad();
+                    return p;
+                }
+                p.tempLoad();
+            }
+        }
+        return null;
+    }
+    public boolean checkingPieceProtected(Piece attacker, int attackerPosX, int attackerPosY) {
+        for (Piece p : ps) {
+            if (p.isBlack != isBlackTurn) {
+                p.tempSave();
+                if (attacker != null) {
+                    p.deltaX = attackerPosX - p.pX;
+                    p.deltaY = attackerPosY - p.pY;
+                    p.clickX = attackerPosX;
+                    p.clickY = attackerPosY;
                 }
                 if (p.legalMove(false)) {
                     p.tempLoad();
