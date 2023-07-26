@@ -40,6 +40,7 @@ public class Piece {
         boolean checking = oppositeKingInCheck();
         attackedPiece = Board.getPiece(this.clickX * SQR_SIZE, this.clickY * SQR_SIZE);
         if (legalMove(true, false)) {
+            attackedPiece = null;
             moveType();
             this.pieceMoved = true;
             this.pX = pX;
@@ -112,12 +113,13 @@ public class Piece {
     } // Queen moves
     public boolean kingMove() {
         if (!name.equalsIgnoreCase("king")) return true;
-        if (attackedPiece != null){
-            System.out.println(attackedPiece.name);
+        if (attackedPiece != null && attackedPiece.isBlack != this.isBlack) {
             if (pieceProtected(attackedPiece, attackedPiece.pX, attackedPiece.pY)) return false; // King cannot take protected piece
         }
         if (!pieceMoved && deltaY == 0 && Math.abs(deltaX) == 2) {
-            int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting position
+            System.out.println(deltaX);
+            System.out.println(deltaY);
+            int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting posSition
             int rookY = pY; // Rook stays in the same row
             castleRook = Board.getPiece(rookX * SQR_SIZE, rookY * SQR_SIZE);
             Piece bFile = Board.getPiece(SQR_SIZE, pY * SQR_SIZE);
@@ -246,7 +248,7 @@ public class Piece {
                     p.clickX = attackerPosX;
                     p.clickY = attackerPosY;
                 }
-                if (p.legalMove(false, true)) {
+                if (!p.name.equalsIgnoreCase("king") && p.legalMove(false, true)) {
                     p.tempLoad();
                     return true;
                 }
@@ -269,11 +271,8 @@ public class Piece {
                         p.deltaY = y - p.pY;
                         p.clickX = x;
                         p.clickY = y;
-
+                        p.attackedPiece = Board.getPiece(x * SQR_SIZE, y * SQR_SIZE); // Set the attackedPiece before calling resolveCheck
                         if (p.legalMove(true, false)) {
-                            System.out.println(p.clickY);
-                            System.out.println(p.clickX);
-                            System.out.println(p.name);
                             p.tempLoad();
                             return false; // At least one legal move is available
                         }

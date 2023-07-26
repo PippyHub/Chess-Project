@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="going to change resolveCheck">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="fixed resolveCheck. must fix checkmate">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Positions/savePosition" beforeDir="false" afterPath="$PROJECT_DIR$/src/Positions/savePosition" afterDir="false" />
@@ -69,13 +69,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00034" summary="updated headers for tomorrow">
-      <created>1687434629968</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1687434629968</updated>
     </task>
     <task id="LOCAL-00035" summary="rook and bishop move correctly">
       <created>1687476406239</created>
@@ -413,7 +406,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690250109130</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="fixed resolveCheck. must fix checkmate">
+      <created>1690283897106</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1690283897106</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -428,7 +428,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="can escape check" />
     <MESSAGE value="adding checkmate" />
     <MESSAGE value="fixed check so pieces can be taken" />
     <MESSAGE value="bishop breaks game during fools mate" />
@@ -453,6 +452,7 @@
     <MESSAGE value="protected attacker makes game lag" />
     <MESSAGE value="finished protected check" />
     <MESSAGE value="going to change resolveCheck" />
-    <option name="LAST_COMMIT_MESSAGE" value="going to change resolveCheck" />
+    <MESSAGE value="fixed resolveCheck. must fix checkmate" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed resolveCheck. must fix checkmate" />
   </component>
 </project>
