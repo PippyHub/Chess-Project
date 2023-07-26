@@ -40,9 +40,9 @@ public class Piece {
         boolean checking = oppositeKingInCheck();
         attackedPiece = Board.getPiece(this.clickX * SQR_SIZE, this.clickY * SQR_SIZE);
         if (legalMove(true, false,false)) {
-            attackedPiece = null;
             moveType();
             this.pieceMoved = true;
+            attackedPiece = null;
             this.pX = pX;
             this.pY = pY;
             this.x = pX * SQR_SIZE;
@@ -99,6 +99,7 @@ public class Piece {
         if (!bishopMove()) return false;
         if (!pawnMove()) return false;
         if (!boardBoundary()) return false;
+        if (!kingTakeProtectedPiece()) return false;
         return noObstruction();
     }
     public boolean checkTurn() { return (isBlackTurn && this.isBlack) || (!isBlackTurn && !this.isBlack); }
@@ -113,9 +114,6 @@ public class Piece {
     } // Queen moves
     public boolean kingMove(boolean checkmating) {
         if (!name.equalsIgnoreCase("king")) return true;
-        if (attackedPiece != null && attackedPiece.isBlack != this.isBlack) {
-            if (pieceProtected(attackedPiece, attackedPiece.pX, attackedPiece.pY)) return false; // King cannot take protected piece
-        }
         if (!pieceMoved && deltaY == 0 && Math.abs(deltaX) == 2) {
             int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting position
             int rookY = pY; // Rook stays in the same row
@@ -236,6 +234,13 @@ public class Piece {
         }
         return null;
     }
+    public boolean kingTakeProtectedPiece() {
+        if (!name.equalsIgnoreCase("king")) return true;
+        if (attackedPiece != null && attackedPiece.isBlack != this.isBlack) {
+            return !pieceProtected(attackedPiece, attackedPiece.pX, attackedPiece.pY); // King cannot take protected piece
+        }
+        return true;
+    }
     public boolean pieceProtected(Piece attacker, int attackerPosX, int attackerPosY) {
         for (Piece p : ps) {
             if (p.isBlack != isBlackTurn) {
@@ -246,8 +251,7 @@ public class Piece {
                     p.clickX = attackerPosX;
                     p.clickY = attackerPosY;
                 }
-                if (!p.name.equalsIgnoreCase("king") &&
-                        p.legalMove(false, true,false)) {
+                if (p.legalMove(false, true,false)) {
                     p.tempLoad();
                     return true;
                 }
@@ -275,6 +279,7 @@ public class Piece {
                             p.tempLoad();
                             return false; // At least one legal move is available
                         }
+                        p.attackedPiece = null;
                         p.tempLoad();
                     }
                 }

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="fixed check and checkmate">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="never mind broken again">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
     </list>
@@ -68,13 +68,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00036" summary="knight moves correctly">
-      <created>1687477436431</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1687477436431</updated>
     </task>
     <task id="LOCAL-00037" summary="queen moves correctly">
       <created>1687477994965</created>
@@ -412,7 +405,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690349270801</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="never mind broken again">
+      <created>1690349809802</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1690349809802</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -427,7 +427,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed check so pieces can be taken" />
     <MESSAGE value="bishop breaks game during fools mate" />
     <MESSAGE value="check works" />
     <MESSAGE value="checkmate works" />
@@ -452,6 +451,7 @@
     <MESSAGE value="going to change resolveCheck" />
     <MESSAGE value="fixed resolveCheck. must fix checkmate" />
     <MESSAGE value="fixed check and checkmate" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed check and checkmate" />
+    <MESSAGE value="never mind broken again" />
+    <option name="LAST_COMMIT_MESSAGE" value="never mind broken again" />
   </component>
 </project>
