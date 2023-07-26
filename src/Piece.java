@@ -39,7 +39,7 @@ public class Piece {
         clickY = pY;
         boolean checking = oppositeKingInCheck();
         attackedPiece = Board.getPiece(this.clickX * SQR_SIZE, this.clickY * SQR_SIZE);
-        if (legalMove(true, false)) {
+        if (legalMove(true, false,false)) {
             attackedPiece = null;
             moveType();
             this.pieceMoved = true;
@@ -87,12 +87,12 @@ public class Piece {
         castleRook.y = castleRook.pY * SQR_SIZE;
         castling = false;
     }
-    public boolean legalMove(boolean realMove, boolean takeOwnPiece) {
+    public boolean legalMove(boolean realMove, boolean takeOwnPiece, boolean checkmating) {
         if (realMove && !checkTurn()) return false;
         if (ownSQRMove()) return false;
         if (!takeOwnPiece && ownPieceMove()) return false;
         if (!queenMove()) return false;
-        if (!kingMove()) return false;
+        if (!kingMove(checkmating)) return false;
         if (realMove && !resolveCheck()) return false;
         if (!rookMove()) return false;
         if (!knightMove()) return false;
@@ -111,22 +111,20 @@ public class Piece {
         if (!name.equalsIgnoreCase("queen")) return true;
         return Math.abs(this.deltaX) == Math.abs(this.deltaY) || deltaX == 0 || deltaY == 0;
     } // Queen moves
-    public boolean kingMove() {
+    public boolean kingMove(boolean checkmating) {
         if (!name.equalsIgnoreCase("king")) return true;
         if (attackedPiece != null && attackedPiece.isBlack != this.isBlack) {
             if (pieceProtected(attackedPiece, attackedPiece.pX, attackedPiece.pY)) return false; // King cannot take protected piece
         }
         if (!pieceMoved && deltaY == 0 && Math.abs(deltaX) == 2) {
-            System.out.println(deltaX);
-            System.out.println(deltaY);
-            int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting posSition
+            int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting position
             int rookY = pY; // Rook stays in the same row
             castleRook = Board.getPiece(rookX * SQR_SIZE, rookY * SQR_SIZE);
             Piece bFile = Board.getPiece(SQR_SIZE, pY * SQR_SIZE);
             boolean bFilePiece = (bFile != null && deltaX < 0);
             if (castleRook != null && castleRook.name.equalsIgnoreCase("rook") && !castleRook.pieceMoved
                     && !bFilePiece) {
-                castling = true;
+                if(!checkmating) castling = true;
                 return true; // Castling successful
             }
             return false; // Castling is not valid
@@ -189,7 +187,7 @@ public class Piece {
                     p.clickX = kingPosX;
                     p.clickY = kingPosY;
                 }
-                if (p.legalMove(false, false)) {
+                if (p.legalMove(false,false,false)) {
                     p.tempLoad();
                     return true;
                 }
@@ -212,7 +210,7 @@ public class Piece {
                     p.clickX = kingPosX;
                     p.clickY = kingPosY;
                 }
-                if (p.legalMove(false, false)) {
+                if (p.legalMove(false,false,false)) {
                     p.tempLoad();
                     return true;
                 }
@@ -229,7 +227,7 @@ public class Piece {
                 p.deltaY = kingPosY - p.pY;
                 p.clickX = kingPosX;
                 p.clickY = kingPosY;
-                if (p.legalMove(false, false)) {
+                if (p.legalMove(false, false,false)) {
                     p.tempLoad();
                     return p;
                 }
@@ -248,7 +246,8 @@ public class Piece {
                     p.clickX = attackerPosX;
                     p.clickY = attackerPosY;
                 }
-                if (!p.name.equalsIgnoreCase("king") && p.legalMove(false, true)) {
+                if (!p.name.equalsIgnoreCase("king") &&
+                        p.legalMove(false, true,false)) {
                     p.tempLoad();
                     return true;
                 }
@@ -272,7 +271,7 @@ public class Piece {
                         p.clickX = x;
                         p.clickY = y;
                         p.attackedPiece = Board.getPiece(x * SQR_SIZE, y * SQR_SIZE); // Set the attackedPiece before calling resolveCheck
-                        if (p.legalMove(true, false)) {
+                        if (p.legalMove(true, false,true)) {
                             p.tempLoad();
                             return false; // At least one legal move is available
                         }

@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="fixed resolveCheck. must fix checkmate">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="fixed check and checkmate">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Positions/savePosition" beforeDir="false" afterPath="$PROJECT_DIR$/src/Positions/savePosition" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,13 +68,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00035" summary="rook and bishop move correctly">
-      <created>1687476406239</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1687476406239</updated>
     </task>
     <task id="LOCAL-00036" summary="knight moves correctly">
       <created>1687477436431</created>
@@ -413,7 +405,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690283897106</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="fixed check and checkmate">
+      <created>1690349270801</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1690349270801</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -428,7 +427,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adding checkmate" />
     <MESSAGE value="fixed check so pieces can be taken" />
     <MESSAGE value="bishop breaks game during fools mate" />
     <MESSAGE value="check works" />
@@ -453,6 +451,7 @@
     <MESSAGE value="finished protected check" />
     <MESSAGE value="going to change resolveCheck" />
     <MESSAGE value="fixed resolveCheck. must fix checkmate" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed resolveCheck. must fix checkmate" />
+    <MESSAGE value="fixed check and checkmate" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed check and checkmate" />
   </component>
 </project>
