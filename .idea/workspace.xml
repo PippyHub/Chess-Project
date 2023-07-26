@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="fixed check and checkmate">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="cant castle through check">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Positions/savePosition" beforeDir="false" afterPath="$PROJECT_DIR$/src/Positions/savePosition" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,13 +68,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00037" summary="queen moves correctly">
-      <created>1687477994965</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1687477994965</updated>
     </task>
     <task id="LOCAL-00038" summary="turns working correctly">
       <created>1687479307881</created>
@@ -413,7 +405,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690349809802</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="cant castle through check">
+      <created>1690375143785</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1690375143785</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -428,7 +427,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="bishop breaks game during fools mate" />
     <MESSAGE value="check works" />
     <MESSAGE value="checkmate works" />
     <MESSAGE value="checkmate message" />
@@ -453,6 +451,7 @@
     <MESSAGE value="fixed resolveCheck. must fix checkmate" />
     <MESSAGE value="fixed check and checkmate" />
     <MESSAGE value="never mind broken again" />
-    <option name="LAST_COMMIT_MESSAGE" value="never mind broken again" />
+    <MESSAGE value="cant castle through check" />
+    <option name="LAST_COMMIT_MESSAGE" value="cant castle through check" />
   </component>
 </project>

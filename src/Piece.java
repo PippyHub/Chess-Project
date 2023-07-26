@@ -120,11 +120,9 @@ public class Piece {
             castleRook = Board.getPiece(rookX * SQR_SIZE, rookY * SQR_SIZE);
             Piece bFile = Board.getPiece(SQR_SIZE, pY * SQR_SIZE);
             boolean bFilePiece = bFile != null && deltaX < 0;
-
-
             boolean squareProtected = squareProtected(pX + Integer.signum(deltaX), pY);
             if (castleRook != null && castleRook.name.equalsIgnoreCase("rook") && !castleRook.pieceMoved
-                    && !bFilePiece && !squareProtected) {
+                    && !bFilePiece && !squareProtected && !myKingInCheck()) {
                 if(!checkmating && realMove) castling = true;
                 return true; // Castling successful
             }
