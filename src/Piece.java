@@ -92,7 +92,7 @@ public class Piece {
         if (ownSQRMove()) return false;
         if (!takeOwnPiece && ownPieceMove()) return false;
         if (!queenMove()) return false;
-        if (!kingMove(checkmating)) return false;
+        if (!kingMove(checkmating, realMove)) return false;
         if (realMove && !resolveCheck()) return false;
         if (!rookMove()) return false;
         if (!knightMove()) return false;
@@ -112,17 +112,20 @@ public class Piece {
         if (!name.equalsIgnoreCase("queen")) return true;
         return Math.abs(this.deltaX) == Math.abs(this.deltaY) || deltaX == 0 || deltaY == 0;
     } // Queen moves
-    public boolean kingMove(boolean checkmating) {
+    public boolean kingMove(boolean checkmating, boolean realMove) {
         if (!name.equalsIgnoreCase("king")) return true;
         if (!pieceMoved && deltaY == 0 && Math.abs(deltaX) == 2) {
             int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting position
             int rookY = pY; // Rook stays in the same row
             castleRook = Board.getPiece(rookX * SQR_SIZE, rookY * SQR_SIZE);
             Piece bFile = Board.getPiece(SQR_SIZE, pY * SQR_SIZE);
-            boolean bFilePiece = (bFile != null && deltaX < 0);
+            boolean bFilePiece = bFile != null && deltaX < 0;
+
+
+            boolean squareProtected = squareProtected(pX + Integer.signum(deltaX), pY);
             if (castleRook != null && castleRook.name.equalsIgnoreCase("rook") && !castleRook.pieceMoved
-                    && !bFilePiece) {
-                if(!checkmating) castling = true;
+                    && !bFilePiece && !squareProtected) {
+                if(!checkmating && realMove) castling = true;
                 return true; // Castling successful
             }
             return false; // Castling is not valid
@@ -133,13 +136,10 @@ public class Piece {
 
     public boolean resolveCheck() {
         this.tempSave();
-
         Piece attacker = getCheckingPiece();
         boolean canDefend = attacker == attackedPiece && attacker != null;
-
         this.pX = this.clickX;
         this.pY = this.clickY;
-
         if (myKingInCheck() && !canDefend) {
             this.tempLoad();
             return false; // King cannot escape check with this move
@@ -252,6 +252,23 @@ public class Piece {
                     p.clickY = attackerPosY;
                 }
                 if (p.legalMove(false, true,false)) {
+                    p.tempLoad();
+                    return true;
+                }
+                p.tempLoad();
+            }
+        }
+        return false;
+    }
+    public boolean squareProtected(int squarePosX, int squarePosY) {
+        for (Piece p : ps) {
+            if (p.isBlack != isBlackTurn) {
+                p.tempSave();
+                p.deltaX = squarePosX - p.pX;
+                p.deltaY = squarePosY - p.pY;
+                p.clickX = squarePosX;
+                p.clickY = squarePosY;
+                if (p.legalMove(false, false,false)) {
                     p.tempLoad();
                     return true;
                 }
