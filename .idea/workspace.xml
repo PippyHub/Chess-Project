@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="fixed double check bug in resolveCheck()">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="fixed taking bug in resolveCheck()">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/newGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/newGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,13 +70,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00045" summary="king check second iteration and updated headers">
-      <created>1687987552301</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1687987552301</updated>
     </task>
     <task id="LOCAL-00046" summary="king check fourth iteration (progress!)">
       <created>1689224928387</created>
@@ -411,7 +407,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690449747749</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="fixed taking bug in resolveCheck()">
+      <created>1690449937179</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1690449937180</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -426,7 +429,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="save pieces to text file" />
     <MESSAGE value="save and load working" />
     <MESSAGE value="save and load fully implemented" />
     <MESSAGE value="fixed castling" />
@@ -451,6 +453,17 @@
     <MESSAGE value="fixed" />
     <MESSAGE value="index set to -1" />
     <MESSAGE value="fixed double check bug in resolveCheck()" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed double check bug in resolveCheck()" />
+    <MESSAGE value="fixed taking bug in resolveCheck()" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed taking bug in resolveCheck()" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.io.FileNotFoundException" package="java.io" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

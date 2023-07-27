@@ -127,13 +127,21 @@ public class Board extends JPanel implements ActionListener, MouseListener {
                         } else {
                             firstChar = String.valueOf(Character.toUpperCase(Piece.getName.charAt(0)));
                         }
-                        Menu.updateTextArea(firstChar);
+                        Menu.updateTextArea(firstChar); //Print piece name e.g. K for king
 
                         char pieceX = (char) (selectedPiece.pX + 'a');
                         String pieceY = String.valueOf(SQR_AMOUNT - selectedPiece.pY);
-                        Menu.updateTextArea(pieceX + pieceY);
 
-                        if (Piece.checkMade) Menu.updateTextArea("+");
+                        if (Piece.takeMade) {
+                            if (Piece.getName.equalsIgnoreCase("pawn")) {
+                                Menu.updateTextArea(String.valueOf(pieceX));
+                            } //If pawn print what square its taking from
+                            Menu.updateTextArea("x"); //Print out if taking
+                        }
+
+                        Menu.updateTextArea(pieceX + pieceY); // Print rank and file e.g. e4
+
+                        if (Piece.checkMade) Menu.updateTextArea("+"); //Print + if check
 
                     }
                     Menu.updateTextArea("\n");
