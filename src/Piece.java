@@ -144,8 +144,14 @@ public class Piece {
 
     public boolean resolveCheck() {
         this.tempSave();
-        Piece attacker = getCheckingPiece();
-        boolean canDefend = attacker == attackedPiece && attacker != null;
+        Piece attacker = null;
+        boolean canDefend = false;
+        if (myKingInCheck()) {
+            attacker = getCheckingPiece();
+            canDefend = (attacker == attackedPiece && attacker != null);
+        } else {
+            canDefend = (attackedPiece != null);
+        }
         this.pX = this.clickX;
         this.pY = this.clickY;
         if (myKingInCheck() && !canDefend) {

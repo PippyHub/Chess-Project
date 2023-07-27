@@ -56,7 +56,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
              if(p.name.equalsIgnoreCase("pawn")) index = 5;
              if(!p.isBlack) index+=6;
              g.drawImage(images[index], p.x, p.y, this);
-         }
+        }
         if (Piece.checkmated) {
             int squareX = 300;
             int squareY = 160;
@@ -89,7 +89,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2 + 43);
         }
     }
-   public static Piece getPiece(int x, int y) {
+    public static Piece getPiece(int x, int y) {
         int pX = x / SQR_SIZE;
         int pY = y / SQR_SIZE;
         for (Piece p: ps) {
