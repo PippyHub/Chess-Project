@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="updating notation">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="updating notation for #">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
     </list>
@@ -68,13 +68,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00047" summary="king check (super slow loop)">
-      <created>1689227571289</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1689227571289</updated>
     </task>
     <task id="LOCAL-00048" summary="king check (another slow loop)">
       <created>1689230016677</created>
@@ -412,7 +405,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690495330087</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="updating notation for #">
+      <created>1690495514374</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1690495514374</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -427,7 +427,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="save and load fully implemented" />
     <MESSAGE value="fixed castling" />
     <MESSAGE value="fixed castling and checkmate" />
     <MESSAGE value="fixing king cant take protected pieces" />
@@ -452,7 +451,8 @@
     <MESSAGE value="fixed double check bug in resolveCheck()" />
     <MESSAGE value="fixed taking bug in resolveCheck()" />
     <MESSAGE value="updating notation" />
-    <option name="LAST_COMMIT_MESSAGE" value="updating notation" />
+    <MESSAGE value="updating notation for #" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating notation for #" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
