@@ -23,7 +23,7 @@ public class Images {
             for (int y = 0; y < 120; y += 60) {
                 for (int x = 0; x < 360; x += 60) {
                     images[index] = all.getSubimage(x, y, 60, 60)
-                            .getScaledInstance(64, 64, BufferedImage.SCALE_SMOOTH);
+                            .getScaledInstance(Board.SQR_SIZE, Board.SQR_SIZE, BufferedImage.SCALE_SMOOTH);
                     index++;
                 }
             }

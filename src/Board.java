@@ -130,7 +130,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
                         Menu.updateTextArea(firstChar);
 
                         char pieceX = (char) (selectedPiece.pX + 'a');
-                        String pieceY = String.valueOf(8 - selectedPiece.pY);
+                        String pieceY = String.valueOf(SQR_AMOUNT - selectedPiece.pY);
                         Menu.updateTextArea(pieceX + pieceY);
 
                         if (Piece.checkMade) Menu.updateTextArea("+");

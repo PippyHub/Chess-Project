@@ -7,6 +7,7 @@
 import java.util.LinkedList;
 public class Piece {
     static final int SQR_SIZE = Board.SQR_SIZE;
+    static final int SQR_AMOUNT = Board.SQR_AMOUNT;
     int x, y, pX, pY, clickX, clickY, deltaX, deltaY; // Piece values
     int tempPX, tempPY, tempDX, tempDY , tempCX, tempCY; // Temporary stored values
     boolean isBlack;
@@ -291,8 +292,8 @@ public class Piece {
     public boolean checkmated() {
         for (Piece p : ps) {
             if (p.isBlack == isBlackTurn) { // Check moves for the current player's pieces (turn has already changed)
-                for (int x = 0; x < 8; x++) {
-                    for (int y = 0; y < 8; y++) {
+                for (int x = 0; x < SQR_AMOUNT; x++) {
+                    for (int y = 0; y < SQR_AMOUNT; y++) {
                         p.tempSave();
                         p.deltaX = x - p.pX;
                         p.deltaY = y - p.pY;
