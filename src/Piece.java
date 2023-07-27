@@ -145,14 +145,15 @@ public class Piece {
     public boolean resolveCheck() {
         this.tempSave();
         Piece attacker = getCheckingPiece();
-        boolean canDefend = false;
-        this.pX = this.clickX;
-        this.pY = this.clickY;
+        boolean canDefend;
         if (myKingInCheck()) {
             canDefend = (attacker == attackedPiece && attacker != null);
-        } else if (!myKingInCheck()){
+        } else {
+            System.out.println("test");
             canDefend = (attackedPiece != null);
         }
+        this.pX = this.clickX;
+        this.pY = this.clickY;
         if (myKingInCheck() && !canDefend) {
             this.tempLoad();
             return false; // King cannot escape check with this move
