@@ -141,7 +141,8 @@ public class Board extends JPanel implements ActionListener, MouseListener {
 
                         Menu.updateTextArea(pieceX + pieceY); // Print rank and file e.g. e4
 
-                        if (Piece.checkMade) Menu.updateTextArea("+"); //Print + if check
+                        if (Piece.checkmated) Menu.updateTextArea("#"); //Print # if mate
+                        else if (Piece.checkMade) Menu.updateTextArea("+"); //Print + if check
 
                     }
                     Menu.updateTextArea("\n");
