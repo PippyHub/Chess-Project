@@ -69,10 +69,10 @@ public class Menu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String cmd=e.getActionCommand();
         switch (cmd) {
-            case "New" -> { new newGame(); clearTextArea(); }
+            case "New" -> { new newGame(); clearTextArea(); Board.selectedPiece = null; }
             case "Save" -> { if (!Piece.checkmated) new Save(Board.ps); else System.out.println("can't save checkmate"); }
-            case "Load" -> { new Load(); clearTextArea(); }
-            case "Clear" -> { newGame.clearing(); panel.repaint(); clearTextArea(); }
+            case "Load" -> { new Load(); clearTextArea(); Board.selectedPiece = null; }
+            case "Clear" -> { newGame.clearing(); panel.repaint(); clearTextArea(); Board.selectedPiece = null; }
             default -> System.out.println("Invalid input");
         }
     }

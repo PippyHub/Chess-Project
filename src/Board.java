@@ -41,8 +41,10 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         }
         if (highlight) {
             g.setColor(Color.yellow);
-            if(selectedPiece.checkTurn())
-                g.fillRect(selectedPiece.pX * SQR_SIZE, selectedPiece.pY * SQR_SIZE, SQR_SIZE, SQR_SIZE);
+            if (selectedPiece != null){
+                if (selectedPiece.checkTurn())
+                    g.fillRect(selectedPiece.pX * SQR_SIZE, selectedPiece.pY * SQR_SIZE, SQR_SIZE, SQR_SIZE);
+            }
         }
         for (Piece p: ps) {
              int index = 0;
@@ -130,11 +132,12 @@ public class Board extends JPanel implements ActionListener, MouseListener {
                         char pieceX = (char) (selectedPiece.pX + 'a');
                         String pieceY = String.valueOf(8 - selectedPiece.pY);
                         Menu.updateTextArea(pieceX + pieceY);
+
+                        if (Piece.checkMade) Menu.updateTextArea("+");
+
                     }
-                    if (Piece.checkMade) Menu.updateTextArea("+");
                     Menu.updateTextArea("\n");
                 }
-
                 highlight = false;
                 selectedPiece = null; // Deselect the piece after moving
             }

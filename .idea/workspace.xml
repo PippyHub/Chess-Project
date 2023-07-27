@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="added notation">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="added U+200A HAIR SPACE to notation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Positions/savePosition" beforeDir="false" afterPath="$PROJECT_DIR$/src/Positions/savePosition" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,13 +70,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00039" summary="castling working">
-      <created>1687508744090</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1687508744090</updated>
     </task>
     <task id="LOCAL-00040" summary="all pieces get highlighted">
       <created>1687527227520</created>
@@ -412,7 +407,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690421097552</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="added U+200A HAIR SPACE to notation">
+      <created>1690421421202</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1690421421202</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -427,7 +429,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="checkmate works" />
     <MESSAGE value="checkmate message" />
     <MESSAGE value="cant take non attacking piece in check" />
     <MESSAGE value="added en passant" />
@@ -452,6 +453,7 @@
     <MESSAGE value="never mind broken again" />
     <MESSAGE value="cant castle through check" />
     <MESSAGE value="added notation" />
-    <option name="LAST_COMMIT_MESSAGE" value="added notation" />
+    <MESSAGE value="added U+200A HAIR SPACE to notation" />
+    <option name="LAST_COMMIT_MESSAGE" value="added U+200A HAIR SPACE to notation" />
   </component>
 </project>
