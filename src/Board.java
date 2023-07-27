@@ -108,7 +108,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
 
                 //Add notation after moving a piece
                 if (Piece.moveMade) {
-                    String turn = Piece.saveTurn() ? "White" : "Black";
+                    String turn = Piece.saveTurn() ? "White" : "Black" + "\u200A";
                     Menu.updateTextArea(turn + "   ");
                     if (Piece.castleMade) {
                         if (Piece.castlingDelta > 0) {
