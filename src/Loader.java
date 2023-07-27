@@ -7,7 +7,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-public class Loader
+public class Loader {
     private static File load;
     static final int PIECE_AMOUNT = 32;
     static int[] pX;
