@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="fixed check and checkmate">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="fixed">
       <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Images.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Images.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Loader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Loader.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,27 +68,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00040" summary="all pieces get highlighted">
-      <created>1687527227520</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1687527227520</updated>
-    </task>
-    <task id="LOCAL-00041" summary="pieces get highlighted on their turn">
-      <created>1687528613518</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1687528613518</updated>
-    </task>
-    <task id="LOCAL-00042" summary="fixed castling double move">
-      <created>1687530853336</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1687530853336</updated>
     </task>
     <task id="LOCAL-00043" summary="code shortening and updated headers">
       <created>1687772300334</created>
@@ -414,7 +391,28 @@
       <option name="project" value="LOCAL" />
       <updated>1690421421202</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="set ints to finals">
+      <created>1690426676167</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1690426676168</updated>
+    </task>
+    <task id="LOCAL-00090" summary="commit">
+      <created>1690426732390</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1690426732390</updated>
+    </task>
+    <task id="LOCAL-00091" summary="fixed">
+      <created>1690426740334</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1690426740334</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -429,9 +427,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="checkmate message" />
-    <MESSAGE value="cant take non attacking piece in check" />
-    <MESSAGE value="added en passant" />
     <MESSAGE value="updated headers" />
     <MESSAGE value="load pieces from text file" />
     <MESSAGE value="save pieces to text file" />
@@ -454,6 +449,9 @@
     <MESSAGE value="cant castle through check" />
     <MESSAGE value="added notation" />
     <MESSAGE value="added U+200A HAIR SPACE to notation" />
-    <option name="LAST_COMMIT_MESSAGE" value="added U+200A HAIR SPACE to notation" />
+    <MESSAGE value="set ints to finals" />
+    <MESSAGE value="commit" />
+    <MESSAGE value="fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed" />
   </component>
 </project>

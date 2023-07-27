@@ -47,7 +47,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             }
         }
         for (Piece p: ps) {
-             int index = 0;
+             int index = -1;
              if(p.name.equalsIgnoreCase("queen")) index = 0;
              if(p.name.equalsIgnoreCase("king")) index = 1;
              if(p.name.equalsIgnoreCase("rook")) index = 2;
