@@ -18,6 +18,9 @@ public class Piece {
     private static boolean isBlackTurn;
     public static boolean checkmated;
     public static boolean winner;
+    public static boolean moveMade, checkMade, castleMade; // Used for notation
+    public static String getName; // Used for notation
+    public static int castlingDelta; // Used for notation
     public static Piece enPassantPawn;
     Piece castleRook;
     Piece attackedPiece;
@@ -33,6 +36,7 @@ public class Piece {
         ps.add(this);
     }
     public void move(int pX, int pY) {
+        moveMade = false;
         deltaX = pX - this.pX;
         deltaY = pY - this.pY;
         clickX = pX;
@@ -40,9 +44,14 @@ public class Piece {
         boolean checking = oppositeKingInCheck();
         attackedPiece = Board.getPiece(this.clickX * SQR_SIZE, this.clickY * SQR_SIZE);
         if (legalMove(true, false,false)) {
+            moveMade = true;
+            checkMade = checking;
+            getName = name;
+            castleMade = castling;
+            castlingDelta = deltaX;
             moveType();
             this.pieceMoved = true;
-            attackedPiece = null;
+            this.attackedPiece = null;
             this.pX = pX;
             this.pY = pY;
             this.x = pX * SQR_SIZE;

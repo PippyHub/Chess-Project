@@ -105,6 +105,36 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             } else {
                 // A piece is already selected, attempt to move it
                 selectedPiece.move(e.getX() / SQR_SIZE, e.getY() / SQR_SIZE);
+
+                //Add notation after moving a piece
+                if (Piece.moveMade) {
+                    String turn = Piece.saveTurn() ? "White" : "Black";
+                    Menu.updateTextArea(turn + "   ");
+                    if (Piece.castleMade) {
+                        if (Piece.castlingDelta > 0) {
+                            Menu.updateTextArea("O-O");
+                        } else {
+                            Menu.updateTextArea("O-O-O");
+                        }
+                    } else {
+                        String firstChar;
+                        if (Piece.getName.equalsIgnoreCase("knight")) {
+                            firstChar = String.valueOf(Character.toUpperCase(Piece.getName.charAt(1)));
+                        } else if (Piece.getName.equalsIgnoreCase("pawn")) {
+                            firstChar = "";
+                        } else {
+                            firstChar = String.valueOf(Character.toUpperCase(Piece.getName.charAt(0)));
+                        }
+                        Menu.updateTextArea(firstChar);
+
+                        char pieceX = (char) (selectedPiece.pX + 'a');
+                        String pieceY = String.valueOf(8 - selectedPiece.pY);
+                        Menu.updateTextArea(pieceX + pieceY);
+                    }
+                    if (Piece.checkMade) Menu.updateTextArea("+");
+                    Menu.updateTextArea("\n");
+                }
+
                 highlight = false;
                 selectedPiece = null; // Deselect the piece after moving
             }

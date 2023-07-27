@@ -8,10 +8,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 public class Menu extends JFrame implements ActionListener {
+    static final int BOARD_SIZE = Board.SQR_SIZE * Board.SQR_AMOUNT;
     public static Board panel = new Board();
+    private static JTextArea textArea; // Declare the JTextArea
     public Menu() {
         setTitle("Chess");
-        this.getContentPane().setPreferredSize(new Dimension(512, 512));
+        this.getContentPane().setPreferredSize(new Dimension(BOARD_SIZE, BOARD_SIZE));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         contents();
@@ -47,15 +49,32 @@ public class Menu extends JFrame implements ActionListener {
         menuItem.addActionListener(this);
         menu.add(menuItem);
         this.setJMenuBar(menuBar);
+
+        menu = new JMenu("Move Notation");
+        menuBar.add(menu);
+
+        int menuWidth = menu.getPreferredSize().width;
+        textArea = new JTextArea();
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(menuWidth, 200));
+        menu.add(scrollPane);
+    }
+    public static void updateTextArea(String newText) {
+        textArea.append(newText);
+    }
+    public static void clearTextArea() {
+        textArea.setText(""); // Clear the content of the textArea
     }
     public void actionPerformed(ActionEvent e) {
         String cmd=e.getActionCommand();
         switch (cmd) {
-            case "New" -> new newGame();
+            case "New" -> { new newGame(); clearTextArea(); }
             case "Save" -> { if (!Piece.checkmated) new Save(Board.ps); else System.out.println("can't save checkmate"); }
-            case "Load" -> new Load();
-            case "Clear" -> {  newGame.clearing(); panel.repaint(); }
+            case "Load" -> { new Load(); clearTextArea(); }
+            case "Clear" -> { newGame.clearing(); panel.repaint(); clearTextArea(); }
             default -> System.out.println("Invalid input");
         }
     }
+
 }
