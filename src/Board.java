@@ -47,15 +47,15 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             }
         }
         for (Piece p: ps) {
-             int index = -1;
-             if(p.name.equalsIgnoreCase("queen")) index = 0;
-             if(p.name.equalsIgnoreCase("king")) index = 1;
-             if(p.name.equalsIgnoreCase("rook")) index = 2;
-             if(p.name.equalsIgnoreCase("knight")) index = 3;
-             if(p.name.equalsIgnoreCase("bishop")) index = 4;
-             if(p.name.equalsIgnoreCase("pawn")) index = 5;
-             if(!p.isBlack) index+=6;
-             g.drawImage(images[index], p.x, p.y, this);
+            int index = -1;
+            if(p.name.equalsIgnoreCase("queen")) index = 0;
+            if(p.name.equalsIgnoreCase("king")) index = 1;
+            if(p.name.equalsIgnoreCase("rook")) index = 2;
+            if(p.name.equalsIgnoreCase("knight")) index = 3;
+            if(p.name.equalsIgnoreCase("bishop")) index = 4;
+            if(p.name.equalsIgnoreCase("pawn")) index = 5;
+            if(!p.isBlack) index+=6;
+            g.drawImage(images[index], p.x, p.y, this);
         }
         if (Piece.checkmated) {
             int squareX = 300;

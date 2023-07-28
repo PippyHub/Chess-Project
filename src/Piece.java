@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class Piece {
     static final int SQR_SIZE = Board.SQR_SIZE;
     static final int SQR_AMOUNT = Board.SQR_AMOUNT;
-    int x, y, pX, pY, clickX, clickY, deltaX, deltaY; // Piece values
+    int x, y, pX, pY, deltaX, deltaY, clickX, clickY; // Piece values
     int tempPX, tempPY, tempDX, tempDY , tempCX, tempCY; // Temporary stored values
     boolean isBlack;
     boolean pieceMoved;
@@ -19,12 +19,15 @@ public class Piece {
     private static boolean isBlackTurn;
     public static boolean checkmated;
     public static boolean winner;
-    public static boolean moveMade, checkMade, castleMade, takeMade; // Used for notation
-    public static String getName; // Used for notation
-    public static int castlingDelta; // Used for notation
     public static Piece enPassantPawn;
     Piece castleRook;
     Piece attackedPiece;
+    public static boolean moveMade, checkMade, castleMade, takeMade; // Used for notation
+    public static String getName; // Used for notation
+    public static int castlingDelta; // Used for notation
+    int storedPX, storedPY; // Store variables for respawning pieces
+    boolean storedIsBlack, storedPieceMoved; // Store variables for respawning pieces
+    String storedName; // Store variables for respawning pieces
     public Piece(int pX, int pY, boolean isBlack, boolean pieceMoved, String n, LinkedList<Piece> ps) {
         this.x = pX * SQR_SIZE;
         this.y = pY * SQR_SIZE;
@@ -32,8 +35,8 @@ public class Piece {
         this.pY = pY;
         this.isBlack = isBlack;
         this.pieceMoved = pieceMoved;
-        this.ps = ps;
         this.name = n;
+        this.ps = ps;
         ps.add(this);
     }
     public void move(int pX, int pY) {
@@ -147,19 +150,21 @@ public class Piece {
     }
     public boolean resolveCheck() {
         this.tempSave();
-        Piece attacker = getCheckingPiece();
-        boolean canDefend;
-        if (myKingInCheck()) {
-            canDefend = (attacker == attackedPiece && attacker != null);
-        } else {
-            canDefend = (attackedPiece != null);
+        boolean tookPiece = false;
+        //Piece attacker = getCheckingPiece();
+        if (attackedPiece != null) {
+            storePiece(attackedPiece);
+            ps.remove(attackedPiece);
+            tookPiece = true;
         }
         this.pX = this.clickX;
         this.pY = this.clickY;
-        if (myKingInCheck() && !canDefend) {
+        if (myKingInCheck()) {
+            if (tookPiece) new Piece(storedPX, storedPY, storedIsBlack, storedPieceMoved, storedName, ps);
             this.tempLoad();
             return false; // King cannot escape check with this move
         }
+        if (tookPiece) new Piece(storedPX, storedPY, storedIsBlack, storedPieceMoved, storedName, ps);
         this.tempLoad();
         return true; // King can escape check with this move
     }
@@ -373,6 +378,13 @@ public class Piece {
             currentY += Integer.signum(this.deltaY);
         }
         return true; // No obstruction found
+    }
+    public void storePiece(Piece temp) {
+        storedPX = temp.pX;
+        storedPY = temp.pY;
+        storedIsBlack = temp.isBlack;
+        storedPieceMoved = temp.pieceMoved;
+        storedName = temp.name;
     }
     public void tempSave() {
         this.tempPX = this.pX;
