@@ -147,16 +147,9 @@ public class Piece {
     }
     public boolean resolveCheck() {
         this.tempSave();
-        Piece attacker = getCheckingPiece();
-        boolean canDefend;
-        if (myKingInCheck()) {
-            canDefend = (attacker == attackedPiece && attacker != null);
-        } else {
-            canDefend = (attackedPiece != null);
-        }
         this.pX = this.clickX;
         this.pY = this.clickY;
-        if (myKingInCheck() && !canDefend) {
+        if (myKingInCheck()) {
             this.tempLoad();
             return false; // King cannot escape check with this move
         }
@@ -170,10 +163,6 @@ public class Piece {
     public boolean oppositeKingInCheck() {
         Piece oppositeKing = oppositeKingPos();
         return checking(oppositeKing, oppositeKing.pX, oppositeKing.pY);
-    }
-    public Piece getCheckingPiece() {
-        Piece myKing = myKingPos();
-        return getPieceCheckingKing(myKing.pX, myKing.pY);
     }
     public Piece myKingPos() {
         for (Piece p : ps) {
@@ -193,7 +182,7 @@ public class Piece {
     }
     public boolean check(Piece myKing, int kingPosX, int kingPosY) {
         for (Piece p : ps) {
-            if (p.isBlack != isBlackTurn) {
+            if (p.isBlack != isBlackTurn && p != attackedPiece) {
                 p.tempSave();
                 if (myKing != null) {
                     p.deltaX = kingPosX - p.pX;
@@ -232,23 +221,6 @@ public class Piece {
             }
         }
         return false;
-    }
-    public Piece getPieceCheckingKing(int kingPosX, int kingPosY) {
-        for (Piece p : ps) {
-            if (p.isBlack != isBlackTurn) {
-                p.tempSave();
-                p.deltaX = kingPosX - p.pX;
-                p.deltaY = kingPosY - p.pY;
-                p.clickX = kingPosX;
-                p.clickY = kingPosY;
-                if (p.legalMove(false, false,false)) {
-                    p.tempLoad();
-                    return p;
-                }
-                p.tempLoad();
-            }
-        }
-        return null;
     }
     public boolean kingTakeProtectedPiece() {
         if (!name.equalsIgnoreCase("king")) return true;
