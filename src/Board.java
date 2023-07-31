@@ -21,7 +21,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         images = img.loadImages();
         addMouseListener(this);
     }
-    public static void pieceList(int pX, int pY, boolean isBlack, boolean pieceMoved, String name) {
+    public static void pieceList(int pX, int pY, boolean isBlack, boolean pieceMoved, Piece.PieceName name) {
         new Piece(pX, pY, isBlack, pieceMoved, name, ps);
     }
     public void paint(Graphics g) {
@@ -42,22 +42,22 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         if (highlight) {
             g.setColor(Color.yellow);
             if (selectedPiece != null){
-                if (selectedPiece.checkTurn())
-                    g.fillRect(selectedPiece.pX * SQR_SIZE, selectedPiece.pY * SQR_SIZE, SQR_SIZE, SQR_SIZE);
+                g.fillRect(selectedPiece.pX * SQR_SIZE, selectedPiece.pY * SQR_SIZE, SQR_SIZE, SQR_SIZE);
             }
         }
-        for (Piece p: ps) {
-            int index = -1;
-            if(p.name.equalsIgnoreCase("queen")) index = 0;
-            if(p.name.equalsIgnoreCase("king")) index = 1;
-            if(p.name.equalsIgnoreCase("rook")) index = 2;
-            if(p.name.equalsIgnoreCase("knight")) index = 3;
-            if(p.name.equalsIgnoreCase("bishop")) index = 4;
-            if(p.name.equalsIgnoreCase("pawn")) index = 5;
-            if(!p.isBlack) index+=6;
+        for (Piece p : ps) {
+            int index = switch (p.name) {
+                case QUEEN -> 0;
+                case KING -> 1;
+                case ROOK -> 2;
+                case KNIGHT -> 3;
+                case BISHOP -> 4;
+                case PAWN -> 5;
+            };
+            if (!p.isBlack) index += 6;
             g.drawImage(images[index], p.x, p.y, this);
         }
-        if (Piece.checkmated) {
+        /*if (Piece.checkmated) {
             int squareX = 300;
             int squareY = 160;
             int centerX = (BOARD_SIZE - squareX) / 2;
@@ -87,7 +87,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             message = "'File > New' to play again";
             messageWidth = g.getFontMetrics().stringWidth(message);
             g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2 + 43);
-        }
+        }*/
     }
     public static Piece getPiece(int x, int y) {
         int pX = x / SQR_SIZE;
@@ -97,7 +97,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         }
         return null;
     }
-    public void notation() { //Add notation after moving a piece
+    /*public void notation() { //Add notation after moving a piece
         if (Piece.moveMade) {
             String turn = Piece.saveTurn() ? "White" : "Black" + "\u200A";
             Menu.updateTextArea(turn + "   ");
@@ -128,24 +128,25 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             }
             Menu.updateTextArea("\n");
         }
-    }
+    }*/
     public void actionPerformed(ActionEvent e) {}
     public void mousePressed(MouseEvent e) {
-        if (!Piece.checkmated) {
-            if (selectedPiece == null) {
-                // No piece currently selected, attempt to select a piece
+        //if (!Piece.checkmated) {
+            if (selectedPiece == null) { // No piece currently selected, attempt to select a piece
                 selectedPiece = getPiece(e.getX(), e.getY());
-                if (selectedPiece != null) if (selectedPiece.isBlack != Piece.saveTurn()) selectedPiece = null;
+                if (selectedPiece != null) {
+                    if (selectedPiece.isBlack != (Piece.getTurn() == Piece.Turn.WHITE)) selectedPiece = null;
+                }
                 if (selectedPiece != null) highlight = true;
             } else {
                 // A piece is already selected, attempt to move it
                 selectedPiece.move(e.getX() / SQR_SIZE, e.getY() / SQR_SIZE);
-                notation();
+                //notation();
                 highlight = false;
                 selectedPiece = null; // Deselect the piece after moving
             }
             this.repaint();
-        }
+        //}
     }
     public void mouseReleased(MouseEvent e) {}
     public void mouseClicked(MouseEvent e) {}

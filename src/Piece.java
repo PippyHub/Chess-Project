@@ -6,7 +6,86 @@
  */
 import java.util.LinkedList;
 public class Piece {
+    public enum Turn {
+        WHITE, BLACK
+    }
+    public enum PieceName {
+        QUEEN, KING, ROOK, KNIGHT, BISHOP, PAWN
+    }
+    private static Turn currentTurn = Turn.WHITE;
     static final int SQR_SIZE = Board.SQR_SIZE;
+    static final int SQR_AMOUNT = Board.SQR_AMOUNT;
+    int x, y, pX, pY, clickX, clickY, deltaX, deltaY; // Piece values
+    boolean isBlack;
+    boolean pieceMoved;
+    PieceName name;
+    LinkedList<Piece> ps;
+
+    int tempPX, tempPY, tempDX, tempDY , tempCX, tempCY; // Temporary piece values
+    public static boolean checkmated;
+    public Piece(int pX, int pY, boolean isBlack, boolean pieceMoved, PieceName name, LinkedList<Piece> ps) {
+        this.x = pX * SQR_SIZE;
+        this.y = pY * SQR_SIZE;
+        this.pX = pX;
+        this.pY = pY;
+        this.isBlack = isBlack;
+        this.pieceMoved = pieceMoved;
+        this.name = name;
+        this.ps = ps;
+        ps.add(this);
+    }
+    public void move(int pX, int pY) {
+        deltaX = pX - this.pX;
+        deltaY = pY - this.pY;
+        clickX = pX;
+        clickY = pY;
+        if (legalMove()) {
+            this.pieceMoved = true;
+            this.pX = pX;
+            this.pY = pY;
+            this.x = pX * SQR_SIZE;
+            this.y = pY * SQR_SIZE;
+            switchTurn();
+        }
+    }
+    public boolean legalMove() {
+        return true;
+    }
+    public static Turn getTurn() { return currentTurn; }
+    public static void switchTurn() { currentTurn = (currentTurn == Turn.WHITE) ? Turn.BLACK : Turn.WHITE; }
+    public static void resetTurn() { currentTurn = Turn.WHITE; }
+    public void tempSave() {
+        this.tempPX = this.pX;
+        this.tempPY = this.pY;
+        this.tempDX = this.deltaX;
+        this.tempDY = this.deltaY;
+        this.tempCX = this.clickX;
+        this.tempCY = this.clickY;
+    }
+    public void tempLoad() {
+        this.pX = this.tempPX;
+        this.pY = this.tempPY;
+        this.deltaX = this.tempDX;
+        this.deltaY = this.tempDY;
+        this.clickX = this.tempCX;
+        this.clickY = this.tempCY;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*static final int SQR_SIZE = Board.SQR_SIZE;
     static final int SQR_AMOUNT = Board.SQR_AMOUNT;
     int x, y, pX, pY, clickX, clickY, deltaX, deltaY; // Piece values
     int tempPX, tempPY, tempDX, tempDY , tempCX, tempCY; // Temporary stored values
@@ -361,5 +440,4 @@ public class Piece {
         this.deltaY = this.tempDY;
         this.clickX = this.tempCX;
         this.clickY = this.tempCY;
-    }
-}
+    }*/

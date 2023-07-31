@@ -6,7 +6,7 @@
  */
 import java.io.File;
 public class Load {
-    public Load() {
+    /*public Load() {
         emptyBoardList();
         resetVariables();
         resetPieces();
@@ -38,5 +38,5 @@ public class Load {
         Loader loader = new Loader();
         loader.loadTurn(file);
         Piece.loadTurn(Loader.turn);
-    }
+    }*/
 }

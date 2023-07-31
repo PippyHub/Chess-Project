@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.LinkedList;
 public class Save {
-    public Save(LinkedList<Piece> ps) {
+    /*public Save(LinkedList<Piece> ps) {
         File position = new File("src/Positions/savePosition");
         File turn = new File("src/Positions/saveTurn");
         try {
@@ -29,5 +29,5 @@ public class Save {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

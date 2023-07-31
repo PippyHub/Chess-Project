@@ -14,14 +14,14 @@ public class Loader {
     static int[] pY;
     static boolean[] isBlack;
     static boolean[] pieceMoved;
-    static String[] name;
+    static Piece.PieceName[] name;
     static boolean turn;
     public Loader() {
         pX = new int[PIECE_AMOUNT];
         pY = new int[PIECE_AMOUNT];
         isBlack = new boolean[PIECE_AMOUNT];
         pieceMoved = new boolean[PIECE_AMOUNT];
-        name = new String[PIECE_AMOUNT];
+        name = new Piece.PieceName[PIECE_AMOUNT];
     }
     public void loadFile(File file) {
         load = file;
@@ -50,7 +50,7 @@ public class Loader {
                     pY[piece] = Integer.parseInt(parts[1]);
                     isBlack[piece] = Boolean.parseBoolean(parts[2]);
                     pieceMoved[piece] = Boolean.parseBoolean(parts[3]);
-                    name[piece] = parts[4];
+                    name[piece] = Piece.PieceName.valueOf(parts[4]);
                 } else break;
             }
             readFile.close();

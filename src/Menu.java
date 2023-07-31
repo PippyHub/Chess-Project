@@ -37,7 +37,8 @@ public class Menu extends JFrame implements ActionListener {
         menuItem.addActionListener(this);
         menu.add(menuItem);
 
-        menuItem = new JMenuItem("Save");
+        this.setJMenuBar(menuBar);
+        /*menuItem = new JMenuItem("Save");
         menuItem.addActionListener(this);
         menu.add(menuItem);
 
@@ -58,7 +59,7 @@ public class Menu extends JFrame implements ActionListener {
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setPreferredSize(new Dimension(menuWidth, 200));
-        menu.add(scrollPane);
+        menu.add(scrollPane);*/
     }
     public static void updateTextArea(String newText) {
         textArea.append(newText);
@@ -69,12 +70,11 @@ public class Menu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String cmd=e.getActionCommand();
         switch (cmd) {
-            case "New" -> { new newGame(); clearTextArea(); Board.selectedPiece = null; }
-            case "Save" -> { if (!Piece.checkmated) new Save(Board.ps); else System.out.println("can't save checkmate"); }
-            case "Load" -> { new Load(); clearTextArea(); Board.selectedPiece = null; }
+            case "New" -> { new newGame(); Board.selectedPiece = null; clearTextArea(); }
+            //case "Save" -> { if (!Piece.checkmated) new Save(Board.ps); else System.out.println("can't save checkmate"); }
+            //case "Load" -> { new Load(); clearTextArea(); Board.selectedPiece = null; }
             case "Clear" -> { newGame.clearing(); panel.repaint(); clearTextArea(); Board.selectedPiece = null; }
             default -> System.out.println("Invalid input");
         }
     }
-
 }
