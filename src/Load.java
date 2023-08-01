@@ -16,10 +16,10 @@ public class Load {
         Menu.panel.repaint();
         Menu.clearTextArea();
         Board.selectedPiece = null;
+        Piece.state = Piece.State.ONGOING;
         while (!Board.ps.isEmpty()) {
             Board.ps.removeFirst();
         }
-        //Piece.checkmated = false;
     }
     public static void resetPieces(File file) {
         Loader loader = new Loader();

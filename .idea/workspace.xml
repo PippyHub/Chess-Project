@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="check working">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="checkmate broken as per">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Load.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Load.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Positions/savePosition" beforeDir="false" afterPath="$PROJECT_DIR$/src/Positions/savePosition" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Positions/saveTurn" beforeDir="false" afterPath="$PROJECT_DIR$/src/Positions/saveTurn" afterDir="false" />
@@ -70,13 +71,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00051" summary="noObstruction working">
-      <created>1689239679673</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1689239679673</updated>
     </task>
     <task id="LOCAL-00052" summary="noObstruction working (again)">
       <created>1689240974086</created>
@@ -414,7 +408,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690889775768</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="checkmate broken as per">
+      <created>1690895034733</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1690895034733</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -429,7 +430,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="king cant take protected pieces" />
     <MESSAGE value="king cant take protected pieces fixed" />
     <MESSAGE value="stable game state - merge" />
     <MESSAGE value="stable game state" />
@@ -454,7 +454,8 @@
     <MESSAGE value="Added 2 enums - names and turns" />
     <MESSAGE value="made load work for new and load turn" />
     <MESSAGE value="check working" />
-    <option name="LAST_COMMIT_MESSAGE" value="check working" />
+    <MESSAGE value="checkmate broken as per" />
+    <option name="LAST_COMMIT_MESSAGE" value="checkmate broken as per" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

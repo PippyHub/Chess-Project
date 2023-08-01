@@ -55,8 +55,8 @@ public class Piece {
             this.pY = pY;
             this.x = pX * SQR_SIZE;
             this.y = pY * SQR_SIZE;
-            gameState(checking);
             switchTurn();
+            gameState(checking);
         }
     }
     public boolean legalMove(boolean realMove, boolean ownMove, boolean mateMove) {
@@ -75,17 +75,6 @@ public class Piece {
         if (realMove && !resolveCheck()) return false;
         if (protectedPiece()) return false;
         return !obstruction();
-    }
-    public boolean obstruction() {
-        if (name == Name.KNIGHT) return false;
-        int currentX = this.pX + Integer.signum(this.deltaX);
-        int currentY = this.pY + Integer.signum(this.deltaY);
-        while (Math.abs(currentX - clickX) > 0 || Math.abs(currentY - clickY) > 0) {
-            if (Board.getPiece(currentX * SQR_SIZE, currentY * SQR_SIZE) != null) return true;
-            currentX += Integer.signum(this.deltaX);
-            currentY += Integer.signum(this.deltaY);
-        }
-        return false; // No obstruction found
     }
     public boolean queenMove() {
         return Math.abs(this.deltaX) == Math.abs(this.deltaY) || deltaX == 0 || deltaY == 0;
@@ -109,13 +98,6 @@ public class Piece {
 
         return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1; // King moves
     } // King moves
-    public boolean protectedPiece() {
-        if (attackedPiece != null && attackedPiece.color != color) {
-            return protectedSquare(attackedPiece.pX,attackedPiece.pY,
-                    false,false,false,true,false);
-        }
-        return false;
-    }
     public boolean rookMove() {
         return this.deltaX == 0 || this.deltaY == 0;
     } // Rook moves
@@ -151,13 +133,13 @@ public class Piece {
         }
         return color == Color.WHITE ? deltaY < 0 : deltaY > 0; //Can't move backwards
     }
-    public boolean ownSquareMove() {
-        return this.deltaX == 0 && this.deltaY == 0;
-    } // Can't move to own square
     public boolean ownPieceMove() {
         Piece clickedPiece = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
         return clickedPiece != null && clickedPiece.color == this.color;
     } // Can't take own piece
+    public boolean ownSquareMove() {
+        return this.deltaX == 0 && this.deltaY == 0;
+    } // Can't move to own square
     public boolean outOfBounds() {
         return !(clickX <= 7 && clickY <= 7 && clickX >= 0 && clickY >= 0);
     } // Can't move out of bounds
@@ -176,6 +158,25 @@ public class Piece {
         Piece king = kingPos(myKing);
         return protectedSquare(king.pX, king.pY,
                 !myKing, resolveCheckMove,false,false,false);
+    }
+    public boolean protectedPiece() {
+        if (name != Name.KING) return false;
+        if (attackedPiece != null && attackedPiece.color != color) {
+            return protectedSquare(attackedPiece.pX,attackedPiece.pY,
+                    false,false,false,true,false);
+        }
+        return false;
+    }
+    public boolean obstruction() {
+        if (name == Name.KNIGHT) return false;
+        int currentX = this.pX + Integer.signum(this.deltaX);
+        int currentY = this.pY + Integer.signum(this.deltaY);
+        while (Math.abs(currentX - clickX) > 0 || Math.abs(currentY - clickY) > 0) {
+            if (Board.getPiece(currentX * SQR_SIZE, currentY * SQR_SIZE) != null) return true;
+            currentX += Integer.signum(this.deltaX);
+            currentY += Integer.signum(this.deltaY);
+        }
+        return false; // No obstruction found
     }
     public void moveType() {
         pieceTake();
@@ -231,7 +232,7 @@ public class Piece {
     public boolean protectedSquare(int pX, int pY, boolean checkOwnPieces, boolean resolveCheckMove, boolean realMove, boolean ownMove, boolean mateMove) {
         for (Piece p : ps) {
             if (checkOwnPieces && p.color == turn || !checkOwnPieces && p.color != turn) {
-                if (!resolveCheckMove || p != attackedPiece) { // Attacked piece cant put king in check
+                if (!resolveCheckMove || p != attackedPiece) { // Resolving check: attacked piece cant put king in check
                     p.tempSave();
                     if (checkOwnPieces && p == this){
                         p.pX = this.clickX;
@@ -253,8 +254,7 @@ public class Piece {
     }
     public boolean checkmate() {
         for (Piece p : ps) {
-            if (p.color != turn) {
-                System.out.println(p.name);
+            if (p.color == Color.BLACK) { // Check moves for the current player's pieces
                 for (int x = 0; x < SQR_AMOUNT; x++) {
                     for (int y = 0; y < SQR_AMOUNT; y++) {
                         p.tempSave();
@@ -276,7 +276,7 @@ public class Piece {
         return true; // No legal moves available, it's checkmate
     }
     public void gameState(boolean checking) {
-        if (checking && checkmate()) {state = State.CHECKMATE; System.out.println(true);}
+        if (checking && checkmate()) state = State.CHECKMATE;
     }
     public void tempSave() {
         this.tempPX = this.pX;
