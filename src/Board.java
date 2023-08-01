@@ -21,8 +21,8 @@ public class Board extends JPanel implements ActionListener, MouseListener {
         images = img.loadImages();
         addMouseListener(this);
     }
-    public static void pieceList(int pX, int pY, boolean isBlack, boolean pieceMoved, Piece.PieceName name) {
-        new Piece(pX, pY, isBlack, pieceMoved, name, ps);
+    public static void pieceList(int pX, int pY, Piece.Color color, boolean pieceMoved, Piece.Name name) {
+        new Piece(pX, pY, color, pieceMoved, name, ps);
     }
     public void paint(Graphics g) {
         boolean white = true;
@@ -54,7 +54,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
                 case BISHOP -> 4;
                 case PAWN -> 5;
             };
-            if (!p.isBlack) index += 6;
+            if (p.color == Piece.Color.WHITE) index += 6;
             g.drawImage(images[index], p.x, p.y, this);
         }
         /*if (Piece.checkmated) {
@@ -131,22 +131,18 @@ public class Board extends JPanel implements ActionListener, MouseListener {
     }*/
     public void actionPerformed(ActionEvent e) {}
     public void mousePressed(MouseEvent e) {
-        //if (!Piece.checkmated) {
+        if (Piece.state == Piece.State.ONGOING) {
             if (selectedPiece == null) { // No piece currently selected, attempt to select a piece
                 selectedPiece = getPiece(e.getX(), e.getY());
-                if (selectedPiece != null) {
-                    if (selectedPiece.isBlack != (Piece.getTurn() == Piece.Turn.WHITE)) selectedPiece = null;
-                }
+                if (selectedPiece != null) if (selectedPiece.color != Piece.getTurn()) selectedPiece = null;
                 if (selectedPiece != null) highlight = true;
-            } else {
-                // A piece is already selected, attempt to move it
+            } else { // A piece is already selected, attempt to move it
                 selectedPiece.move(e.getX() / SQR_SIZE, e.getY() / SQR_SIZE);
-                //notation();
                 highlight = false;
                 selectedPiece = null; // Deselect the piece after moving
             }
             this.repaint();
-        //}
+        }
     }
     public void mouseReleased(MouseEvent e) {}
     public void mouseClicked(MouseEvent e) {}

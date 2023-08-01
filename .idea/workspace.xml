@@ -4,15 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="WORKING COPY - rewrite commencing">
+    <list default="true" id="254dee7e-3c0f-48db-b43a-acc0fa3eeb74" name="Changes" comment="Added 2 enums - names and turns">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Images.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Images.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Load.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Load.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Loader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Loader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Piece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Positions/defaultPosition" beforeDir="false" afterPath="$PROJECT_DIR$/src/Positions/defaultPosition" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Positions/savePosition" beforeDir="false" afterPath="$PROJECT_DIR$/src/Positions/savePosition" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Positions/saveTurn" beforeDir="false" afterPath="$PROJECT_DIR$/src/Positions/saveTurn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Save.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Save.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/newGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/New.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,13 +78,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685684401255</updated>
-    </task>
-    <task id="LOCAL-00048" summary="king check (another slow loop)">
-      <created>1689230016677</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1689230016677</updated>
     </task>
     <task id="LOCAL-00049" summary="noObstruction changed: Bresenham's line algorithm">
       <created>1689231879282</created>
@@ -418,7 +415,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690495514374</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="Added 2 enums - names and turns">
+      <created>1690785769310</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1690785769310</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -433,7 +437,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed castling" />
     <MESSAGE value="fixed castling and checkmate" />
     <MESSAGE value="fixing king cant take protected pieces" />
     <MESSAGE value="king cant take protected pieces" />
@@ -458,7 +461,8 @@
     <MESSAGE value="fixed taking bug in resolveCheck()" />
     <MESSAGE value="updating notation" />
     <MESSAGE value="updating notation for #" />
-    <option name="LAST_COMMIT_MESSAGE" value="updating notation for #" />
+    <MESSAGE value="Added 2 enums - names and turns" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added 2 enums - names and turns" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

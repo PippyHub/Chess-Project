@@ -6,29 +6,36 @@
  */
 import java.util.LinkedList;
 public class Piece {
-    public enum Turn {
+    public enum Color {
         WHITE, BLACK
     }
-    public enum PieceName {
+    public enum Name {
         QUEEN, KING, ROOK, KNIGHT, BISHOP, PAWN
     }
-    private static Turn currentTurn = Turn.WHITE;
+    public enum State {
+        ONGOING, CHECKMATE, STALEMATE
+    }
     static final int SQR_SIZE = Board.SQR_SIZE;
     static final int SQR_AMOUNT = Board.SQR_AMOUNT;
     int x, y, pX, pY, clickX, clickY, deltaX, deltaY; // Piece values
-    boolean isBlack;
+    Color color;
     boolean pieceMoved;
-    PieceName name;
+    Name name;
     LinkedList<Piece> ps;
-
     int tempPX, tempPY, tempDX, tempDY , tempCX, tempCY; // Temporary piece values
-    public static boolean checkmated;
-    public Piece(int pX, int pY, boolean isBlack, boolean pieceMoved, PieceName name, LinkedList<Piece> ps) {
+    private static Color turn = Color.WHITE;
+    static State state = State.ONGOING;
+    boolean enPassantEnabled;
+    boolean castling;
+    private static Piece enPassantPawn;
+    Piece castleRook;
+    Piece attackedPiece;
+    public Piece(int pX, int pY, Color color , boolean pieceMoved, Name name, LinkedList<Piece> ps) {
         this.x = pX * SQR_SIZE;
         this.y = pY * SQR_SIZE;
         this.pX = pX;
         this.pY = pY;
-        this.isBlack = isBlack;
+        this.color = color;
         this.pieceMoved = pieceMoved;
         this.name = name;
         this.ps = ps;
@@ -39,7 +46,9 @@ public class Piece {
         deltaY = pY - this.pY;
         clickX = pX;
         clickY = pY;
-        if (legalMove()) {
+        attackedPiece = Board.getPiece(this.clickX * SQR_SIZE, this.clickY * SQR_SIZE);
+        if (legalMove(true, false, false)) {
+            moveType();
             this.pieceMoved = true;
             this.pX = pX;
             this.pY = pY;
@@ -48,12 +57,166 @@ public class Piece {
             switchTurn();
         }
     }
-    public boolean legalMove() {
+    public boolean legalMove(boolean realMove, boolean ownMove, boolean mateMove) {
+        boolean validMove = switch (name) {
+            case QUEEN -> queenMove();
+            case KING -> kingMove(realMove, mateMove) && protectedPiece();
+            case ROOK -> rookMove();
+            case KNIGHT -> knightMove();
+            case BISHOP -> bishopMove();
+            case PAWN -> pawnMove();
+        };
+        if (!validMove) return false;
+        if (!ownMove && ownPieceMove()) return false;
+        if (ownSquareMove()) return false;
+        if (outOfBounds()) return false;
+        return !obstruction();
+    }
+    public boolean ownSquareMove() {
+        return this.deltaX == 0 && this.deltaY == 0;
+    } // Can't move to own square
+    public boolean ownPieceMove() {
+        Piece clickedPiece = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
+        return clickedPiece != null && clickedPiece.color == this.color;
+    } // Can't take own piece
+    public boolean outOfBounds() {
+        return !(clickX <= 7 && clickY <= 7 && clickX >= 0 && clickY >= 0);
+    } // Can't move out of bounds
+    public boolean obstruction() {
+        if (name == Name.KNIGHT) return false;
+        int currentX = this.pX + Integer.signum(this.deltaX);
+        int currentY = this.pY + Integer.signum(this.deltaY);
+        while (Math.abs(currentX - clickX) > 0 || Math.abs(currentY - clickY) > 0) {
+            if (Board.getPiece(currentX * SQR_SIZE, currentY * SQR_SIZE) != null) return true;
+            currentX += Integer.signum(this.deltaX);
+            currentY += Integer.signum(this.deltaY);
+        }
+        return false; // No obstruction found
+    }
+    public boolean queenMove() {
+        return Math.abs(this.deltaX) == Math.abs(this.deltaY) || deltaX == 0 || deltaY == 0;
+    } // Queen moves
+    public boolean kingMove(boolean realMove, boolean mateMove) {
+        if (!pieceMoved && deltaY == 0 && Math.abs(deltaX) == 2) {
+            int rookX = (deltaX > 0) ? 7 : 0; // Determine the rook's starting position
+            int rookY = pY; // Rook stays in the same row
+            castleRook = Board.getPiece(rookX * SQR_SIZE, rookY * SQR_SIZE);
+            Piece bFile = Board.getPiece(SQR_SIZE, pY * SQR_SIZE);
+            boolean bFilePiece = bFile != null && deltaX < 0;
+            boolean protectedSquare;
+            //protectedSquare = protectedSquare();
+            if (castleRook != null && castleRook.name == Name.ROOK && !castleRook.pieceMoved
+                    && !bFilePiece /*&& !protectedSquare*/) {
+                if (realMove && !mateMove) castling = true;
+                return true; // Castling successful
+            }
+            return false; // Castling is not valid
+        }
+
+        return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1; // King moves
+    } // King moves
+    public boolean protectedPiece() {
+
+        if (name != Name.KING) return true;
+        if (attackedPiece != null && attackedPiece.color != color) {
+            System.out.println( protectedSquare(attackedPiece.pX,attackedPiece.pY,false,false,true,false));
+            return protectedSquare(attackedPiece.pX,attackedPiece.pY,false,false,true,false);
+        }
         return true;
     }
-    public static Turn getTurn() { return currentTurn; }
-    public static void switchTurn() { currentTurn = (currentTurn == Turn.WHITE) ? Turn.BLACK : Turn.WHITE; }
-    public static void resetTurn() { currentTurn = Turn.WHITE; }
+    public boolean rookMove() {
+        return this.deltaX == 0 || this.deltaY == 0;
+    } // Rook moves
+    public boolean knightMove() {
+        return Math.abs(this.deltaX) == 2 && Math.abs(this.deltaY) == 1 ||
+                Math.abs(this.deltaX) == 1 && Math.abs(this.deltaY) == 2;
+    } // Knight moves
+    public boolean bishopMove() {
+        return deltaX == deltaY || deltaX == -deltaY;
+    } // Bishop moves
+    public boolean pawnMove() {
+        if (Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE) != null) {
+            if (deltaX < -1 || deltaX > 1) return false; // Diagonal taking
+            if (deltaX == 0) return false; // Can't take non-diagonally
+        } else {
+            if (deltaX != 0) { // If moving diagonally
+                if (deltaY == 0 || Math.abs(deltaX) > 1) return false; // Can't en passant sideways
+                int signColor = color == Color.WHITE ? 1 : -1;
+                Piece pawn = Board.getPiece(clickX * SQR_SIZE,(clickY + signColor) * SQR_SIZE);
+                boolean sameRank = false;
+                if (pawn != null) sameRank = this.pY == pawn.pY;
+                if (pawn != null && pawn.enPassantEnabled && pawn == enPassantPawn && sameRank) {
+                    enPassantPawn.kill();
+                    return true;
+                }
+                return false; // Can't move to empty square without en passant
+            }
+        }
+        if (color == Color.WHITE) { // If piece is white
+            if ((!pieceMoved && deltaY < -2) || (pieceMoved && deltaY < -1)) return false; // Can't move forward too far
+        } else { // If piece is black
+            if ((!pieceMoved && deltaY > 2) || (pieceMoved && deltaY > 1)) return false; // Can't move forward too far
+        }
+        return color == Color.WHITE ? deltaY < 0 : deltaY > 0; //Can't move backwards
+    }
+    public boolean protectedSquare(int pX, int pY, boolean checkOwn, boolean realMove, boolean ownMove, boolean mateMove) {
+        for (Piece p : ps) {
+            if (checkOwn && p.color == turn || !checkOwn && p.color != turn ) {
+                p.tempSave();
+                p.deltaX = pX - p.pX;
+                p.deltaY = pY - p.pY;
+                p.clickX = pX;
+                p.clickY = pY;
+                if (p.legalMove(realMove, ownMove, mateMove)) {
+                    p.tempLoad();
+                    return true;
+                }
+                p.tempLoad();
+            }
+        }
+        return false;
+    }
+    public void moveType() {
+        pieceTake();
+        pawnPromote();
+        pawnTwoSquare();
+        if (castling) castle();
+    }
+    public void pieceTake() {
+        Piece take = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
+        if (take != null)
+            take.kill();
+    }
+    public void kill() {
+        ps.remove(this);
+    }
+    public void pawnPromote() {
+        if (name == Name.PAWN && ((color == Color.BLACK && clickY == 7) || (color == Color.WHITE && clickY == 0))) {
+            name = Name.QUEEN;
+        }
+    }
+    public void pawnTwoSquare() {
+        enPassantPawn = null;
+        if (name == Name.PAWN && Math.abs(deltaY) == 2) {
+            enPassantEnabled = true;
+            enPassantPawn = this;
+        }
+    }
+    public void castle() {
+        castleRook.pX = (deltaX > 0) ? this.pX + 1 : this.pX - 1;
+        castleRook.x = castleRook.pX * SQR_SIZE;
+        castleRook.y = castleRook.pY * SQR_SIZE;
+        castling = false;
+    }
+    public static void switchTurn() {
+        turn = (turn == Color.WHITE) ? Color.BLACK : Color.WHITE;
+    }
+    public static Color getTurn() {
+        return turn;
+    }
+    public static void setTurn(Color color) {
+        turn = color;
+    }
     public void tempSave() {
         this.tempPX = this.pX;
         this.tempPY = this.pY;

@@ -9,25 +9,25 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.LinkedList;
 public class Save {
-    /*public Save(LinkedList<Piece> ps) {
+    public Save(LinkedList<Piece> ps) {
         File position = new File("src/Positions/savePosition");
         File turn = new File("src/Positions/saveTurn");
         try {
             FileWriter positionWrite = new FileWriter(position);
             for (Piece piece : ps) {
                 String line = piece.pX + "," + piece.pY + "," +
-                        piece.isBlack + "," + piece.pieceMoved + "," + piece.name + "\n";
+                        piece.color + "," + piece.pieceMoved + "," + piece.name + "\n";
                 positionWrite.write(line);
             }
             positionWrite.flush();
             positionWrite.close();
 
             FileWriter turnWrite = new FileWriter(turn);
-            turnWrite.write( Piece.saveTurn() + "");
+            turnWrite.write(Piece.getTurn().name());
             turnWrite.flush();
             turnWrite.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }

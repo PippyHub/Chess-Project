@@ -7,10 +7,15 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+
 public class Menu extends JFrame implements ActionListener {
     static final int BOARD_SIZE = Board.SQR_SIZE * Board.SQR_AMOUNT;
     public static Board panel = new Board();
     private static JTextArea textArea; // Declare the JTextArea
+    File defaultFile = new File("src/Positions/defaultPosition");
+    File saveFile = new File("src/Positions/savePosition");
+
     public Menu() {
         setTitle("Chess");
         this.getContentPane().setPreferredSize(new Dimension(BOARD_SIZE, BOARD_SIZE));
@@ -37,8 +42,7 @@ public class Menu extends JFrame implements ActionListener {
         menuItem.addActionListener(this);
         menu.add(menuItem);
 
-        this.setJMenuBar(menuBar);
-        /*menuItem = new JMenuItem("Save");
+        menuItem = new JMenuItem("Save");
         menuItem.addActionListener(this);
         menu.add(menuItem);
 
@@ -59,7 +63,7 @@ public class Menu extends JFrame implements ActionListener {
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setPreferredSize(new Dimension(menuWidth, 200));
-        menu.add(scrollPane);*/
+        menu.add(scrollPane);
     }
     public static void updateTextArea(String newText) {
         textArea.append(newText);
@@ -70,10 +74,10 @@ public class Menu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String cmd=e.getActionCommand();
         switch (cmd) {
-            case "New" -> { new newGame(); Board.selectedPiece = null; clearTextArea(); }
-            //case "Save" -> { if (!Piece.checkmated) new Save(Board.ps); else System.out.println("can't save checkmate"); }
-            //case "Load" -> { new Load(); clearTextArea(); Board.selectedPiece = null; }
-            case "Clear" -> { newGame.clearing(); panel.repaint(); clearTextArea(); Board.selectedPiece = null; }
+            case "New" -> new Load(true, defaultFile);
+            case "Save" -> new Save(Board.ps);
+            case "Load" -> new Load(true, saveFile);
+            case "Clear" -> Load.clearing();
             default -> System.out.println("Invalid input");
         }
     }
