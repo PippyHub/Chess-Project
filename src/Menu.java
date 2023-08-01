@@ -75,7 +75,7 @@ public class Menu extends JFrame implements ActionListener {
         String cmd=e.getActionCommand();
         switch (cmd) {
             case "New" -> new Load(false, defaultFile);
-            case "Save" -> new Save(Board.ps);
+            case "Save" -> { if (Piece.state == Piece.State.ONGOING) new Save(Board.ps); }
             case "Load" -> new Load(true, saveFile);
             case "Clear" -> Load.clearing();
             default -> System.out.println("Invalid input");

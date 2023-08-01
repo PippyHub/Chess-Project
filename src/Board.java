@@ -58,7 +58,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             if (p.color == Piece.Color.WHITE) index += 6;
             g.drawImage(images[index], p.x, p.y, this);
         }
-        if (Piece.state == Piece.State.CHECKMATE) {
+        if (Piece.state != Piece.State.ONGOING) {
             int squareX = 300;
             int squareY = 160;
             int centerX = (BOARD_SIZE - squareX) / 2;
@@ -74,13 +74,13 @@ public class Board extends JPanel implements ActionListener, MouseListener {
 
             g.setColor(Color.BLACK);
             g.setFont(new Font("Arial", Font.BOLD, 24));
-            String message = "Checkmate!";
+            String message =  Piece.state == Piece.State.CHECKMATE ? "Checkmate!" : "Stalemate!";
             int messageWidth = g.getFontMetrics().stringWidth(message);
             g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2 - 40);
 
             g.setFont(new Font("Arial", Font.PLAIN, 20));
             String winner = Piece.getTurn() == Piece.Color.WHITE ? "black" : "white";
-            message = winner + " has won";
+            message = Piece.state == Piece.State.CHECKMATE ? winner + " has won" : winner + " has drawn";
             messageWidth = g.getFontMetrics().stringWidth(message);
             g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2 - 17);
 

@@ -86,11 +86,12 @@ public class Piece {
             castleRook = Board.getPiece(rookX * SQR_SIZE, rookY * SQR_SIZE);
             Piece bFile = Board.getPiece(SQR_SIZE, pY * SQR_SIZE);
             boolean bFilePiece = bFile != null && deltaX < 0;
-            boolean protectedSquar; // MUST FIX - cant move through check
-            //protectedSquar = protectedSquar();
+            boolean checkCastle;
+            checkCastle = protectedSquare(pX + Integer.signum(deltaX), pY,
+                    false, false, false);
             if (castleRook != null && castleRook.name == Name.ROOK && !castleRook.pieceMoved
-                    && !bFilePiece /*&& !protectedSquar*/) {
-                if (!realMove && !mateMove) castling = true;
+                    && !bFilePiece && !checkCastle) {
+                if (realMove && !mateMove) castling = true;
                 return true; // Castling successful
             }
             return false; // Castling is not valid
@@ -157,13 +158,13 @@ public class Piece {
     public boolean check(boolean myKing, boolean resolveCheckMove) {
         Piece king = kingPos(myKing);
         return protectedSquare(king.pX, king.pY,
-                !myKing, resolveCheckMove,false,false,false);
+                !myKing, resolveCheckMove,false);
     }
     public boolean protectedPiece() {
         if (name != Name.KING) return false;
         if (attackedPiece != null && attackedPiece.color != color) {
             return protectedSquare(attackedPiece.pX,attackedPiece.pY,
-                    false,false,false,true,false);
+                    false,false,true);
         }
         return false;
     }
@@ -229,10 +230,10 @@ public class Piece {
         }
         return null; // Return null if the king is not found
     }
-    public boolean protectedSquare(int pX, int pY, boolean checkOwnPieces, boolean resolveCheckMove, boolean realMove, boolean ownMove, boolean mateMove) {
+    public boolean protectedSquare(int pX, int pY, boolean checkOwnPieces, boolean resolveCheckMove, boolean ownMove) {
         for (Piece p : ps) {
             if (checkOwnPieces && p.color == turn || !checkOwnPieces && p.color != turn) {
-                if (!resolveCheckMove || p != attackedPiece) { // Resolving check: attacked piece cant put king in check
+                if (!resolveCheckMove || p != attackedPiece) { // Attacked piece cant put king in check
                     p.tempSave();
                     if (checkOwnPieces && p == this){
                         p.pX = this.clickX;
@@ -242,7 +243,7 @@ public class Piece {
                     p.deltaY = pY - p.pY;
                     p.clickX = pX;
                     p.clickY = pY;
-                    if (p.legalMove(realMove, ownMove, mateMove)) {
+                    if (p.legalMove(false, ownMove, false)) {
                         p.tempLoad();
                         return true;
                     }
