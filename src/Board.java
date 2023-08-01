@@ -58,7 +58,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             if (p.color == Piece.Color.WHITE) index += 6;
             g.drawImage(images[index], p.x, p.y, this);
         }
-        /*if (Piece.checkmated) {
+        if (Piece.state == Piece.State.CHECKMATE) {
             int squareX = 300;
             int squareY = 160;
             int centerX = (BOARD_SIZE - squareX) / 2;
@@ -79,7 +79,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2 - 40);
 
             g.setFont(new Font("Arial", Font.PLAIN, 20));
-            String winner = Piece.winner ? "black" : "white";
+            String winner = Piece.getTurn() == Piece.Color.WHITE ? "black" : "white";
             message = winner + " has won";
             messageWidth = g.getFontMetrics().stringWidth(message);
             g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2 - 17);
@@ -88,7 +88,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
             message = "'File > New' to play again";
             messageWidth = g.getFontMetrics().stringWidth(message);
             g.drawString(message, (BOARD_SIZE - messageWidth) / 2, centerY + squareY / 2 + 43);
-        }*/
+        }
     }
     public static Piece getPiece(int x, int y) {
         int pX = x / SQR_SIZE;
