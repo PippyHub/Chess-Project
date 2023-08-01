@@ -74,7 +74,7 @@ public class Menu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String cmd=e.getActionCommand();
         switch (cmd) {
-            case "New" -> new Load(true, defaultFile);
+            case "New" -> new Load(false, defaultFile);
             case "Save" -> new Save(Board.ps);
             case "Load" -> new Load(true, saveFile);
             case "Clear" -> Load.clearing();

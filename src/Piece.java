@@ -60,7 +60,7 @@ public class Piece {
     public boolean legalMove(boolean realMove, boolean ownMove, boolean mateMove) {
         boolean validMove = switch (name) {
             case QUEEN -> queenMove();
-            case KING -> kingMove(realMove, mateMove) && protectedPiece();
+            case KING -> kingMove(realMove, mateMove) && !protectedPiece();
             case ROOK -> rookMove();
             case KNIGHT -> knightMove();
             case BISHOP -> bishopMove();
@@ -70,18 +70,9 @@ public class Piece {
         if (!ownMove && ownPieceMove()) return false;
         if (ownSquareMove()) return false;
         if (outOfBounds()) return false;
+        if (realMove && !resolveCheck()) return false;
         return !obstruction();
     }
-    public boolean ownSquareMove() {
-        return this.deltaX == 0 && this.deltaY == 0;
-    } // Can't move to own square
-    public boolean ownPieceMove() {
-        Piece clickedPiece = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
-        return clickedPiece != null && clickedPiece.color == this.color;
-    } // Can't take own piece
-    public boolean outOfBounds() {
-        return !(clickX <= 7 && clickY <= 7 && clickX >= 0 && clickY >= 0);
-    } // Can't move out of bounds
     public boolean obstruction() {
         if (name == Name.KNIGHT) return false;
         int currentX = this.pX + Integer.signum(this.deltaX);
@@ -103,11 +94,11 @@ public class Piece {
             castleRook = Board.getPiece(rookX * SQR_SIZE, rookY * SQR_SIZE);
             Piece bFile = Board.getPiece(SQR_SIZE, pY * SQR_SIZE);
             boolean bFilePiece = bFile != null && deltaX < 0;
-            boolean protectedSquare;
-            //protectedSquare = protectedSquare();
+            boolean protectedSquar; // MUST FIX - cant move through check
+            //protectedSquar = protectedSquar();
             if (castleRook != null && castleRook.name == Name.ROOK && !castleRook.pieceMoved
-                    && !bFilePiece /*&& !protectedSquare*/) {
-                if (realMove && !mateMove) castling = true;
+                    && !bFilePiece /*&& !protectedSquar*/) {
+                if (!realMove && !mateMove) castling = true;
                 return true; // Castling successful
             }
             return false; // Castling is not valid
@@ -116,13 +107,10 @@ public class Piece {
         return Math.abs(deltaX) <= 1 && Math.abs(deltaY) <= 1; // King moves
     } // King moves
     public boolean protectedPiece() {
-
-        if (name != Name.KING) return true;
         if (attackedPiece != null && attackedPiece.color != color) {
-            System.out.println( protectedSquare(attackedPiece.pX,attackedPiece.pY,false,false,true,false));
             return protectedSquare(attackedPiece.pX,attackedPiece.pY,false,false,true,false);
         }
-        return true;
+        return false;
     }
     public boolean rookMove() {
         return this.deltaX == 0 || this.deltaY == 0;
@@ -159,22 +147,30 @@ public class Piece {
         }
         return color == Color.WHITE ? deltaY < 0 : deltaY > 0; //Can't move backwards
     }
-    public boolean protectedSquare(int pX, int pY, boolean checkOwn, boolean realMove, boolean ownMove, boolean mateMove) {
-        for (Piece p : ps) {
-            if (checkOwn && p.color == turn || !checkOwn && p.color != turn ) {
-                p.tempSave();
-                p.deltaX = pX - p.pX;
-                p.deltaY = pY - p.pY;
-                p.clickX = pX;
-                p.clickY = pY;
-                if (p.legalMove(realMove, ownMove, mateMove)) {
-                    p.tempLoad();
-                    return true;
-                }
-                p.tempLoad();
-            }
+    public boolean ownSquareMove() {
+        return this.deltaX == 0 && this.deltaY == 0;
+    } // Can't move to own square
+    public boolean ownPieceMove() {
+        Piece clickedPiece = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
+        return clickedPiece != null && clickedPiece.color == this.color;
+    } // Can't take own piece
+    public boolean outOfBounds() {
+        return !(clickX <= 7 && clickY <= 7 && clickX >= 0 && clickY >= 0);
+    } // Can't move out of bounds
+    public boolean resolveCheck() {
+        this.tempSave();
+        this.pX = this.clickX;
+        this.pY = this.clickY;
+        if (checked()) {
+            this.tempLoad();
+            return false; // King cannot escape check with this move
         }
-        return false;
+        this.tempLoad();
+        return true; // King can escape check with this move
+    }
+    public boolean checked() {
+        Piece myKing = kingPos(true);
+        return protectedSquare(myKing.pX,myKing.pY,false,false,false,false);
     }
     public void moveType() {
         pieceTake();
@@ -216,6 +212,33 @@ public class Piece {
     }
     public static void setTurn(Color color) {
         turn = color;
+    }
+    public Piece kingPos(boolean myKing) {
+        for (Piece p : ps) {
+            if (p.name == Name.KING) {
+                if (myKing && p.color == turn || !myKing && p.color != turn) {
+                    return p; // return king
+                }
+            }
+        }
+        return null; // Return null if the king is not found
+    }
+    public boolean protectedSquare(int pX, int pY, boolean checkOwnPieces, boolean realMove, boolean ownMove, boolean mateMove) {
+        for (Piece p : ps) {
+            if (checkOwnPieces && p.color == turn || !checkOwnPieces && p.color != turn ) {
+                p.tempSave();
+                p.deltaX = pX - p.pX;
+                p.deltaY = pY - p.pY;
+                p.clickX = pX;
+                p.clickY = pY;
+                if (p.legalMove(realMove, ownMove, mateMove)) {
+                    p.tempLoad();
+                    return true;
+                }
+                p.tempLoad();
+            }
+        }
+        return false;
     }
     public void tempSave() {
         this.tempPX = this.pX;

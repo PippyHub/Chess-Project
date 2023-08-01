@@ -12,6 +12,7 @@ public class Board extends JPanel implements ActionListener, MouseListener {
     static final int SQR_SIZE = 64;
     static final int SQR_AMOUNT = 8;
     static final int BOARD_SIZE = SQR_SIZE * SQR_AMOUNT;
+    static final int PIECE_AMOUNT = 32;
     public static LinkedList<Piece> ps = new LinkedList<>(); //linked list of pieces
     public static Piece selectedPiece = null;
     Images img = new Images();
