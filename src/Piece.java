@@ -47,6 +47,7 @@ public class Piece {
         clickX = pX;
         clickY = pY;
         attackedPiece = Board.getPiece(this.clickX * SQR_SIZE, this.clickY * SQR_SIZE);
+        boolean checking = check(false, false);
         if (legalMove(true, false, false)) {
             moveType();
             this.pieceMoved = true;
@@ -54,13 +55,14 @@ public class Piece {
             this.pY = pY;
             this.x = pX * SQR_SIZE;
             this.y = pY * SQR_SIZE;
+            gameState(checking);
             switchTurn();
         }
     }
     public boolean legalMove(boolean realMove, boolean ownMove, boolean mateMove) {
         boolean validMove = switch (name) {
             case QUEEN -> queenMove();
-            case KING -> kingMove(realMove, mateMove) && !protectedPiece();
+            case KING -> kingMove(realMove, mateMove);
             case ROOK -> rookMove();
             case KNIGHT -> knightMove();
             case BISHOP -> bishopMove();
@@ -71,6 +73,7 @@ public class Piece {
         if (ownSquareMove()) return false;
         if (outOfBounds()) return false;
         if (realMove && !resolveCheck()) return false;
+        if (protectedPiece()) return false;
         return !obstruction();
     }
     public boolean obstruction() {
@@ -108,7 +111,8 @@ public class Piece {
     } // King moves
     public boolean protectedPiece() {
         if (attackedPiece != null && attackedPiece.color != color) {
-            return protectedSquare(attackedPiece.pX,attackedPiece.pY,false,false,true,false);
+            return protectedSquare(attackedPiece.pX,attackedPiece.pY,
+                    false,false,false,true,false);
         }
         return false;
     }
@@ -161,16 +165,17 @@ public class Piece {
         this.tempSave();
         this.pX = this.clickX;
         this.pY = this.clickY;
-        if (checked()) {
+        if (check(true, true)) {
             this.tempLoad();
             return false; // King cannot escape check with this move
         }
         this.tempLoad();
         return true; // King can escape check with this move
     }
-    public boolean checked() {
-        Piece myKing = kingPos(true);
-        return protectedSquare(myKing.pX,myKing.pY,false,false,false,false);
+    public boolean check(boolean myKing, boolean resolveCheckMove) {
+        Piece king = kingPos(myKing);
+        return protectedSquare(king.pX, king.pY,
+                !myKing, resolveCheckMove,false,false,false);
     }
     public void moveType() {
         pieceTake();
@@ -223,22 +228,55 @@ public class Piece {
         }
         return null; // Return null if the king is not found
     }
-    public boolean protectedSquare(int pX, int pY, boolean checkOwnPieces, boolean realMove, boolean ownMove, boolean mateMove) {
+    public boolean protectedSquare(int pX, int pY, boolean checkOwnPieces, boolean resolveCheckMove, boolean realMove, boolean ownMove, boolean mateMove) {
         for (Piece p : ps) {
-            if (checkOwnPieces && p.color == turn || !checkOwnPieces && p.color != turn ) {
-                p.tempSave();
-                p.deltaX = pX - p.pX;
-                p.deltaY = pY - p.pY;
-                p.clickX = pX;
-                p.clickY = pY;
-                if (p.legalMove(realMove, ownMove, mateMove)) {
+            if (checkOwnPieces && p.color == turn || !checkOwnPieces && p.color != turn) {
+                if (!resolveCheckMove || p != attackedPiece) { // Attacked piece cant put king in check
+                    p.tempSave();
+                    if (checkOwnPieces && p == this){
+                        p.pX = this.clickX;
+                        p.pY = this.clickY;
+                    }
+                    p.deltaX = pX - p.pX;
+                    p.deltaY = pY - p.pY;
+                    p.clickX = pX;
+                    p.clickY = pY;
+                    if (p.legalMove(realMove, ownMove, mateMove)) {
+                        p.tempLoad();
+                        return true;
+                    }
                     p.tempLoad();
-                    return true;
                 }
-                p.tempLoad();
             }
         }
         return false;
+    }
+    public boolean checkmate() {
+        for (Piece p : ps) {
+            if (p.color != turn) {
+                System.out.println(p.name);
+                for (int x = 0; x < SQR_AMOUNT; x++) {
+                    for (int y = 0; y < SQR_AMOUNT; y++) {
+                        p.tempSave();
+                        p.deltaX = x - p.pX;
+                        p.deltaY = y - p.pY;
+                        p.clickX = x;
+                        p.clickY = y;
+                        p.attackedPiece = Board.getPiece(x * SQR_SIZE, y * SQR_SIZE);
+                        if (p.legalMove(true, false,true)) {
+                            p.tempLoad();
+                            return false; // At least one legal move is available
+                        }
+                        p.attackedPiece = null;
+                        p.tempLoad();
+                    }
+                }
+            }
+        }
+        return true; // No legal moves available, it's checkmate
+    }
+    public void gameState(boolean checking) {
+        if (checking && checkmate()) {state = State.CHECKMATE; System.out.println(true);}
     }
     public void tempSave() {
         this.tempPX = this.pX;
