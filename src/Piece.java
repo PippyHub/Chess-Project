@@ -49,6 +49,7 @@ public class Piece {
         clickY = pY;
         take = false;
         attackedPiece = Board.getPiece(this.clickX * SQR_SIZE, this.clickY * SQR_SIZE);
+        castling = false;
         boolean checking = check(false, false);
         if (legalMove(true, false, false)) {
             boolean castle = castling;
