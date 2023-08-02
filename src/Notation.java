@@ -6,10 +6,10 @@
  */
 public class Notation {
     static final int SQR_AMOUNT = Board.SQR_AMOUNT;
-    public Notation(boolean castle, int deltaX, Piece.Name name, int pX, int pY, boolean taking, Piece.State state, boolean checking) {
-        notate(castle, deltaX, name, pX, pY, taking, state, checking);
+    public Notation(boolean castle, int deltaX, Piece.Name name, int pX, int pY, boolean take, Piece.State state, boolean checking) {
+        notate(castle, deltaX, name, pX, pY, take, state, checking);
     }
-    public void notate(boolean castle, int deltaX, Piece.Name name, int pX, int pY, boolean taking, Piece.State state, boolean checking) {
+    public void notate(boolean castle, int deltaX, Piece.Name name, int pX, int pY, boolean take, Piece.State state, boolean checking) {
         String turn = Piece.getTurn() == Piece.Color.WHITE ? "White" : "Black" + "\u200A";
         Menu.updateTextArea(turn + "   ");
         if (castle) {
@@ -27,7 +27,7 @@ public class Notation {
             Menu.updateTextArea(firstChar); //Print piece name e.g. K for king
             char pieceX = (char) (pX + 'a');
             String pieceY = String.valueOf(SQR_AMOUNT - pY);
-            if (taking) {
+            if (take) {
                 if (name == Piece.Name.PAWN) {
                     Menu.updateTextArea(String.valueOf(pieceX));
                 } //If pawn print what square its taking from

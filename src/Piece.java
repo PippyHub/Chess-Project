@@ -27,7 +27,7 @@ public class Piece {
     static State state = State.ONGOING;
     boolean enPassantEnabled;
     boolean castle;
-    boolean taking;
+    boolean take;
     private static Piece enPassantPawn;
     Piece castleRook;
     Piece attackedPiece;
@@ -47,7 +47,7 @@ public class Piece {
         deltaY = pY - this.pY;
         clickX = pX;
         clickY = pY;
-        taking = false;
+        take = false;
         attackedPiece = Board.getPiece(this.clickX * SQR_SIZE, this.clickY * SQR_SIZE);
         boolean checking = check(false, false);
         if (legalMove(true, false, false)) {
@@ -57,7 +57,7 @@ public class Piece {
             this.pY = pY;
             this.x = pX * SQR_SIZE;
             this.y = pY * SQR_SIZE;
-            new Notation(castle, deltaX, name, this.pX, this.pY, taking, state, checking);
+            new Notation(castle, deltaX, name, this.pX, this.pY, take, state, checking);
             switchTurn();
             gameState(checking);
         }
@@ -192,7 +192,7 @@ public class Piece {
         Piece take = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
         if (take != null) {
             take.kill();
-            taking = true;
+            this.take = true;
         }
     }
     public void kill() {
