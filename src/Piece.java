@@ -26,7 +26,8 @@ public class Piece {
     private static Color turn = Color.WHITE;
     static State state = State.ONGOING;
     boolean enPassantEnabled;
-    boolean castling;
+    boolean castle;
+    boolean taking;
     private static Piece enPassantPawn;
     Piece castleRook;
     Piece attackedPiece;
@@ -46,6 +47,7 @@ public class Piece {
         deltaY = pY - this.pY;
         clickX = pX;
         clickY = pY;
+        taking = false;
         attackedPiece = Board.getPiece(this.clickX * SQR_SIZE, this.clickY * SQR_SIZE);
         boolean checking = check(false, false);
         if (legalMove(true, false, false)) {
@@ -55,6 +57,7 @@ public class Piece {
             this.pY = pY;
             this.x = pX * SQR_SIZE;
             this.y = pY * SQR_SIZE;
+            new Notation(castle, deltaX, name, this.pX, this.pY, taking, state, checking);
             switchTurn();
             gameState(checking);
         }
@@ -91,7 +94,7 @@ public class Piece {
                     false, false, false);
             if (castleRook != null && castleRook.name == Name.ROOK && !castleRook.pieceMoved
                     && !bFilePiece && !checkCastle) {
-                if (realMove && !mateMove) castling = true;
+                if (realMove && !mateMove) castle = true;
                 return true; // Castling successful
             }
             return false; // Castling is not valid
@@ -183,12 +186,14 @@ public class Piece {
         pieceTake();
         pawnPromote();
         pawnTwoSquare();
-        if (castling) castle();
+        if (castle) castle();
     }
     public void pieceTake() {
         Piece take = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
-        if (take != null)
+        if (take != null) {
             take.kill();
+            taking = true;
+        }
     }
     public void kill() {
         ps.remove(this);
@@ -209,7 +214,7 @@ public class Piece {
         castleRook.pX = (deltaX > 0) ? this.pX + 1 : this.pX - 1;
         castleRook.x = castleRook.pX * SQR_SIZE;
         castleRook.y = castleRook.pY * SQR_SIZE;
-        castling = false;
+        castle = false;
     }
     public static void switchTurn() {
         turn = (turn == Color.WHITE) ? Color.BLACK : Color.WHITE;
