@@ -26,7 +26,7 @@ public class Piece {
     private static Color turn = Color.WHITE;
     static State state = State.ONGOING;
     boolean enPassantEnabled;
-    boolean castle;
+    boolean castling;
     boolean take;
     private static Piece enPassantPawn;
     Piece castleRook;
@@ -51,6 +51,7 @@ public class Piece {
         attackedPiece = Board.getPiece(this.clickX * SQR_SIZE, this.clickY * SQR_SIZE);
         boolean checking = check(false, false);
         if (legalMove(true, false, false)) {
+            boolean castle = castling;
             moveType();
             this.pieceMoved = true;
             this.pX = pX;
@@ -94,7 +95,7 @@ public class Piece {
                     false, false, false);
             if (castleRook != null && castleRook.name == Name.ROOK && !castleRook.pieceMoved
                     && !bFilePiece && !checkCastle) {
-                if (realMove && !mateMove) castle = true;
+                if (realMove && !mateMove) castling = true;
                 return true; // Castling successful
             }
             return false; // Castling is not valid
@@ -186,7 +187,7 @@ public class Piece {
         pieceTake();
         pawnPromote();
         pawnTwoSquare();
-        if (castle) castle();
+        if (castling) castle();
     }
     public void pieceTake() {
         Piece take = Board.getPiece(clickX * SQR_SIZE, clickY * SQR_SIZE);
@@ -214,7 +215,7 @@ public class Piece {
         castleRook.pX = (deltaX > 0) ? this.pX + 1 : this.pX - 1;
         castleRook.x = castleRook.pX * SQR_SIZE;
         castleRook.y = castleRook.pY * SQR_SIZE;
-        castle = false;
+        castling = false;
     }
     public static void switchTurn() {
         turn = (turn == Color.WHITE) ? Color.BLACK : Color.WHITE;
