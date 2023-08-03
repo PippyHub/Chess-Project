@@ -25,15 +25,16 @@ public class Notation {
                 firstChar = String.valueOf(name.name().charAt(0));
             }
             Menu.updateTextArea(firstChar); //Print piece name e.g. K for king
-            char pieceX = (char) (pX + 'a');
-            String pieceY = String.valueOf(SQR_AMOUNT - pY);
+            char clickX = (char) (pX + 'a');
+            char pieceX = (char) (pX - deltaX + 'a');
+            String clickY = String.valueOf(SQR_AMOUNT - pY);
             if (take) {
                 if (name == Piece.Name.PAWN) {
                     Menu.updateTextArea(String.valueOf(pieceX));
                 } //If pawn print what square its taking from
                 Menu.updateTextArea("x"); //Print out if taking
             }
-            Menu.updateTextArea(pieceX + pieceY); // Print rank and file e.g. e4
+            Menu.updateTextArea(clickX + clickY); // Print rank and file e.g. e4
             if (state == Piece.State.CHECKMATE) Menu.updateTextArea("#"); //Print # if mate
             else if (checking) Menu.updateTextArea("+"); //Print + if check
         }
