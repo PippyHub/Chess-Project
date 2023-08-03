@@ -50,7 +50,7 @@ public class Piece {
         take = false;
         attackedPiece = Board.getPiece(this.clickX * SQR_SIZE, this.clickY * SQR_SIZE);
         castling = false;
-        if (legalMove(true, false, false)) {
+        if (legalMove(true, false, false)) { //Legal move code
             boolean castle = castling;
             moveType();
             boolean checking = check(false, false);
