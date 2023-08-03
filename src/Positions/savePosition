@@ -1,6 +1,4 @@
-4,7,WHITE,false,KING
-0,7,WHITE,false,ROOK
-7,7,WHITE,false,ROOK
-4,0,BLACK,false,KING
-0,0,BLACK,false,ROOK
-7,0,BLACK,false,ROOK
+4,7,WHITE,true,KING
+1,2,WHITE,true,QUEEN
+0,1,WHITE,true,PAWN
+7,0,BLACK,true,KING

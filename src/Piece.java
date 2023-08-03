@@ -50,18 +50,18 @@ public class Piece {
         take = false;
         attackedPiece = Board.getPiece(this.clickX * SQR_SIZE, this.clickY * SQR_SIZE);
         castling = false;
-        boolean checking = check(false, false);
         if (legalMove(true, false, false)) {
             boolean castle = castling;
             moveType();
+            boolean checking = check(false, false);
             this.pieceMoved = true;
             this.pX = pX;
             this.pY = pY;
             this.x = pX * SQR_SIZE;
             this.y = pY * SQR_SIZE;
-            new Notation(castle, deltaX, name, this.pX, this.pY, take, state, checking);
             switchTurn();
             gameState(checking);
+            new Notation(castle, deltaX, name, this.pX, this.pY, take, state, checking);
         }
     }
     public boolean legalMove(boolean realMove, boolean ownMove, boolean mateMove) {
